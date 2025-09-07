@@ -49,15 +49,19 @@ export function HeroSection() {
             <span>{formatTime(currentTime)}</span>
           </motion.div>
 
-          <div className="w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden border-4 border-primary/20">
-            <HeroCarousel
-              images={[
-                "/images/hero/hero1.jpg",
-                "/images/hero/hero2.jpeg",
-              ]}
-              intervalMs={4000}
-              aspect="h-full"
-            />
+          <div className="relative">
+            <div className="w-40 h-40 md:w-56 md:h-56 rounded-full overflow-hidden">
+              <HeroCarousel
+                images={[
+                  "/images/hero/hero1.jpg",     // make sure these file names/extensions match exactly
+                  "/images/hero/hero2.jpeg",
+                ]}
+                intervalMs={4000}
+                aspect="h-full"                 // let the wrapper control size
+                variant="circle"                // round avatar
+                glow={true}                     // glow on slide change
+              />
+            </div>
           </div>
 
 
