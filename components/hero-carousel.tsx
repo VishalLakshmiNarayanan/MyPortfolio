@@ -61,7 +61,8 @@ export default function HeroCarousel({
       </AnimatePresence>
 
       {/* Thick border */}
-      <div className={`pointer-events-none absolute inset-0 ${radius} border-4 md:border-8 border-gray-700`} />
+      <div className={`pointer-events-none absolute inset-0 ${radius}`} />
+
 
 
       {/* Glow on change */}
