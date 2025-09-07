@@ -37,7 +37,7 @@ export default function HeroCarousel({ images, intervalMs = 5000, aspect = "h-[3
             alt={`Hero image ${index + 1}`}
             fill
             priority
-            className="object-cover"
+            className="object-contain object-center bg-black"
             sizes="100vw"
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
