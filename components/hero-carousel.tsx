@@ -54,7 +54,7 @@ export default function HeroCarousel({
             fill
             priority
             /* Keep face fully visible across different aspect ratios */
-            className="object-contain object-center bg-black"
+            className="object-contain"
             sizes="100vw"
           />
         </motion.div>
