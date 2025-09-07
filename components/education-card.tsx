@@ -53,6 +53,26 @@ export function EducationCard({ education, index }: EducationCardProps) {
               ))}
             </div>
           </div>
+          {education.stats?.length ? (
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {education.stats.map((s, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ y: 8, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.25, delay: idx * 0.05 }}
+                whileHover={{ y: -2 }}
+                className="rounded-xl border bg-card/60 backdrop-blur p-3 text-center shadow-sm"
+              >
+                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  {s.label}
+                </p>
+                <p className="text-base font-semibold">{s.value}</p>
+              </motion.div>
+            ))}
+          </div>
+        ) : null}
         </CardContent>
       </Card>
     </motion.div>

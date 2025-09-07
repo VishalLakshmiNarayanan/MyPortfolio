@@ -164,6 +164,12 @@ export const education: Education[] = [
     startDate: "2024-08-01",
     current: true,
     coursework: ["Statistical Machine Learning", "Big Data Analysis", "Data Mining", "Data Processing"],
+     stats: [
+      { label: "CGPA", value: "3.83 / 4.00" },
+      { label: "Credits Earned", value: "18 / 36" },
+      { label: "Projects", value: "5" },
+      { label: "Hackathons Won", value: "1" },
+    ],
   },
   {
     degree: "B.Tech in Computer Science (AI/ML Specialization)",
@@ -174,6 +180,12 @@ export const education: Education[] = [
     current: false,
     notes: "Graduated with 8.13/10.00 CGPA",
     coursework: ["Machine Learning", "Deep Learning", "Natural Language Processing"],
+    stats: [
+      { label: "CGPA", value: "3.25 / 4.00" },
+      { label: "Credits Earned", value: "160 / 160" },
+      { label: "Projects", value: "12" },
+      { label: "Hackathons Won", value: "1" },
+    ],
   },
 ]
 
