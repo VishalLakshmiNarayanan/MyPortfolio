@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Github, Linkedin, Clock } from "lucide-react"
 import Image from "next/image"
+import HeroCarousel from "@/components/hero-carousel";
 
 export function HeroSection() {
   const [currentTime, setCurrentTime] = useState(new Date())
@@ -50,14 +51,15 @@ export function HeroSection() {
 
           <div className="relative">
             <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-primary/20">
-              <Image
-                src="/images/lv.jpg"
-                alt="Vishal Lakshmi Narayanan"
-                width={160}
-                height={160}
-                className="w-full h-full object-cover"
-                priority
+              <HeroCarousel
+                images={[
+                  "/images/hero/hero-1.jpg",
+                  "/images/hero/hero-2.jpeg",
+                ]}
+                intervalMs={5000} // change timing if you want
+                aspect="[--hero-h:38rem] h-[var(--hero-h)] md:h-[calc(var(--hero-h)+4rem)]"
               />
+
             </div>
           </div>
 
