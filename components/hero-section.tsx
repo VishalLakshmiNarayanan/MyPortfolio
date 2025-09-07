@@ -51,8 +51,8 @@ export function HeroSection() {
 
           <HeroCarousel
             images={[
-              "/images/hero/hero-1.jpg",
-              "/images/hero/hero-2.jpeg",
+              "/images/hero/hero1.jpg",
+              "/images/hero/hero2.jpeg",
             ]}
             intervalMs={5000}
             aspect="[--hero-h:28rem] h-[var(--hero-h)] md:h-[36rem]"
