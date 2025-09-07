@@ -73,7 +73,7 @@ export const allProjects: Project[] = [
     tech: ["Streamlit", "Groq LLaMA", "Python"],
     tags: ["AI", "Travel", "Optimization"],
     github: "https://github.com/VishalLakshmiNarayanan/Zoro",
-    date: "2025-04-01",
+    date: "2025-05-01",
     featured: true,
     image: "/images/projects/ai-travel-planner.jpg",
   },
@@ -102,6 +102,24 @@ export const allProjects: Project[] = [
     image: "/images/projects/maily.jpg",
   },
   {
+    slug: "phishguard",
+    title: "PhishGuard – AI-Based Phishing Detection",
+    description:
+      "PhishGuard is a Chrome extension that uses AI and VirusTotal to detect phishing websites in real-time. Click the PhishGuard icon in the Chrome toolbar, choose “Analyze This Page,” and view the risk level and detailed recommendation in the popup.",
+    tech: [
+      "JavaScript",
+      "Chrome Extension",
+      "Llama (LLM)",
+      "VirusTotal API",
+      "HTML/CSS"
+    ],
+    tags: ["Security", "Browser Extension", "AI"],
+    github: "https://github.com/VishalLakshmiNarayanan/PhishGuard-",
+    date: "2025-05-01",          // use YYYY-MM-DD; adjust if you prefer
+    featured: true,             // set true if you want it in any featured sections
+    image: "/images/projects/phishguard.png"
+  },
+  {
     slug: "diabetic-retinopathy",
     title: "Diabetic Retinopathy Detection",
     description:
@@ -123,6 +141,7 @@ export const allProjects: Project[] = [
     featured: true,
     image: "/images/projects/malware-detection.png",
   },
+  
 ]
 
 export const experiences: Experience[] = [
