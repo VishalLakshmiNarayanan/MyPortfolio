@@ -9,6 +9,7 @@ import { ContactCard } from "@/components/contact-card"
 import { AwardCard } from "@/components/award-card"
 import { CertificationCard } from "@/components/certification-card"
 import { FloatingSkillsBubble } from "@/components/floating-skills-bubble"
+import ProjectCarousel from "@/components/ProjectCarousel"
 
 import { experiences, education, skillGroups, publications, allProjects, awards, certifications } from "@/lib/content"
 
@@ -63,11 +64,7 @@ export default function HomePage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation">Featured Projects</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {featuredProjects.map((project, index) => (
-              <ProjectCard key={project.slug} project={project} index={index} />
-            ))}
-          </div>
+          <ProjectCarousel projects={featuredProjects} />
         </div>
       </section>
 
