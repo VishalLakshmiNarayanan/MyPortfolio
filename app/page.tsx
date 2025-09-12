@@ -10,6 +10,8 @@ import { CertificationCard } from "@/components/certification-card"
 import { FloatingSkillsBubble } from "@/components/floating-skills-bubble"
 import ProjectCarousel from "@/components/ProjectCarousel"
 import WavySection from "@/components/WavySection"
+import ExperienceTimeline from "@/components/ExperienceTimeline"
+
 
 import {
   experiences,
@@ -54,15 +56,7 @@ export default function HomePage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation">Experience</h2>
           </div>
-          <div className="max-w-4xl mx-auto space-y-6">
-            {experiences.map((experience, index) => (
-              <ExperienceCard
-                key={`${experience.company}-${experience.startDate}`}
-                experience={experience}
-                index={index}
-              />
-            ))}
-          </div>
+          <ExperienceTimeline items={experiences} />
         </div>
       </WavySection>
 
