@@ -22,7 +22,6 @@ export default function ProjectCarousel({ projects, className }: ProjectCarousel
     setIndex(i => (i + delta + count) % count)
   }, [count])
 
-  // keyboard support
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight") go(1)
@@ -45,44 +44,23 @@ export default function ProjectCarousel({ projects, className }: ProjectCarousel
   return (
     <section className={className} aria-label="Projects carousel" aria-roledescription="carousel">
       <div className="relative mx-auto max-w-6xl px-2 sm:px-4">
-        {/* Stage */}
-        <div className="relative h-[560px] md:h-[600px]">
-          {/* LEFT preview (clickable) */}
-          <motion.div
-            key={`prev-${prev.title}`}
-            className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 z-10"
-            initial={{ x: -40, opacity: 0 }}
-            animate={{ x: 0, opacity: 0.7 }}
-            transition={{ duration: 0.35 }}
-            style={{ width: "32%" }}
-            onClick={() => go(-1)}
-            role="button"
-            aria-label="Previous project"
-          >
-            <div className="pointer-events-auto cursor-pointer select-none [filter:blur(2px)] opacity-60 scale-90">
+        {/* GRID stage: prev • active • next (previews hidden on small) */}
+        <div className="grid grid-cols-1 md:grid-cols-[.9fr,minmax(0,720px),.9fr] items-center gap-6">
+          {/* LEFT preview */}
+          <div className="hidden md:block justify-self-end w-full max-w-[360px]">
+            <div
+              onClick={() => go(-1)}
+              role="button"
+              aria-label="Previous project"
+              className="cursor-pointer select-none opacity-60 hover:opacity-80 transition
+                         [filter:blur(2px)] hover:[filter:blur(1px)] scale-90 hover:scale-95"
+            >
               <ProjectCardUI project={prev} />
             </div>
-          </motion.div>
+          </div>
 
-          {/* RIGHT preview (clickable) */}
-          <motion.div
-            key={`next-${next.title}`}
-            className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 z-10"
-            initial={{ x: 40, opacity: 0 }}
-            animate={{ x: 0, opacity: 0.7 }}
-            transition={{ duration: 0.35 }}
-            style={{ width: "32%" }}
-            onClick={() => go(1)}
-            role="button"
-            aria-label="Next project"
-          >
-            <div className="pointer-events-auto cursor-pointer select-none [filter:blur(2px)] opacity-60 scale-90">
-              <ProjectCardUI project={next} />
-            </div>
-          </motion.div>
-
-          {/* ACTIVE slide (center) */}
-          <div className="absolute inset-0 flex items-center justify-center z-20">
+          {/* ACTIVE slide */}
+          <div>
             <AnimatePresence custom={dir} initial={false} mode="popLayout">
               <motion.div
                 key={active.title}
@@ -99,7 +77,6 @@ export default function ProjectCarousel({ projects, className }: ProjectCarousel
                   if (info.offset.x < -80) go(1)
                   if (info.offset.x > 80) go(-1)
                 }}
-                className="w-[92%] sm:w-[78%] md:w-[60%]"
                 aria-roledescription="slide"
                 aria-label={`${active.title} (${index + 1} of ${count})`}
               >
@@ -107,9 +84,22 @@ export default function ProjectCarousel({ projects, className }: ProjectCarousel
               </motion.div>
             </AnimatePresence>
           </div>
+
+          {/* RIGHT preview */}
+          <div className="hidden md:block justify-self-start w-full max-w-[360px]">
+            <div
+              onClick={() => go(1)}
+              role="button"
+              aria-label="Next project"
+              className="cursor-pointer select-none opacity-60 hover:opacity-80 transition
+                         [filter:blur(2px)] hover:[filter:blur(1px)] scale-90 hover:scale-95"
+            >
+              <ProjectCardUI project={next} />
+            </div>
+          </div>
         </div>
 
-        {/* Bottom controls: ← • dots • → */}
+        {/* bottom controls: ← • dots • → */}
         <div className="mt-6 flex items-center justify-center gap-3" role="tablist" aria-label="Project slides">
           <Button
             size="icon"
@@ -130,7 +120,6 @@ export default function ProjectCarousel({ projects, className }: ProjectCarousel
                   onClick={() => { setDir(i > index ? 1 : -1); setIndex(i) }}
                   role="tab"
                   aria-selected={activeDot}
-                  aria-controls={`project-slide-${i}`}
                   className={`h-2.5 rounded-full transition-all ${
                     activeDot ? "w-6 bg-emerald-400" : "w-2.5 bg-white/20 hover:bg-white/40"
                   }`}
