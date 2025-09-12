@@ -119,8 +119,8 @@ html {
 
 .holographic-card:hover {
   transform: scale(1.05) translateZ(0);
-  box-shadow: 0 0 20px rgba(33, 150, 243, 0.4), 0 0 40px rgba(0, 255, 255, 0.2), 0 10px 30px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(33, 150, 243, 0.3);
+  box-shadow: 0 0 20px rgba(12, 145, 100, 0.4), 0 0 40px rgba(18, 179, 138, 0.2), 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(31, 131, 89, 0.3);
 }
 
 .holographic-card:hover::before {
