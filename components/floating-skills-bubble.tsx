@@ -102,7 +102,7 @@ const categoryColors = {
   programming: "#0e2e1e",
   database: "#2a754f",
   analytics: "#012916",
-  visualization: "#52b486ff",
+  visualization: "#52b486",
   statistics: "#0daf0d",
   ml: "#0f1410",
   data: "#05f792",
