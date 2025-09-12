@@ -479,7 +479,7 @@ html {
 
 /* Hero platform-specific colors */
 .hero-social-btn.github::before {
-  background: #000000;
+  background: #ffffff;
 }
 
 .hero-social-btn.linkedin::before {
@@ -497,7 +497,7 @@ html {
 /* Hero default colors */
 .hero-social-btn.github .icon,
 .hero-social-btn.github .text {
-  color: #ffffff;
+  color: #000000;
 }
 
 .hero-social-btn.linkedin .icon,
