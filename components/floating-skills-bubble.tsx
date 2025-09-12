@@ -99,13 +99,13 @@ const skillsData: SkillData[] = [
 
 // Updated neon color palette with neon blue theme
 const categoryColors = {
-  programming: "#2196f3",
-  database: "#ff5722",
-  analytics: "#ff9800",
-  visualization: "#ffc107",
-  statistics: "#8bc34a",
-  ml: "#9c27b0",
-  data: "#6737eb",
+  programming: "#0e2e1e",
+  database: "#2a754f",
+  analytics: "#012916",
+  visualization: "#52b486ff",
+  statistics: "#0daf0d",
+  ml: "#0f1410",
+  data: "#05f792",
 }
 
 
