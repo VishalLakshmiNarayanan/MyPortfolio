@@ -200,7 +200,7 @@ export const education: Education[] = [
       { label: "CGPA", value: "3.83 / 4.00" },
       { label: "Credits Earned", value: "18 / 30" },
       { label: "Academic Projects", value: "5" },
-      { label: "Hackathons Won", value: "1" },
+      { label: "Hackathons Won", value: "2" },
     ],
   },
   {
