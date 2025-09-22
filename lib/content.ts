@@ -77,7 +77,7 @@ export const allProjects: Project[] = [
   date: "2025-09-01",
   featured: true,                                   // <- ensures it appears in the carousel
   image: "/images/projects/slidesage.png",
-}
+},
   {
     slug: "ai-travel-planner",
     title: "AI Travel Itinerary Planner",
