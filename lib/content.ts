@@ -202,7 +202,7 @@ export const education: Education[] = [
      stats: [
       { label: "CGPA", value: "3.83 / 4.00" },
       { label: "Credits Earned", value: "18 / 30" },
-      { label: "Academic Projects", value: "5" },
+      { label: "Projects", value: "6" },
       { label: "Hackathons Won", value: "2" },
     ],
   },
@@ -217,7 +217,7 @@ export const education: Education[] = [
     stats: [
       { label: "CGPA", value: "3.25 / 4.00" },
       { label: "Credits Earned", value: "160 / 160" },
-      { label: "Academic Projects", value: "12" },
+      { label: "Projects", value: "12" },
       { label: "Hackathons Won", value: "1" },
     ],
   },
@@ -318,7 +318,7 @@ export const certifications: Certification[] = [
 ]
 
 export const heroStats = [
-  { id: "projects",  label: "Projects",       rolling: ["17", "9"] }, // glow on 9
+  { id: "projects",  label: "Projects",       rolling: ["18", "7"] }, 
   { id: "hackathons",label: "Hackathon Wins", value: "3" },
   { id: "linkedin",  label: "Followers",      value: "1300+" },
   { id: "stack",     label: "Tech Stack",     value: "28" },
