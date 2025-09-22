@@ -76,12 +76,7 @@ export function HeroSection() {
             </div>
 
             <p className="text-lg text-muted-foreground max-w-4xl leading-relaxed hover-underline-animation">
-              I'm a graduate student in Data Science, Analytics & Engineering at Arizona State University, with a strong
-              foundation in machine learning, NLP, applied statistics, and data-driven problem solving. My experience
-              spans building AI-powered applications (AI travel planner, job-matching portal, workflow automation
-              agents), conducting healthcare research on intelligent edge computing & AR/VR, and developing data
-              pipelines & dashboards as a Data Analyst Intern. I focus on translating complex datasets into actionable
-              insights and practical AI systems that drive impact in real-world domains.
+              Graduate student in Data Science at ASU, building AI-powered applications and data solutions. Passionate about turning complex datasets into real-world impact.
             </p>
           </div>
 
