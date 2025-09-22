@@ -22,6 +22,9 @@ export interface Experience {
   achievements: string[]
 }
 
+
+
+
 export interface Education {
   degree: string
   school: string
@@ -313,3 +316,33 @@ export const certifications: Certification[] = [
     category: "programming",
   },
 ]
+
+// lib/content.ts
+export const heroStats = [
+  {
+    id: "projects",
+    label: "Projects",
+    rolling: ["17 Total", "9 Featured"], // rolls between these
+  },
+  {
+    id: "hackathons",
+    label: "Hackathon Wins",
+    value: "3",
+  },
+  {
+    id: "linkedin",
+    label: "LinkedIn Followers",
+    value: "1300+",
+  },
+  {
+    id: "stack",
+    label: "Tech Stack Expertise",
+    value: "28",
+    suffix: "Tools & Frameworks",
+  },
+  {
+    id: "domains",
+    label: "Domains of Impact",
+    value: "5",
+  },
+] as const;

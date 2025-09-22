@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Github, Linkedin, Clock } from "lucide-react"
 import GlassFlipper from "@/components/GlassFlipper"
+import HeroStats from "@/components/blocks/HeroStats";
 
 
 import HeroCarousel from "@/components/hero-carousel";
@@ -79,6 +80,8 @@ export function HeroSection() {
               Graduate student in Data Science at ASU, building AI-powered applications and data solutions. Passionate about turning complex datasets into real-world impact.
             </p>
           </div>
+
+          <HeroStats />
 
           <div className="flex flex-wrap justify-center gap-4">
             <a
