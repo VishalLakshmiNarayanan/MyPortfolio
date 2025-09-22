@@ -248,6 +248,16 @@ export const publications: Publication[] = [
 
 export const awards: Award[] = [
   {
+  title: "1st Place — DevHacks S2",
+  organization: "DevHacks",
+  date: "2025-09-22", 
+  description:
+    "Won 1st place for building SlideSage AI — an AI-powered learning assistant that transforms dense concepts into short, dialogue-based explainer videos with quizzes, streaks, and badges. If a student doesn’t understand a concept the first time, SlideSage instantly regenerates a new video with fresh analogies or examples until it clicks. The goal: make learning adaptive, fun, and addictive.",
+  category: "hackathon",
+  image: "/images/awards/dev.png",
+},
+
+  {
     title: "People's Choice Award",
     organization: "HackAZona v0.1",
     date: "2025-04-01",
