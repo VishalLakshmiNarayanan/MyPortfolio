@@ -56,7 +56,7 @@ export function HeroSection() {
             <HeroCarousel
               images={[
                   // make sure these filenames/extensions match
-                "/images/hero/hero2.jpeg",
+                "/images/hero/hero1.jpg",
               ]}
               intervalMs={4000}
               aspect="h-full"
