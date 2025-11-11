@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Github, Linkedin, Clock } from "lucide-react"
+import Image from "next/image"
 import GlassFlipper from "@/components/GlassFlipper"
 import HeroStats from "@/components/blocks/HeroStats";
 
@@ -78,19 +79,29 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right visual */}
+          {/* Right visual - single image with theme lighting, no box */}
           <div className="order-1 md:order-2 flex justify-center md:justify-end">
-            <div className="relative w-56 h-56 md:w-80 md:h-96 rounded-2xl overflow-hidden border-2 border-purple-300 shadow-xl">
-              <HeroCarousel
-                images={["/images/hero/portrait.jpg", "/images/hero/hero1.jpg"]}
-                intervalMs={4000}
-                aspect="h-full"
-                variant="rounded"
-                glow={false}
+            <div className="relative w-64 h-64 md:w-[26rem] md:h-[28rem]">
+              {/* Soft site-themed lighting behind */}
+              <div
+                className="pointer-events-none absolute -inset-6 rounded-[2rem]"
+                style={{
+                  background: `
+                    radial-gradient(ellipse 90% 70% at 60% 35%, rgba(175, 109, 255, 0.35), transparent 60%),
+                    radial-gradient(ellipse 90% 60% at 30% 65%, rgba(255, 100, 180, 0.25), transparent 62%),
+                    radial-gradient(ellipse 70% 60% at 80% 80%, rgba(120, 190, 255, 0.25), transparent 65%)
+                  `,
+                  filter: "blur(20px)",
+                }}
               />
-              <div className="hidden md:block absolute -right-6 top-8 bg-white/90 border rounded-full px-3 py-1 text-sm shadow">AI Platforms</div>
-              <div className="hidden md:block absolute -right-10 top-32 bg-white/90 border rounded-full px-3 py-1 text-sm shadow">Data Science</div>
-              <div className="hidden md:block absolute -right-4 bottom-8 bg-white/90 border rounded-full px-3 py-1 text-sm shadow">Backend</div>
+              <Image
+                src="/images/hero/portrait.jpg"
+                alt="Vishal Lakshmi Narayanan portrait"
+                fill
+                priority
+                className="object-contain object-center scale-[1.08] drop-shadow-xl"
+                sizes="(min-width: 768px) 420px, 256px"
+              />
             </div>
           </div>
 
