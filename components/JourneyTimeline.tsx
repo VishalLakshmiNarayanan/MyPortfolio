@@ -13,25 +13,25 @@ interface Moment {
 
 const moments: Moment[] = [
   {
-    title: "DevHacks S1",
+    title: "DevHacks S1 ",
     date: "March 2025",
     month: "Mar",
     image: "/images/Moments/devhackss1.png"
   },
   {
-    title: "HackAZona",
+    title: "HackAZona v0.1 [People's choice award]",
     date: "March 2025",
     month: "Mar",
     image: "/images/Moments/Hackazona.png"
   },
   {
-    title: "Techipalooza Conference",
+    title: "Techipalooza Conference 2025",
     date: "August 2025",
     month: "Aug",
     image: "/images/Moments/techipaloozaconf.png"
   },
   {
-    title: "DevHacks S2 (Winning Edition)",
+    title: "DevHacks S2 [WON 1st Place]",
     date: "August 2025",
     month: "Aug",
     image: "/images/Moments/devhackss2.png"
@@ -43,19 +43,19 @@ const moments: Moment[] = [
     image: "/images/Moments/HHH.png"
   },
   {
-    title: "Data Conference (ASU)",
+    title: "9th Annual ASU Data Conference",
     date: "November 2025",
     month: "Nov",
     image: "/images/Moments/Dataconf.png"
   },
   {
-    title: "Workshop Conducted",
+    title: "Conducted Portfolio building workshop",
     date: "November 2025",
     month: "Nov",
     image: "/images/Moments/Workshop.png"
   },
   {
-    title: "Mentorship (Claude Builder Hackathon)",
+    title: "Mentored Teams and conducted workshop on Polymarket Track (Claude Builder Hackathon) ",
     date: "November 2025",
     month: "Nov",
     image: "/images/Moments/mentorship.png"
