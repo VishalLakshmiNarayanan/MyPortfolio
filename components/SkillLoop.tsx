@@ -107,11 +107,12 @@ function Row({
           const icon = resolveIcon(it.name)
           const accent = `accent-${it.cat}`
           const delay = ((idx * 137) % 110) / 10 // 0..11s stagger
+          const themeColor = it.cat === 'dsml' ? 'af6dff' : it.cat === 'de' ? 'ff64b4' : it.cat === 'viz' ? 'ffd966' : '78beff'
           return (
             <div key={`${it.name}-${idx}`} className={`tile ${accent}`} style={{ ['--pulseDelay' as any]: `${delay}s` }}>
               <div className="icon-wrap">
                 {icon.type === 'iconify' ? (
-                  <img src={`https://api.iconify.design/${encodeURIComponent(icon.value)}.svg${icon.value.startsWith('logos:') ? '' : '?color=%23cfd6ff'}`} alt="" />
+                  <img src={`https://api.iconify.design/${encodeURIComponent(icon.value)}.svg${icon.value.startsWith('logos:') ? '' : `?color=%23${themeColor}`}`} alt="" />
                 ) : icon.type === 'devicon' ? (
                   <i className={`${icon.value}`}></i>
                 ) : (
