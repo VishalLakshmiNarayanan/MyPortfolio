@@ -93,7 +93,7 @@ export function CertificationBadges({ certifications }: CertificationBadgesProps
               <div className={styles.badge__inner}>
                 <span className={styles.badge__category}>{categoryLabels[certification.category]}</span>
 
-                <div className={styles.badge__logo-frame}>
+                <div className={styles["badge__logo-frame"]}>
                   <img src={iconSrc} alt={`${certification.organization} logo`} className={styles.badge__logo} />
                 </div>
 
