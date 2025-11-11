@@ -35,6 +35,8 @@ export interface Education {
   gpa?: string
   coursework: string[]
   notes?: string
+  image?: string
+  stats?: Array<{ label: string; value: string }>
 }
 
 export interface Publication {
@@ -224,12 +226,13 @@ export const education: Education[] = [
     startDate: "2024-08-01",
     current: true,
     coursework: ["Statistical Machine Learning", "Big Data Analysis", "Data Mining", "Data Processing"],
-     stats: [
+    stats: [
       { label: "CGPA", value: "3.83 / 4.00" },
       { label: "Credits Earned", value: "18 / 18" },
       { label: "Projects", value: "7" },
       { label: "Hackathons Won", value: "2" },
     ],
+    image: "/images/education/asu.jpg",
   },
   {
     degree: "B.Tech in Computer Science (AI/ML Specialization)",
@@ -245,6 +248,7 @@ export const education: Education[] = [
       { label: "Projects", value: "12" },
       { label: "Hackathons Won", value: "1" },
     ],
+    image: "/images/education/vit.webp",
   },
 ]
 
