@@ -320,6 +320,13 @@ export const awards: Award[] = [
 
 export const certifications: Certification[] = [
   {
+    title: "AI Agent Fundamentals",
+    organization: "Databricks",
+    date: "2025-09-01",
+    credentialUrl: "https://credentials.databricks.com/3c81b547-1237-4332-8e42-4ac99621441f#acc.ROUN6AEo",
+    category: "ai",
+  },
+  {
     title: "n8n Course: No Code AI Agent Builder",
     organization: "Simplilearn",
     date: "2025-06-01",
