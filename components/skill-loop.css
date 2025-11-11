@@ -1,0 +1,89 @@
+/* Skills Tag Loop (multi-row seamless marquee) */
+
+:root {
+  --sky-bg: #1e293b; /* tailwind slate-800 */
+  --tag-bg: #334155; /* slate-700 */
+  --tag-text: #e2e8f0; /* slate-200 */
+  --tag-dim: #64748b; /* slate-500 */
+}
+
+.skills-loop {
+  display: grid;
+  place-items: center;
+}
+
+.tag-list {
+  width: 70rem;
+  max-width: 92vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem 0;
+  position: relative;
+  padding: 1.25rem 0;
+  overflow: hidden;
+}
+
+.loop-slider .inner {
+  display: flex;
+  width: fit-content;
+  animation-name: skill-loop;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: var(--direction, normal);
+  animation-duration: var(--duration, 35s);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0 0.35rem;
+  color: var(--tag-text);
+  font-size: 0.92rem;
+  background-color: var(--tag-bg);
+  border-radius: 0.5rem;
+  padding: 0.6rem 0.9rem;
+  margin-right: 1rem; /* must use margin for seamless loop */
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow:
+    0 0.1rem 0.2rem rgb(0 0 0 / 20%),
+    0 0.1rem 0.5rem rgb(0 0 0 / 30%),
+    0 0.2rem 1.1rem rgb(0 0 0 / 35%);
+  white-space: nowrap;
+}
+
+.tag .ico {
+  width: 1.15rem;
+  height: 1.15rem;
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.25));
+}
+.tag .ico img { width: 100%; height: 100%; object-fit: contain; }
+.tag .ico i { font-size: 1.05rem; line-height: 1; }
+
+.fade-overlay {
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--sky-bg), transparent 30%, transparent 70%, var(--sky-bg));
+  position: absolute;
+  inset: 0;
+}
+
+/* Category lighting accents */
+.accent-dsml { box-shadow: 0 0 0 0 rgba(175,109,255,0.0), inset 0 0 0 1px rgba(175,109,255,0.15); }
+.accent-de { box-shadow: 0 0 0 0 rgba(255,100,180,0.0), inset 0 0 0 1px rgba(255,100,180,0.15); }
+.accent-viz { box-shadow: 0 0 0 0 rgba(255,235,170,0.0), inset 0 0 0 1px rgba(255,235,170,0.15); }
+.accent-misc { box-shadow: 0 0 0 0 rgba(120,190,255,0.0), inset 0 0 0 1px rgba(120,190,255,0.15); }
+.accent-dsml:hover { box-shadow: 0 0 12px 2px rgba(175,109,255,0.35), inset 0 0 0 1px rgba(175,109,255,0.35); }
+.accent-de:hover { box-shadow: 0 0 12px 2px rgba(255,100,180,0.35), inset 0 0 0 1px rgba(255,100,180,0.35); }
+.accent-viz:hover { box-shadow: 0 0 12px 2px rgba(255,235,170,0.35), inset 0 0 0 1px rgba(255,235,170,0.35); }
+.accent-misc:hover { box-shadow: 0 0 12px 2px rgba(120,190,255,0.35), inset 0 0 0 1px rgba(120,190,255,0.35); }
+
+@keyframes skill-loop {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loop-slider .inner { animation: none; }
+}
+

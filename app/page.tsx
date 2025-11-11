@@ -10,6 +10,7 @@ import { CertificationCard } from "@/components/certification-card"
 import { FloatingSkillsBubble } from "@/components/floating-skills-bubble"
 import SkillGalaxy from "@/components/SkillGalaxy"
 import SkillCarousel from "@/components/SkillCarousel"
+import SkillLoop from "@/components/SkillLoop"
 import StackedProjectCards from "@/components/StackedProjectCards"
 import ExperienceTimeline from "@/components/ExperienceTimeline"
 
@@ -41,7 +42,7 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Skills</h2>
           </div>
           <div className="max-w-6xl mx-auto">
-            <SkillCarousel />
+            <SkillLoop />
           </div>
         </div>
       </section>
