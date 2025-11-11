@@ -174,6 +174,19 @@ export const allProjects: Project[] = [
 
 export const experiences: Experience[] = [
   {
+    title: "Technical Officer",
+    company: "Devlabs",
+    location: "Arizona, United States",
+    startDate: "2025-10-01",
+    current: true,
+    description:
+      "Contributing to the AI-driven Builder Intelligence system for resume understanding, skill extraction, and candidate–job ranking using embeddings and vector search.",
+    achievements: [
+      "Designed and implemented components of the Builder Intelligence pipeline, powering semantic resume parsing, skill extraction, and ranking with vector search.",
+      "Assisted backend and AI workflow development across data processing, API integration, and pipeline automation connecting the Builder chatbot, MongoDB, and inference layers.",
+    ],
+  },
+  {
     title: "Data Analyst Intern",
     company: "Amrutanjan HealthCare Ltd.",
     location: "Chennai, India",
@@ -213,7 +226,7 @@ export const education: Education[] = [
     coursework: ["Statistical Machine Learning", "Big Data Analysis", "Data Mining", "Data Processing"],
      stats: [
       { label: "CGPA", value: "3.83 / 4.00" },
-      { label: "Credits Earned", value: "18 / 30" },
+      { label: "Credits Earned", value: "18 / 18" },
       { label: "Projects", value: "7" },
       { label: "Hackathons Won", value: "2" },
     ],
