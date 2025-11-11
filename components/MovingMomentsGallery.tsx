@@ -19,49 +19,57 @@ const moments: Moment[] = [
     title: "DevHacks S1",
     date: "March 2025",
     image: "/images/Moments/devhackss1.png",
-    description: "First hackathon experience where the SlideSage AI proof-of-concept earned praise for adaptive learning walkthroughs.",
+    description:
+      "Built a Streamlit-based resume parsing and course recommendation app that helped students discover personalized upskilling paths. My first major hackathon experience with the DevLabs community.",
   },
   {
     title: "HackAZona",
     date: "March 2025",
     image: "/images/Moments/Hackazona.png",
-    description: "Built PlanWiseAI, an agent that generated real-time itineraries and won the crowd over with its multi-agent choreography.",
+    description:
+      "Developed PlanWiseAI, an intelligent travel planner that generated real-time itineraries using multi-agent reasoning and live data orchestration, earning strong audience reception.",
   },
   {
     title: "Techipalooza Conference",
     date: "August 2025",
     image: "/images/Moments/techipaloozaconf.png",
-    description: "Showcased research on accessible interfaces for AR-driven learning and collected dozens of delightful follow-up conversations.",
+    description:
+      "Participated in Techipalooza 2025, a networking conference where startups and innovators showcased their products and ideas, fostering connections across ASU’s tech ecosystem.",
   },
   {
     title: "DevHacks S2 – Winning Edition",
     date: "August 2025",
     image: "/images/Moments/devhackss2.png",
-    description: "First place project combined AI scripting and creative storytelling to keep judges engaged and entertained.",
+    description:
+      "Won 1st Place at DevHacks Season 2 with SlideSage, an AI-powered learning assistant that converts complex topics into adaptive explainer videos and interactive walkthroughs.",
   },
   {
     title: "Hacks for Humanity",
     date: "October 2025",
     image: "/images/Moments/HHH.png",
-    description: "Collaborated on automation for social impact, connecting nonprofits to AI-assisted volunteer coordination.",
+    description:
+      "Created CultureBites, a community-driven app connecting local foodies, hosts, and small restaurants through shared experiences and cultural storytelling for social impact.",
   },
   {
-    title: "Data Conference (ASU)",
+    title: "9th Annual ASU Data Conference",
     date: "November 2025",
     image: "/images/Moments/Dataconf.png",
-    description: "Led a session on AI observability with SQL-backed analytics, leaving attendees energized about data storytelling.",
+    description:
+      "Attended the 9th Annual ASU Data Conference, where professionals from AWS and Alteryx showcased real-world applications of AI and data analytics for responsible innovation.",
   },
   {
-    title: "Workshop Conducted",
+    title: "Portfolio Building Workshop",
     date: "November 2025",
     image: "/images/Moments/Workshop.png",
-    description: "Led a hands-on automation workshop introducing students to n8n, Agents, and intuitive workflow design.",
+    description:
+      "Conducted my first hands-on workshop on portfolio building, guiding students through structuring impactful projects, showcasing skills, and presenting their work effectively.",
   },
   {
-    title: "Claude Builder Hackathon Mentorship",
+    title: "Claude Builder Hackathon – Mentorship",
     date: "November 2025",
     image: "/images/Moments/mentorship.png",
-    description: "Mentored the next generation of builders tackling Claude-powered experiences with human-first design.",
+    description:
+      "Mentored teams at the Claude Builder Hackathon, helping them design and refine conversational builders powered by LLMs with a focus on human-first multi-agent design. And conducted a workshop for Polymarket Track",
   },
 ]
 
