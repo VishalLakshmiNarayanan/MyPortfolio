@@ -8,7 +8,7 @@ import { ContactCard } from "@/components/contact-card"
 import { AwardCard } from "@/components/award-card"
 import { CertificationCard } from "@/components/certification-card"
 import { FloatingSkillsBubble } from "@/components/floating-skills-bubble"
-import ProjectCarousel from "@/components/ProjectCarousel"
+import StackedProjectCards from "@/components/StackedProjectCards"
 import ExperienceTimeline from "@/components/ExperienceTimeline"
 
 
@@ -64,8 +64,9 @@ export default function HomePage() {
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Featured Projects</h2>
+            <p className="text-black/70 max-w-2xl mx-auto">Click the arrow or press space to explore each project</p>
           </div>
-          <ProjectCarousel projects={featuredProjects} />
+          <StackedProjectCards projects={featuredProjects} />
         </div>
       </section>
 

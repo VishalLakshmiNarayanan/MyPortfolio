@@ -607,3 +607,160 @@ html {
 .glow-theme {
   animation: auroraDreamGlow 1.8s ease-in-out infinite alternate;
 }
+
+/* ===== Stacked Project Cards Animation ===== */
+.project-stack {
+  /* defaults */
+  --_offset-steps: 6rem; /* distance up */
+  --_scale-steps: 25;  /* scale behind*/
+  --_opacity-steps: 15; /* opacity behind */
+  --_ani-duration: 300ms; /* transition on card elements */
+  --_ani-delay: 200ms; /* delay on card elements (will be multiplied) */
+
+  /* calculations */
+  --_offset-steps-two: calc(var(--_offset-steps) * -1);
+  --_offset-steps-three: calc(var(--_offset-steps) * -2);
+  --scale-steps-two: calc(1 - var(--_scale-steps) * 0.01);
+  --scale-steps-three: calc(1 - var(--_scale-steps) * 0.02);
+  --opacity-steps-two: calc(1 - var(--_opacity-steps) * 0.02);
+  --opacity-steps-three: calc(1 - var(--_opacity-steps) * 0.04);
+
+  @media (width > 600px){
+    --_offset-steps: 4em; /* distance up */
+  }
+
+  display: grid;
+  grid-template-areas: "stack";
+  width: min(calc(100% - 2rem), 48rem);
+  margin: 0 auto;
+}
+
+.stacked-project-card {
+  --_bg-alpha: .5;
+  --_border-radius: 16px;
+  --_bg-dot-offset: 20px;
+
+  position: relative;
+  isolation: isolate;
+  background-color: white;
+  grid-area: stack;
+  transition: 500ms ease-in-out;
+  border-radius: var(--_border-radius);
+
+  translate: 0 var(--_offset);
+  order: var(--_order);
+  z-index: var(--_order);
+  scale: var(--_scale);
+  opacity: var(--_opacity);
+
+  &::before,
+  &::after{
+    content: "";
+    position: absolute;
+    border-radius: inherit;
+    z-index: -1;
+  }
+
+  &::before {
+    z-index: -1;
+    inset: calc(var(--_bg-dot-offset) * -1);
+    background-image: radial-gradient(var(--_bg-dot-color) 1px, transparent 0px);
+    background-repeat: repeat;
+    background-size: 5px 5px;
+    background-position: center;
+    border-radius: calc(var(--_border-radius) + var(--_bg-dot-offset));
+  }
+
+  &::after{
+    background-color: white;
+    inset: 0;
+  }
+}
+
+/* Aurora Dream color variants for each card */
+.stacked-project-card[data-variant="purple"] {
+  --_bg-dot-color: rgba(175, 109, 255, var(--_bg-alpha, 1));
+  --_order: var(--_purple-order, 1);
+  --_scale: var(--_purple-scale, 0.75);
+  --_opacity: var(--_purple-opacity, 0.7);
+  --_offset: var(--_purple-offset, -12rem);
+}
+
+.stacked-project-card[data-variant="pink"] {
+  --_bg-dot-color: rgba(255, 100, 180, var(--_bg-alpha, 1));
+  --_order: var(--_pink-order, 2);
+  --_scale: var(--_pink-scale, 0.85);
+  --_opacity: var(--_pink-opacity, 0.85);
+  --_offset: var(--_pink-offset, -6rem);
+}
+
+.stacked-project-card[data-variant="yellow"] {
+  --_bg-dot-color: rgba(255, 235, 170, var(--_bg-alpha, 1));
+  --_order: var(--_yellow-order, 3);
+  --_scale: var(--_yellow-scale, 1);
+  --_opacity: var(--_yellow-opacity, 1);
+  --_offset: var(--_yellow-offset, 0);
+}
+
+.stacked-project-card[data-variant="blue"] {
+  --_bg-dot-color: rgba(120, 190, 255, var(--_bg-alpha, 1));
+  --_order: var(--_blue-order, 1);
+  --_scale: var(--_blue-scale, 0.75);
+  --_opacity: var(--_blue-opacity, 0.7);
+  --_offset: var(--_blue-offset, -12rem);
+}
+
+/* Card header */
+.stacked-project-card > .card-header {
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--_bg-dot-color);
+  transition: background-color var(--_ani-duration) ease-in-out;
+  border-radius: var(--_border-radius) var(--_border-radius) 0 0;
+}
+
+/* Card content */
+.stacked-project-card > .card-content {
+  position: relative;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stacked-project-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: var(--_ani-duration) ease-in-out;
+  opacity: var(--_img-opacity, 0);
+}
+
+.stacked-project-card p,
+.stacked-project-card h3 {
+  transition: var(--_ani-duration) ease-in-out;
+  transition-delay: 200ms;
+  opacity: var(--_text-opacity, 0);
+  margin: 0;
+}
+
+/* Active card state - show all content */
+.stacked-project-card[data-active="true"] {
+  --_img-opacity: 1;
+  --_text-opacity: 1;
+}
+
+/* Navigation controls */
+.stack-nav-control {
+  padding: 0;
+  color: #333;
+  transition: rotate 300ms ease-in-out;
+  cursor: pointer;
+}
+
+.stack-nav-control:hover {
+  rotate: 90deg;
+}
