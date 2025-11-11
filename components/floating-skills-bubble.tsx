@@ -1,463 +1,269 @@
 "use client"
 
-import { useEffect, useMemo, useRef } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { motion } from "framer-motion"
+import { skillGroups, allProjects } from "@/lib/content"
 
-interface Bubble {
-  id: number
+type CategoryKey = "dsml" | "de" | "viz" | "misc"
+
+const categoryKeyMap: Record<string, CategoryKey> = {
+  "Data Science & Machine Learning": "dsml",
+  "Data Engineering & Infrastructure": "de",
+  "Data Analytics & Visualization": "viz",
+  "Additional Proficiencies": "misc",
+}
+
+const categoryColors: Record<CategoryKey, string> = {
+  dsml: "#af6dff",
+  de: "#ff64b4",
+  viz: "#ffebaa",
+  misc: "#78beff",
+}
+
+// Iconify IDs provided by user mapping
+const iconifyIdMap: Record<string, string> = {
+  Python: "logos:python",
+  R: "logos:r-lang",
+  "Scikit-learn": "simple-icons:scikitlearn",
+  TensorFlow: "logos:tensorflow",
+  PyTorch: "logos:pytorch-icon",
+  NLP: "ph:brain-duotone",
+  "Recommendation Systems": "ph:star-duotone",
+  "LLM Integration": "lucide:brain-circuit",
+  "Time Series Analysis": "mdi:chart-timeline-variant",
+  "Causal Inference": "mdi:graph-outline",
+  "A/B Testing": "mdi:flask-outline",
+  SQL: "vscode-icons:file-type-sql",
+  PySpark: "simple-icons:apachespark",
+  Databricks: "simple-icons:databricks",
+  "Apache Airflow": "simple-icons:apacheairflow",
+  MLflow: "simple-icons:mlflow",
+  Docker: "logos:docker-icon",
+  "REST APIs": "tabler:api",
+  MySQL: "logos:mysql-icon",
+  PostgreSQL: "logos:postgresql",
+  "SQL Server": "simple-icons:microsoftsqlserver",
+  SQLite: "simple-icons:sqlite",
+  Supabase: "simple-icons:supabase",
+  Tableau: "simple-icons:tableau",
+  "Power BI": "simple-icons:powerbi",
+  Streamlit: "simple-icons:streamlit",
+  Matplotlib: "simple-icons:matplotlib",
+  Seaborn: "simple-icons:seaborn",
+  Excel: "vscode-icons:file-type-excel",
+  "Statistical Modeling": "mdi:chart-box-outline",
+  "Linear Optimization (CPLEX)": "mdi:chart-line-variant",
+  "D3.js": "simple-icons:d3dotjs",
+  Git: "logos:git-icon",
+  "API Integration": "tabler:api",
+  "n8n Workflows": "simple-icons:n8n",
+  Julia: "simple-icons:julia",
+  "CI/CD pipelines": "simple-icons:githubactions",
+}
+
+interface Node {
+  id: string
+  skill: string
+  category: CategoryKey
   x: number
   y: number
-  vx: number
-  vy: number
-  radius: number
-  skill: string
-  color: string
-  category: string
+  r: number
+  icon?: string
 }
 
-interface SkillData {
-  name: string
-  category: string
-  connections: string[]
-}
-
-const skillsData: SkillData[] = [
-  // Data Science & Machine Learning
-  { name: "Python", category: "dsml", connections: ["Scikit-learn", "TensorFlow", "PyTorch", "NLP", "Time Series Analysis"] },
-  { name: "R", category: "dsml", connections: ["Causal Inference", "A/B Testing", "Time Series Analysis", "Statistical Modeling"] },
-  { name: "Scikit-learn", category: "dsml", connections: ["Python", "Recommendation Systems"] },
-  { name: "TensorFlow", category: "dsml", connections: ["Python", "NLP", "MLflow"] },
-  { name: "PyTorch", category: "dsml", connections: ["Python", "NLP", "MLflow"] },
-  { name: "NLP", category: "dsml", connections: ["Python", "LLM Integration", "Recommendation Systems"] },
-  { name: "Recommendation Systems", category: "dsml", connections: ["Scikit-learn", "NLP", "LLM Integration"] },
-  { name: "LLM Integration", category: "dsml", connections: ["Python", "NLP"] },
-  { name: "Time Series Analysis", category: "dsml", connections: ["Python", "R"] },
-  { name: "Causal Inference", category: "dsml", connections: ["R", "A/B Testing"] },
-  { name: "A/B Testing", category: "dsml", connections: ["Causal Inference", "Statistical Modeling"] },
-
-  // Data Engineering & Infrastructure
-  { name: "SQL", category: "de", connections: ["MySQL", "PostgreSQL", "SQL Server", "SQLite", "Supabase", "Databricks"] },
-  { name: "PySpark", category: "de", connections: ["Databricks", "SQL"] },
-  { name: "Databricks", category: "de", connections: ["PySpark", "MLflow"] },
-  { name: "Apache Airflow", category: "de", connections: ["REST APIs", "Docker", "MLflow"] },
-  { name: "MLflow", category: "de", connections: ["Databricks", "PyTorch", "TensorFlow"] },
-  { name: "Docker", category: "de", connections: ["REST APIs", "CI/CD pipelines"] },
-  { name: "REST APIs", category: "de", connections: ["SQL", "Docker", "API Integration"] },
-  { name: "MySQL", category: "de", connections: ["SQL"] },
-  { name: "PostgreSQL", category: "de", connections: ["SQL"] },
-  { name: "SQL Server", category: "de", connections: ["SQL"] },
-  { name: "SQLite", category: "de", connections: ["SQL"] },
-  { name: "Supabase", category: "de", connections: ["SQL", "REST APIs"] },
-  { name: "MongoDB", category: "de", connections: ["REST APIs"] },
-
-  // Data Analytics & Visualization
-  { name: "Tableau", category: "viz", connections: ["SQL", "Excel"] },
-  { name: "Power BI", category: "viz", connections: ["SQL", "Excel"] },
-  { name: "Streamlit", category: "viz", connections: ["Python"] },
-  { name: "Matplotlib", category: "viz", connections: ["Python"] },
-  { name: "Seaborn", category: "viz", connections: ["Python"] },
-  { name: "Excel", category: "viz", connections: ["Power BI", "Tableau"] },
-  { name: "Statistical Modeling", category: "viz", connections: ["R", "A/B Testing"] },
-  { name: "Linear Optimization (CPLEX)", category: "viz", connections: ["Python"] },
-  { name: "D3.js", category: "viz", connections: ["REST APIs"] },
-
-  // Additional Proficiencies
-  { name: "Git", category: "misc", connections: ["CI/CD pipelines", "Docker"] },
-  { name: "API Integration", category: "misc", connections: ["REST APIs", "n8n Workflows"] },
-  { name: "n8n Workflows", category: "misc", connections: ["API Integration", "REST APIs"] },
-  { name: "Julia", category: "misc", connections: ["Linear Optimization (CPLEX)"] },
-  { name: "CI/CD pipelines", category: "misc", connections: ["Git", "Docker"] },
-  { name: "Astro", category: "misc", connections: ["D3.js", "REST APIs"] },
-]
-
-// Aurora Dream palette per categories (hex format for canvas compatibility)
-const categoryColors = {
-  dsml: "#af6dff", // Data Science & ML - Purple
-  de: "#ff64b4", // Data Engineering & Infra - Pink
-  viz: "#ffebaa", // Analytics & Visualization - Yellow
-  misc: "#78beff", // Additional Proficiencies - Blue
-}
-
+interface Edge { from: string; to: string; category: CategoryKey }
 
 export function FloatingSkillsBubble() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const bubblesRef = useRef<Bubble[]>([])
-  const animationRef = useRef<number>()
-  const iconImagesRef = useRef<Record<string, HTMLImageElement>>({})
-  const failedIconsRef = useRef<Set<string>>(new Set())
-
-  // Map of skill name -> Devicon SVG URL
-  const deviconUrlMap: Record<string, string> = useMemo(() => ({
-    Python: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-    R: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg",
-    "Scikit-learn": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-plain.svg",
-    TensorFlow: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg",
-    PyTorch: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg",
-    SQL: "",
-    PySpark: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachespark/apachespark-original.svg",
-    Databricks: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachespark/apachespark-original.svg", // approx
-    "Apache Airflow": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apacheairflow/apacheairflow-plain.svg",
-    MLflow: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", // approx
-    Docker: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-    "REST APIs": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg", // approx
-    MySQL: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
-    PostgreSQL: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-    "SQL Server": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg",
-    SQLite: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg",
-    Supabase: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg",
-    MongoDB: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-    Tableau: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tableau/tableau-original.svg",
-    "Power BI": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/powerbi/powerbi-original.svg",
-    Streamlit: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/streamlit/streamlit-original.svg",
-    Matplotlib: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/anaconda/anaconda-original.svg", // approx
-    Seaborn: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/anaconda/anaconda-original.svg", // approx
-    Excel: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg", // approx
-    "Statistical Modeling": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg", // approx
-    "Linear Optimization (CPLEX)": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/julia/julia-original.svg", // approx
-    "D3.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/d3js/d3js-original.svg",
-    Git: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-    "API Integration": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg", // approx
-    "n8n Workflows": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", // approx
-    Julia: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/julia/julia-original.svg",
-    "CI/CD pipelines": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-plain.svg", // approx
-    Astro: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/astro/astro-original.svg",
-    "Time Series Analysis": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", // approx
-    "Causal Inference": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg", // approx
-    "A/B Testing": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg", // approx
-    NLP: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg", // approx
-    "Recommendation Systems": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", // approx
-    "LLM Integration": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg", // approx
-  }), [])
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [size, setSize] = useState({ w: 0, h: 0 })
+  const [hovered, setHovered] = useState<string | null>(null)
+  const [selected, setSelected] = useState<string | null>(null)
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
-    // Preload Devicon images for supported skills
-    Object.entries(deviconUrlMap).forEach(([name, url]) => {
-      if (!url) return
-      const img = new Image()
-      img.crossOrigin = "anonymous"
-      img.onload = () => {
-        iconImagesRef.current[name] = img
-      }
-      img.onerror = () => {
-        failedIconsRef.current.add(name)
-      }
-      img.src = url
-    })
-
-    const resizeCanvas = () => {
-      canvas.width = canvas.offsetWidth
-      canvas.height = canvas.offsetHeight
+    const onResize = () => {
+      const el = containerRef.current
+      if (!el) return
+      setSize({ w: el.clientWidth, h: el.clientHeight })
     }
-
-    resizeCanvas()
-    window.addEventListener("resize", resizeCanvas)
-
-    // Function to check if two bubbles overlap
-    const checkOverlap = (bubble1: Bubble, bubble2: Bubble) => {
-      const dx = bubble1.x - bubble2.x
-      const dy = bubble1.y - bubble2.y
-      const distance = Math.sqrt(dx * dx + dy * dy)
-      return distance < bubble1.radius + bubble2.radius + 20 // Increased buffer from 10 to 20
-    }
-
-    // Function to find a non-overlapping position with grid-based approach
-    const findNonOverlappingPosition = (bubbles: Bubble[], newBubble: Bubble, maxAttempts = 100) => {
-      // Try grid-based positioning first for better distribution
-      const gridCols = Math.floor(canvas.width / 80) // 80px grid cells
-      const gridRows = Math.floor(canvas.height / 80)
-      const gridPositions = []
-
-      for (let row = 0; row < gridRows; row++) {
-        for (let col = 0; col < gridCols; col++) {
-          gridPositions.push({
-            x: (col + 0.5) * (canvas.width / gridCols),
-            y: (row + 0.5) * (canvas.height / gridRows),
-          })
-        }
-      }
-
-      // Shuffle grid positions for randomness
-      for (let i = gridPositions.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1))
-        ;[gridPositions[i], gridPositions[j]] = [gridPositions[j], gridPositions[i]]
-      }
-
-      // Try grid positions first
-      for (const pos of gridPositions) {
-        if (
-          pos.x >= newBubble.radius &&
-          pos.x <= canvas.width - newBubble.radius &&
-          pos.y >= newBubble.radius &&
-          pos.y <= canvas.height - newBubble.radius
-        ) {
-          newBubble.x = pos.x
-          newBubble.y = pos.y
-
-          let overlapping = false
-          for (const existingBubble of bubbles) {
-            if (checkOverlap(newBubble, existingBubble)) {
-              overlapping = true
-              break
-            }
-          }
-
-          if (!overlapping) {
-            return true
-          }
-        }
-      }
-
-      // Fallback to random positioning with more attempts
-      for (let attempt = 0; attempt < maxAttempts; attempt++) {
-        newBubble.x = Math.random() * (canvas.width - newBubble.radius * 2) + newBubble.radius
-        newBubble.y = Math.random() * (canvas.height - newBubble.radius * 2) + newBubble.radius
-
-        let overlapping = false
-        for (const existingBubble of bubbles) {
-          if (checkOverlap(newBubble, existingBubble)) {
-            overlapping = true
-            break
-          }
-        }
-
-        if (!overlapping) {
-          return true
-        }
-      }
-      return false
-    }
-
-    // Initialize bubbles with better spacing
-    const bubbles: Bubble[] = []
-    skillsData.forEach((skillData, i) => {
-      const newBubble: Bubble = {
-        id: i,
-        x: 0,
-        y: 0,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: (Math.random() - 0.5) * 0.6,
-        radius: Math.random() * 6 + 22, // Slightly smaller bubbles (22-28 instead of 25-33)
-        skill: skillData.name,
-        color: categoryColors[skillData.category as keyof typeof categoryColors] || "#2196f3",
-        category: skillData.category,
-      }
-
-      if (findNonOverlappingPosition(bubbles, newBubble)) {
-        bubbles.push(newBubble)
-      } else {
-        // More aggressive fallback - much smaller radius and edge placement
-        newBubble.radius = Math.random() * 4 + 18
-        newBubble.x = Math.random() * (canvas.width - newBubble.radius * 2) + newBubble.radius
-        newBubble.y = Math.random() * (canvas.height - newBubble.radius * 2) + newBubble.radius
-        bubbles.push(newBubble)
-      }
-    })
-    bubblesRef.current = bubbles
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      bubbles.forEach((bubble) => {
-        // Update position
-        bubble.x += bubble.vx
-        bubble.y += bubble.vy
-
-        // Bounce off walls with some padding
-        const wallPadding = 5
-        if (bubble.x <= bubble.radius + wallPadding || bubble.x >= canvas.width - bubble.radius - wallPadding) {
-          bubble.vx *= -0.8 // Add some energy loss on wall bounce
-        }
-        if (bubble.y <= bubble.radius + wallPadding || bubble.y >= canvas.height - bubble.radius - wallPadding) {
-          bubble.vy *= -0.8
-        }
-
-        // Keep within bounds with padding
-        bubble.x = Math.max(bubble.radius + wallPadding, Math.min(canvas.width - bubble.radius - wallPadding, bubble.x))
-        bubble.y = Math.max(
-          bubble.radius + wallPadding,
-          Math.min(canvas.height - bubble.radius - wallPadding, bubble.y),
-        )
-
-        // Enhanced collision detection and separation
-        bubbles.forEach((otherBubble) => {
-          if (bubble.id !== otherBubble.id) {
-            const dx = bubble.x - otherBubble.x
-            const dy = bubble.y - otherBubble.y
-            const distance = Math.sqrt(dx * dx + dy * dy)
-            const minDistance = bubble.radius + otherBubble.radius + 15 // Increased minimum distance
-
-            if (distance < minDistance && distance > 0) {
-              // Stronger separation force
-              const angle = Math.atan2(dy, dx)
-              const targetX = otherBubble.x + Math.cos(angle) * minDistance
-              const targetY = otherBubble.y + Math.sin(angle) * minDistance
-
-              // More aggressive separation
-              const force = (minDistance - distance) / minDistance
-              const ax = (targetX - bubble.x) * 0.1 * force // Increased force
-              const ay = (targetY - bubble.y) * 0.1 * force
-
-              bubble.vx += ax
-              bubble.vy += ay
-
-              // Add some randomness to prevent stuck situations
-              if (Math.abs(bubble.vx) < 0.1 && Math.abs(bubble.vy) < 0.1) {
-                bubble.vx += (Math.random() - 0.5) * 0.2
-                bubble.vy += (Math.random() - 0.5) * 0.2
-              }
-
-              bubble.vx *= 0.98 // Less damping for more movement
-              bubble.vy *= 0.98
-            }
-          }
-        })
-
-        // Add slight random movement to prevent stagnation
-        if (Math.random() < 0.01) {
-          // 1% chance per frame
-          bubble.vx += (Math.random() - 0.5) * 0.1
-          bubble.vy += (Math.random() - 0.5) * 0.1
-        }
-
-        // Limit maximum velocity to prevent chaos
-        const maxVelocity = 1.5
-        const currentSpeed = Math.sqrt(bubble.vx * bubble.vx + bubble.vy * bubble.vy)
-        if (currentSpeed > maxVelocity) {
-          bubble.vx = (bubble.vx / currentSpeed) * maxVelocity
-          bubble.vy = (bubble.vy / currentSpeed) * maxVelocity
-        }
-
-        // Draw bubble with neon styling
-        ctx.beginPath()
-        ctx.arc(bubble.x, bubble.y, bubble.radius, 0, Math.PI * 2)
-
-        // Create neon gradient fill
-        const gradient = ctx.createRadialGradient(
-          bubble.x - bubble.radius * 0.3,
-          bubble.y - bubble.radius * 0.3,
-          0,
-          bubble.x,
-          bubble.y,
-          bubble.radius,
-        )
-        gradient.addColorStop(0, bubble.color + "90")
-        gradient.addColorStop(0.7, bubble.color + "60")
-        gradient.addColorStop(1, bubble.color + "30")
-        ctx.fillStyle = gradient
-        ctx.fill()
-
-        // Add neon border
-        ctx.strokeStyle = bubble.color
-        ctx.lineWidth = 3
-        ctx.stroke()
-
-        // Add neon glow
-        ctx.beginPath()
-        ctx.arc(bubble.x, bubble.y, bubble.radius - 3, 0, Math.PI * 2)
-        ctx.strokeStyle = bubble.color + "80"
-        ctx.lineWidth = 2
-        ctx.stroke()
-
-        // Draw devicon image if available, else fallback to text
-        const img = iconImagesRef.current[bubble.skill]
-        if (img && img.complete && (img as any).naturalWidth > 0) {
-          try {
-            const size = Math.min(bubble.radius * 1.4, 44)
-            ctx.drawImage(img, bubble.x - size / 2, bubble.y - size / 2, size, size)
-          } catch {
-            // If draw fails for any reason, fallback to text
-            ctx.fillStyle = "#000000"
-            ctx.font = "bold 11px Inter"
-            ctx.textAlign = "center"
-            ctx.textBaseline = "middle"
-            ctx.fillText(bubble.skill, bubble.x, bubble.y)
-          }
-        } else {
-          // Fallback label
-          ctx.fillStyle = "#000000"
-          ctx.font = "bold 11px Inter"
-          ctx.textAlign = "center"
-          ctx.textBaseline = "middle"
-          const text = bubble.skill
-          const textWidth = ctx.measureText(text).width
-          if (textWidth > bubble.radius * 1.6) ctx.font = "bold 9px Inter"
-          ctx.fillText(text, bubble.x, bubble.y)
-        }
-      })
-
-      // Draw neon connections
-      bubbles.forEach((bubble1) => {
-        const skill1Data = skillsData.find((s) => s.name === bubble1.skill)
-        if (!skill1Data) return
-
-        bubbles.forEach((bubble2) => {
-          if (bubble1.id >= bubble2.id) return
-
-          const skill2Data = skillsData.find((s) => s.name === bubble2.skill)
-          if (!skill2Data) return
-
-          const shouldConnect =
-            skill1Data.connections.includes(skill2Data.name) || skill2Data.connections.includes(skill1Data.name)
-
-          if (shouldConnect) {
-            const dx = bubble1.x - bubble2.x
-            const dy = bubble1.y - bubble2.y
-            const distance = Math.sqrt(dx * dx + dy * dy)
-
-            const maxDistance = 180 // Slightly reduced connection distance
-            if (distance < maxDistance) {
-              // Create neon gradient for connection lines
-              const connectionGradient = ctx.createLinearGradient(bubble1.x, bubble1.y, bubble2.x, bubble2.y)
-              connectionGradient.addColorStop(0, bubble1.color + "C0")
-              connectionGradient.addColorStop(1, bubble2.color + "C0")
-
-              ctx.beginPath()
-              ctx.moveTo(bubble1.x, bubble1.y)
-              ctx.lineTo(bubble2.x, bubble2.y)
-
-              const opacity = Math.max(0.3, 0.8 * (1 - distance / maxDistance))
-
-              if (bubble1.category === bubble2.category) {
-                ctx.strokeStyle = connectionGradient
-                ctx.lineWidth = 2
-              } else {
-                ctx.strokeStyle = connectionGradient
-                ctx.lineWidth = 1
-              }
-
-              ctx.stroke()
-            }
-          }
-        })
-      })
-
-      animationRef.current = requestAnimationFrame(animate)
-    }
-
-    animate()
-
-    return () => {
-      window.removeEventListener("resize", resizeCanvas)
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
-      }
-    }
+    onResize()
+    window.addEventListener("resize", onResize)
+    return () => window.removeEventListener("resize", onResize)
   }, [])
 
+  const { nodes, edges } = useMemo(() => {
+    const w = Math.max(size.w || 900, 900)
+    const h = Math.max(size.h || 500, 500)
+    const centers: Record<CategoryKey, { x: number; y: number }> = {
+      dsml: { x: w * 0.25, y: h * 0.35 },
+      de: { x: w * 0.75, y: h * 0.35 },
+      viz: { x: w * 0.25, y: h * 0.75 },
+      misc: { x: w * 0.75, y: h * 0.75 },
+    }
+
+    const nodes: Node[] = []
+    const edges: Edge[] = []
+
+    for (const group of skillGroups) {
+      const key = categoryKeyMap[group.category]
+      if (!key) continue
+      const cx = centers[key].x
+      const cy = centers[key].y
+      const n = group.skills.length
+      const baseR = 90
+      group.skills.forEach((skill, i) => {
+        const angle = (i / n) * Math.PI * 2
+        const radius = baseR + 40 * Math.sin(i)
+        const x = cx + Math.cos(angle) * radius
+        const y = cy + Math.sin(angle) * radius
+        const id = `${key}-${i}-${skill}`
+        nodes.push({ id, skill, category: key, x, y, r: 24, icon: iconifyIdMap[skill] })
+      })
+    }
+
+    // Intra-category ring connections
+    const byCat: Record<CategoryKey, Node[]> = { dsml: [], de: [], viz: [], misc: [] }
+    nodes.forEach((n) => byCat[n.category].push(n))
+    (Object.keys(byCat) as CategoryKey[]).forEach((k) => {
+      const arr = byCat[k]
+      arr.forEach((n, i) => {
+        const to = arr[(i + 1) % arr.length]
+        edges.push({ from: n.id, to: to.id, category: k })
+      })
+    })
+
+    // Light cross-category bridges
+    const minLen = Math.min(byCat.dsml.length, byCat.de.length, byCat.viz.length, byCat.misc.length)
+    for (let i = 0; i < Math.min(minLen, 6); i++) {
+      edges.push({ from: byCat.dsml[i].id, to: byCat.de[i].id, category: "dsml" })
+      edges.push({ from: byCat.viz[i].id, to: byCat.misc[i].id, category: "viz" })
+    }
+
+    return { nodes, edges }
+  }, [size])
+
+  const findProject = (skill: string) => {
+    const s = skill.toLowerCase()
+    return (
+      allProjects.find((p) => p.tech.some((t) => t.toLowerCase().includes(s))) ||
+      allProjects.find((p) => p.description.toLowerCase().includes(s)) ||
+      allProjects.find((p) => p.tags.some((t) => t.toLowerCase().includes(s))) ||
+      null
+    )
+  }
+
+  const selectedProject = selected ? findProject(selected) : null
+
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-      className="w-full h-[500px] rounded-lg bg-gradient-to-br from-background to-muted/30 border border-black overflow-hidden" // Increased height from 384px to 500px and black border
+    <div
+      ref={containerRef}
+      className="w-full h-[520px] rounded-lg bg-gradient-to-br from-background to-muted/30 border border-black overflow-hidden relative"
     >
-      <canvas ref={canvasRef} className="w-full h-full" style={{ background: "transparent" }} />
-    </motion.div>
+      <svg width="100%" height="100%" viewBox={`0 0 ${Math.max(size.w, 900)} ${Math.max(size.h, 500)}`}>
+        {/* Edges */}
+        {edges.map((e, idx) => {
+          const a = nodes.find((n) => n.id === e.from)!
+          const b = nodes.find((n) => n.id === e.to)!
+          const active = hovered && (hovered === a.id || hovered === b.id)
+          return (
+            <motion.line
+              key={idx}
+              x1={a.x}
+              y1={a.y}
+              x2={b.x}
+              y2={b.y}
+              stroke={categoryColors[e.category] + (active ? "" : "55")}
+              strokeWidth={active ? 3 : 1.5}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: idx * 0.01 }}
+            />
+          )
+        })}
+
+        {/* Nodes */}
+        {nodes.map((n, idx) => {
+          const highlight = hovered === n.id
+          const iconHref = n.icon ? `https://api.iconify.design/${encodeURIComponent(n.icon)}.svg` : null
+          return (
+            <g
+              key={n.id}
+              onMouseEnter={() => setHovered(n.id)}
+              onMouseLeave={() => setHovered(null)}
+              onClick={() => setSelected(n.skill)}
+              style={{ cursor: "pointer" }}
+            >
+              <motion.circle
+                cx={n.x}
+                cy={n.y}
+                r={n.r}
+                fill="#ffffff"
+                stroke={categoryColors[n.category]}
+                strokeWidth={highlight ? 4 : 2}
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, delay: idx * 0.01 }}
+              />
+              {iconHref ? (
+                <image
+                  href={iconHref}
+                  x={n.x - 16}
+                  y={n.y - 16}
+                  width={32}
+                  height={32}
+                  preserveAspectRatio="xMidYMid meet"
+                />
+              ) : (
+                <text x={n.x} y={n.y + 4} textAnchor="middle" fontSize="10" fill="#111" fontWeight={600}>
+                  {n.skill}
+                </text>
+              )}
+              <title>{n.skill}</title>
+            </g>
+          )
+        })}
+      </svg>
+
+      {/* Details panel */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: selected ? 1 : 0, y: selected ? 0 : 10 }}
+        transition={{ duration: 0.25 }}
+        className="pointer-events-none absolute bottom-3 left-3 right-3"
+      >
+        {selected && (
+          <div className="pointer-events-auto mx-auto max-w-3xl rounded-xl border bg-white/90 backdrop-blur p-4 shadow-lg">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-xs text-black/70">Skill</p>
+                <h4 className="text-lg font-semibold text-black">{selected}</h4>
+              </div>
+              <button
+                onClick={() => setSelected(null)}
+                className="text-xs px-2 py-1 rounded border border-black/20 hover:bg-black hover:text-white"
+              >
+                Close
+              </button>
+            </div>
+            {selectedProject ? (
+              <div className="mt-3">
+                <p className="text-xs text-black/60 mb-1">Related project</p>
+                <div className="rounded-lg border p-3 bg-white">
+                  <div className="flex items-center justify-between">
+                    <h5 className="font-semibold text-black">{selectedProject.title}</h5>
+                    {selectedProject.image ? (
+                      <img src={selectedProject.image} alt="project" className="w-16 h-10 object-cover rounded" />
+                    ) : null}
+                  </div>
+                  <p className="text-sm text-black/80 mt-1 line-clamp-3">{selectedProject.description}</p>
+                </div>
+              </div>
+            ) : (
+              <p className="mt-3 text-sm text-black/70">No direct match found. Explore featured projects above.</p>
+            )}
+          </div>
+        )}
+      </motion.div>
+    </div>
   )
 }
+
