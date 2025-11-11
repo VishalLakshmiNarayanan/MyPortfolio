@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+import { useState } from "react"
 import Image from "next/image"
 import "./moving-moments.css"
 
@@ -8,127 +10,123 @@ interface Moment {
   date: string
   image: string
   description: string
-  angle: string
 }
 
 const moments: Moment[] = [
   {
     title: "DevHacks S1",
-    date: "March",
+    date: "March 2025",
     image: "/images/moments/devhackss1.jpg",
     description: "First hackathon experience",
-    angle: "4deg"
   },
   {
-    title: "HackAZona v0.1",
-    date: "March",
-    image: "/images/moments/Hackazona.jpg",
+    title: "HackAZona",
+    date: "March 2025",
+    image: "/images/moments/hackazona.jpg",
     description: "Innovative solutions at HackAZona",
-    angle: "-8deg"
   },
   {
-    title: "TechiePalooza Conference",
-    date: "August",
+    title: "Techipalooza Conference",
+    date: "August 2025",
     image: "/images/moments/techipaloozaconf.jpg",
     description: "Tech conference and networking",
-    angle: "-7deg"
   },
   {
-    title: "DevHacks S2",
-    date: "August",
-    image: "/images/moments/devhackss2.jpeg",
+    title: "DevHacks S2 — Winning Edition",
+    date: "August 2025",
+    image: "/images/moments/devhackss2.jpg",
     description: "1st Place victory at DevHacks S2",
-    angle: "11deg"
   },
   {
     title: "Hacks for Humanity",
-    date: "October",
-    image: "/images/moments/HHH.JPG",
+    date: "October 2025",
+    image: "/images/moments/hhh.jpg",
     description: "Building tech for social impact",
-    angle: "13deg"
   },
   {
-    title: "Data Conference",
-    date: "November",
-    image: "/images/moments/Dataconf.jpg",
-    description: "Data professionals shared their insights on how they use data and AI in their workflows",
-    angle: "-17deg"
+    title: "Data Conference (ASU)",
+    date: "November 2025",
+    image: "/images/moments/dataconf.jpg",
+    description: "Data science and AI at ASU",
   },
   {
     title: "Workshop Conducted",
-    date: "November",
-    image: "/images/moments/Workshop.jpg",
-    description: "Lead a portfolio building workshop",
-    angle: "20deg"
+    date: "November 2025",
+    image: "/images/moments/workshop.jpg",
+    description: "Leading educational workshop",
   },
   {
     title: "Claude Builder Hackathon Mentorship",
-    date: "November",
+    date: "November 2025",
     image: "/images/moments/mentorship.jpg",
-    description: "Mentored teams and overlooked the polymarket track",
-    angle: "-15deg"
-  }
+    description: "Mentoring the next generation",
+  },
 ]
 
 export default function MovingMomentsGallery() {
-  const totalMoments = moments.length
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const n = moments.length
+
+  const handleClick = (inc: number) => {
+    setCurrentIndex((prev) => (prev + inc + n) % n)
+  }
+
+  const handleImageError = (title: string, src: string) => {
+    console.log("[v0] Image failed to load:", { title, src })
+  }
+
+  const handleImageLoad = (title: string) => {
+    console.log("[v0] Image loaded successfully:", title)
+  }
 
   return (
-    <div className="moments-cards">
-      {moments.map((moment, index) => {
-        const currentNum = index + 1
-        const prevNum = index === 0 ? totalMoments : index
-        const nextNum = index === totalMoments - 1 ? 1 : index + 2
+    <section
+      className="moments-section"
+      style={
+        {
+          "--n": n,
+          "--k": currentIndex,
+        } as React.CSSProperties
+      }
+    >
+      {moments.map((moment, i) => {
+        const randomRotation = (i * 13 - 20) % 30
 
         return (
-          <div key={index}>
-            <input
-              type="radio"
-              id={`moment-radio-${currentNum}`}
-              name="moment-radio-card"
-              defaultChecked={index === 0}
+          <article
+            key={i}
+            className="moment-card"
+            style={
+              {
+                "--i": i,
+                "--a": `${randomRotation}deg`,
+              } as React.CSSProperties
+            }
+          >
+            <h2>{moment.title}</h2>
+            <em>{moment.date}</em>
+            <Image
+              src={moment.image || "/placeholder.svg"}
+              alt={moment.description}
+              width={400}
+              height={400}
+              className="moment-img"
+              onError={() => handleImageError(moment.title, moment.image)}
+              onLoad={() => handleImageLoad(moment.title)}
+              unoptimized
             />
-            <article className="moment-card" style={{ '--angle': moment.angle } as React.CSSProperties}>
-              <div className="moment-card-img-wrapper">
-                <Image
-                  className="moment-card-img"
-                  src={moment.image}
-                  alt={moment.title}
-                  fill
-                  sizes="(max-width: 768px) 90vw, 400px"
-                  quality={90}
-                  priority={index < 2}
-                />
-              </div>
-              <div className="moment-card-data">
-                <span className="moment-card-num">{currentNum}/{totalMoments}</span>
-                <h2 className="moment-card-title">{moment.title}</h2>
-                <p className="moment-card-desc">
-                  <em className="moment-card-date">{moment.date}</em>
-                  <br />
-                  {moment.description}
-                </p>
-                <footer className="moment-card-footer">
-                  <label
-                    htmlFor={`moment-radio-${prevNum}`}
-                    aria-label="Previous"
-                    className="moment-nav-btn"
-                  >
-                    &#10094;
-                  </label>
-                  <label
-                    htmlFor={`moment-radio-${nextNum}`}
-                    aria-label="Next"
-                    className="moment-nav-btn"
-                  >
-                    &#10095;
-                  </label>
-                </footer>
-              </div>
-            </article>
-          </div>
+          </article>
         )
       })}
-    </div>
+
+      <div className="nav-controls">
+        <button data-inc="-1" onClick={() => handleClick(-1)} aria-label="previous">
+          <span className="sr-only">Previous</span>
+        </button>
+        <button data-inc="1" onClick={() => handleClick(1)} aria-label="next">
+          <span className="sr-only">Next</span>
+        </button>
+      </div>
+    </section>
   )
 }
