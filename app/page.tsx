@@ -6,7 +6,7 @@ import { SkillCard } from "@/components/skill-card"
 import { PublicationCard } from "@/components/publication-card"
 import { ContactCard } from "@/components/contact-card"
 import { AwardCard } from "@/components/award-card"
-import { CertificationCard } from "@/components/certification-card"
+import { CertificationBadges } from "@/components/CertificationBadges"
 import { FloatingSkillsBubble } from "@/components/floating-skills-bubble"
 import SkillGalaxy from "@/components/SkillGalaxy"
 import SkillCarousel from "@/components/SkillCarousel"
@@ -117,14 +117,8 @@ export default function HomePage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Certifications</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {certifications.map((certification, index) => (
-              <CertificationCard
-                key={`${certification.title}-${certification.date}`}
-                certification={certification}
-                index={index}
-              />
-            ))}
+          <div className="flex justify-center">
+            <CertificationBadges certifications={certifications} />
           </div>
         </div>
       </section>
