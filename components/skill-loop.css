@@ -8,7 +8,6 @@
 }
 
 .skills-loop { position: relative; display: grid; place-items: center; width: 100%; }
-.skills-loop .bg-aurora { position: absolute; inset: 0; z-index: 0; }
 .skills-loop .content { position: relative; z-index: 1; width: 100%; }
 
 .tag-list {
@@ -50,6 +49,19 @@
   transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
   white-space: nowrap;
 }
+.tile::before { /* subtle prismatic inside each tile only */
+  content: ""; position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(120% 80% at 70% 20%, color-mix(in oklab, var(--accent) 12%, transparent) , transparent 55%),
+              radial-gradient(100% 60% at 30% 10%, rgba(255,255,255,0.06), transparent 60%),
+              linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.0));
+}
+.tile::after { /* glossy light streak across box */
+  content: ""; position: absolute; inset: -30% -120% -30% -120%; z-index: 1;
+  background: linear-gradient(75deg, transparent 44%, rgba(255,255,255,0.22) 50%, transparent 56%);
+  transform: translateX(-40%);
+  animation: tileSweep 6.5s ease-in-out infinite;
+  animation-delay: var(--pulseDelay, 0s);
+}
 .tile:hover { transform: translateY(-3px); box-shadow: 0 16px 30px rgba(0,0,0,0.35); border-color: color-mix(in oklab, var(--accent) 40%, white 0%); }
 
 .icon-wrap { width: 80px; height: 80px; margin-top: 14px; display: grid; place-items: center; border-radius: 12px; position: relative; background: radial-gradient(ellipse at center, rgba(255,255,255,.12), rgba(255,255,255,.02)); }
@@ -65,6 +77,7 @@
 .tile { animation: pulseGlow 9s ease-in-out infinite; animation-delay: var(--pulseDelay, 0s); }
 
 @keyframes shine { from { transform: translateX(-120%) rotate(10deg); } to { transform: translateX(120%) rotate(10deg); } }
+@keyframes tileSweep { 0%, 70% { transform: translateX(-40%); } 90% { transform: translateX(40%); } 100% { transform: translateX(40%); } }
 @keyframes pulseGlow { 0%, 85%, 100% { box-shadow: 0 8px 18px rgba(0,0,0,0.25); } 40% { box-shadow: 0 0 24px 6px color-mix(in oklab, var(--accent) 35%, transparent); } }
 
 .fade-overlay {
