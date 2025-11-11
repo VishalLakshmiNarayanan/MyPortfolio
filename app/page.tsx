@@ -8,6 +8,7 @@ import { ContactCard } from "@/components/contact-card"
 import { AwardCard } from "@/components/award-card"
 import { CertificationCard } from "@/components/certification-card"
 import { FloatingSkillsBubble } from "@/components/floating-skills-bubble"
+import SkillGalaxy from "@/components/SkillGalaxy"
 import StackedProjectCards from "@/components/StackedProjectCards"
 import ExperienceTimeline from "@/components/ExperienceTimeline"
 
@@ -38,13 +39,8 @@ export default function HomePage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Skills</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {skillGroups.map((skillGroup, index) => (
-              <SkillCard key={skillGroup.category} skillGroup={skillGroup} index={index} />
-            ))}
-          </div>
-          <div className="mt-12 max-w-4xl mx-auto">
-            <FloatingSkillsBubble />
+          <div className="max-w-6xl mx-auto">
+            <SkillGalaxy />
           </div>
         </div>
       </section>
