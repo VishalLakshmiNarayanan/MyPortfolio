@@ -1,22 +1,12 @@
 .flip-card {
   width: 100%;
-  max-width: 420px;
-  height: 380px;
-  margin: 1em auto;
+  max-width: 100%;
+  height: 400px;
+  margin: 0.75em 0;
   position: relative;
   overflow: hidden;
-  border: 8px solid;
-  border-radius: 10px;
-  border-image: linear-gradient(
-      -50deg,
-      green,
-      #00b300,
-      forestgreen,
-      green,
-      lightgreen,
-      #00e600,
-      green
-    ) 1;
+  border: none; /* remove green border */
+  border-radius: 12px;
 }
 
 .flip-content {
@@ -41,25 +31,15 @@
   width: 100%;
   height: 100%;
   border-radius: 6px;
-  background-color: #186218; /* fallback if no bg image */
+  background-color: #000; /* fallback if no bg image, black */
   background-size: cover;
   background-position: center center;
   transition: transform 0.4s ease-in-out;
   z-index: 2;
 }
 
-.flip-front::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  display: block;
-  border-radius: inherit;
-  background: linear-gradient(
-    45deg,
-    rgba(0, 128, 0, 0.25),
-    rgba(0, 230, 0, 0.25)
-  );
-}
+/* Remove green wash for full image visibility */
+.flip-front::after { content: none; }
 
 .flip-front .flip-inner {
   height: 100%;
@@ -147,7 +127,7 @@
 
 .flip-info span {
   font-size: 1.3em;
-  color: #355cc9;
+  color: #000; /* black */
   font-weight: 700;
 }
 
@@ -155,23 +135,23 @@
   font-size: 0.55em;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #6b8dd6;
+  color: #111; /* black-ish */
 }
 
 .degree-title {
   font-weight: 700;
   font-size: 1em;
   margin-bottom: 0.6em;
-  color: #355cc9;
+  color: #000; /* black */
   line-height: 1.25;
 }
 
 .flip-description {
-  max-height: 140px;
+  max-height: 160px;
   overflow-y: auto;
-  color: #333;
-  font-size: 0.85em;
-  line-height: 1.4;
+  color: #111; /* darker text */
+  font-size: 0.9em;
+  line-height: 1.5;
 }
 
 .coursework-section {
@@ -182,7 +162,7 @@
   font-size: 0.85em;
   font-weight: 600;
   margin-bottom: 0.35em;
-  color: #355cc9;
+  color: #000; /* black */
 }
 
 .coursework-section ul {
@@ -202,7 +182,7 @@
   content: "•";
   position: absolute;
   left: 0;
-  color: #6b8dd6;
+  color: #000; /* black bullet */
   font-weight: bold;
   font-size: 0.9em;
 }
@@ -213,13 +193,13 @@
   align-items: center;
   width: 100%;
   padding-bottom: 0.4em;
-  border-bottom: 2px solid rgba(67, 138, 243, 0.15);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1); /* neutral divider */
 }
 
 .flip-location,
 .flip-duration {
   font-weight: 600;
-  color: #355cc9;
+  color: #111; /* black */
   font-size: 0.8em;
 }
 
@@ -257,13 +237,13 @@
 
 .flip-button.return {
   line-height: 3em;
-  color: #355cc9;
-  border-color: #355cc9;
+  color: #000; /* black */
+  border-color: #000;
   text-shadow: none;
 }
 
 .flip-button.return:hover {
-  background-color: #355cc9;
+  background-color: #000;
   color: #fff;
   box-shadow: none;
 }
@@ -279,12 +259,12 @@
 }
 
 .flip-description::-webkit-scrollbar-thumb {
-  background: #7a9edb;
+  background: #999; /* neutral */
   border-radius: 10px;
 }
 
 .flip-description::-webkit-scrollbar-thumb:hover {
-  background: #355cc9;
+  background: #666; /* darker neutral */
 }
 
 /* Hover interaction = slide open */
@@ -395,4 +375,3 @@
     line-height: 2.1em;
   }
 }
-
