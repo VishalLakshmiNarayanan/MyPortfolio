@@ -77,7 +77,7 @@ export function HeroSection() {
 
           {/* Right visual with lighting + floating socials */}
           <div className="order-1 md:order-2 flex justify-center md:justify-end">
-            <div className="relative w-96 h-96 md:w-[34rem] md:h-[36rem]">
+            <div className="relative w-[20rem] h-[20rem] md:w-[44rem] md:h-[46rem] lg:w-[48rem] lg:h-[50rem]">
               {/* Soft theme lighting */}
               <div
                 className="pointer-events-none absolute -inset-6 rounded-[2rem]"

@@ -67,8 +67,8 @@ export function CertificationBadges({ certifications }: CertificationBadgesProps
         const brand = brandConfigs[certification.organization] ?? defaultBrand
         const iconSrc = deviconMap[certification.organization] ?? brand.logo
         const style: CSSProperties = {
-          ["--ribbon-color" as keyof CSSProperties]: brand.ribbon,
-          ["--ribbon-dark" as keyof CSSProperties]: brand.accent,
+          ["--badge-color" as keyof CSSProperties]: brand.ribbon,
+          ["--badge-accent" as keyof CSSProperties]: brand.accent,
         }
         const title = certification.title.toUpperCase()
 
