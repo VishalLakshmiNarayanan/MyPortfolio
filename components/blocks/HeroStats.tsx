@@ -24,9 +24,9 @@ export default function HeroStats() {
   }, [reduce])
 
   const glassCard =
-    "glass w-full h-24 rounded-xl ring-1 ring-white/10 px-6 " +
-    "bg-white/[0.04] backdrop-blur-xl " +
-    "shadow-[0_18px_80px_-20px_rgba(16,185,129,.35)] " +
+    "glass w-full h-24 rounded-xl ring-1 ring-purple-300/40 px-6 " +
+    "backdrop-blur-xl " +
+    "shadow-[0_18px_80px_-20px_rgba(175,109,255,.4)] " +
     "relative flex items-center justify-center text-center"
 
   return (
@@ -39,7 +39,7 @@ export default function HeroStats() {
         return (
           <div key={s.id} className="flex flex-col items-center">
             {/* label ABOVE */}
-            <div className="mb-2 flex items-center gap-2 text-sm font-medium text-white/70">
+            <div className="mb-2 flex items-center gap-2 text-sm font-bold text-black/80">
               {s.id === "linkedin" && <LinkedInMark className="h-4 w-4" />}
               <span>{s.label}</span>
             </div>
@@ -56,8 +56,8 @@ export default function HeroStats() {
                       className={cn(
                         "absolute inset-0 flex items-center justify-center font-semibold text-2xl sm:text-3xl tracking-tight",
                         gold
-                          ? "text-yellow-400 drop-shadow-[0_0_14px_rgba(250,204,21,.55)]"
-                          : reduce ? "text-white" : "text-white glow-theme" // themed glow
+                          ? "text-yellow-500 drop-shadow-[0_0_14px_rgba(250,204,21,.55)]"
+                          : reduce ? "text-black" : "text-black glow-theme" // themed glow
                       )}
                       initial={reduce ? false : { y: "100%", opacity: 0 }}
                       animate={reduce ? { opacity: 1 } : { y: 0, opacity: 1 }}
@@ -73,7 +73,7 @@ export default function HeroStats() {
                 <div className="h-9 flex items-center justify-center min-w-[11ch]">
                   <span className={cn(
                     "text-2xl sm:text-3xl font-semibold tracking-tight",
-                    reduce ? "text-white" : "text-white glow-theme"
+                    reduce ? "text-black" : "text-black glow-theme"
                   )}>
                     {value}
                   </span>
@@ -84,7 +84,7 @@ export default function HeroStats() {
               {isProjects && (
                 <div className={cn(
                   "absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-[0.15em]",
-                  reduce ? "text-white/55" : "text-white/70 glow-theme"
+                  reduce ? "text-black/60" : "text-black/70 glow-theme font-semibold"
                 )}>
                   {flip === 0 ? "Total" : "Featured"}
                 </div>

@@ -9,7 +9,6 @@ import { AwardCard } from "@/components/award-card"
 import { CertificationCard } from "@/components/certification-card"
 import { FloatingSkillsBubble } from "@/components/floating-skills-bubble"
 import ProjectCarousel from "@/components/ProjectCarousel"
-import WavySection from "@/components/WavySection"
 import ExperienceTimeline from "@/components/ExperienceTimeline"
 
 
@@ -29,15 +28,15 @@ export default function HomePage() {
   return (
     <div className="min-h-screen relative" id="top">
       {/* Hero */}
-      <WavySection id="home" bottom>
+      <section id="home" className="py-12 md:py-20">
         <HeroSection />
-      </WavySection>
+      </section>
 
       {/* Skills */}
-      <WavySection id="skills" top bottom>
+      <section id="skills" className="py-12 md:py-20">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation">Skills</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Skills</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {skillGroups.map((skillGroup, index) => (
@@ -48,33 +47,33 @@ export default function HomePage() {
             <FloatingSkillsBubble />
           </div>
         </div>
-      </WavySection>
+      </section>
 
       {/* Experience */}
-      <WavySection id="experience" top bottom className="bg-emerald-500/5">
+      <section id="experience" className="py-12 md:py-20">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation">Experience</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Experience</h2>
           </div>
           <ExperienceTimeline items={experiences} />
         </div>
-      </WavySection>
+      </section>
 
       {/* Featured Projects */}
-      <WavySection id="projects" top bottom>
+      <section id="projects" className="py-12 md:py-20">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation">Featured Projects</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Featured Projects</h2>
           </div>
           <ProjectCarousel projects={featuredProjects} />
         </div>
-      </WavySection>
+      </section>
 
       {/* Education */}
-      <WavySection id="education" top bottom className="bg-emerald-500/5">
+      <section id="education" className="py-12 md:py-20">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation">Education</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Education</h2>
           </div>
           <div className="max-w-4xl mx-auto space-y-6">
             {education.map((edu, index) => (
@@ -82,13 +81,13 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </WavySection>
+      </section>
 
       {/* Awards */}
-      <WavySection id="awards" top bottom>
+      <section id="awards" className="py-12 md:py-20">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation">Awards & Recognition</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Awards & Recognition</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {awards.map((award, index) => (
@@ -96,13 +95,13 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </WavySection>
+      </section>
 
       {/* Publications */}
-      <WavySection id="publications" top bottom className="bg-emerald-500/5">
+      <section id="publications" className="py-12 md:py-20">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation">Publications</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Publications</h2>
           </div>
           <div className="max-w-4xl mx-auto">
             {publications.map((publication, index) => (
@@ -110,13 +109,13 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </WavySection>
+      </section>
 
       {/* Certifications */}
-      <WavySection id="certifications" top bottom>
+      <section id="certifications" className="py-12 md:py-20">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation">Certifications</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Certifications</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {certifications.map((certification, index) => (
@@ -128,17 +127,17 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </WavySection>
+      </section>
 
       {/* Contact */}
-      <WavySection id="contact" top className="bg-emerald-500/5">
+      <section id="contact" className="py-12 md:py-20">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation">Contact</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Contact</h2>
           </div>
           <ContactCard />
         </div>
-      </WavySection>
+      </section>
     </div>
   )
 }

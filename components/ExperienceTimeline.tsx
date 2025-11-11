@@ -15,14 +15,14 @@ export default function ExperienceTimeline({ items }: { items: any[] }) {
   return (
     <div ref={ref} className="relative mx-auto max-w-5xl">
       {/* desktop center line */}
-      <div className="absolute inset-y-0 left-1/2 hidden w-px -translate-x-1/2 bg-emerald-400/20 md:block" />
+      <div className="absolute inset-y-0 left-1/2 hidden w-px -translate-x-1/2 bg-purple-400/30 md:block" />
       {/* animated overlay */}
       <motion.div
-        className="absolute left-1/2 hidden w-1 -translate-x-1/2 rounded-b bg-emerald-400/60 md:block"
+        className="absolute left-1/2 hidden w-1 -translate-x-1/2 rounded-b bg-gradient-to-b from-purple-500 to-pink-500 md:block"
         style={{ height: grow }}
       />
       {/* mobile line */}
-      <div className="absolute left-4 top-0 bottom-0 w-px bg-emerald-400/20 md:hidden" />
+      <div className="absolute left-4 top-0 bottom-0 w-px bg-purple-400/30 md:hidden" />
 
       <ul className="space-y-12">
         {items.map((exp, i) => {
@@ -32,7 +32,7 @@ export default function ExperienceTimeline({ items }: { items: any[] }) {
             <li key={key} className="relative">
               {/* dot */}
               <div
-                className={`absolute top-7 z-[1] h-3.5 w-3.5 rounded-full bg-emerald-400 ring-4 ring-emerald-400/20
+                className={`absolute top-7 z-[1] h-3.5 w-3.5 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 ring-4 ring-purple-300/30
                   ${"left-4 -translate-x-1/2 md:left-1/2 md:-translate-x-1/2"}`}
               />
               {/* layout */}

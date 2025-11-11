@@ -30,15 +30,15 @@ export default function GlassFlipper({
   return (
     <div
       className={cn(
-        // glassy pill that matches your Emerald theme
-        "glass mx-auto w-fit rounded-xl ring-1 ring-white/10 px-4 py-2",
-        "shadow-[0_18px_80px_-20px_rgba(16,185,129,.35)]",
+        // glassy pill that matches Aurora Dream theme
+        "glass mx-auto w-fit rounded-xl ring-1 ring-purple-300/40 px-4 py-2",
+        "shadow-[0_18px_80px_-20px_rgba(175,109,255,.4)]",
         className
       )}
       aria-live="polite"
     >
       <div className="flex items-center gap-2">
-        <span className="hidden sm:inline text-white/70 text-sm">I’m a</span>
+        <span className="hidden sm:inline text-black/70 text-sm font-medium">I'm a</span>
 
         {/* viewport keeps height fixed while text slides */}
         <div className="relative h-7 sm:h-8 overflow-hidden min-w-[14ch] sm:min-w-[16ch]">
@@ -51,7 +51,7 @@ export default function GlassFlipper({
               exit={reduce ? { opacity: 0 } : { y: "-100%", opacity: 0 }}
               transition={{ duration: 0.45, ease: [0.2, 0.8, 0.2, 1] }}
             >
-              <span className="bg-gradient-to-r from-emerald-300 via-emerald-400 to-emerald-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 bg-clip-text text-transparent font-bold">
                 {current}
               </span>
             </motion.div>

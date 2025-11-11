@@ -46,13 +46,13 @@ export function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="flex items-center gap-2 text-sm text-muted-foreground bg-card border rounded-full px-4 py-2"
+            className="flex items-center gap-2 text-sm text-black bg-white/50 border border-purple-300 rounded-full px-4 py-2 backdrop-blur-md"
           >
-            <Clock className="w-4 h-4" />
-            <span>{formatTime(currentTime)}</span>
+            <Clock className="w-4 h-4 text-black" />
+            <span className="font-medium">{formatTime(currentTime)}</span>
           </motion.div>
 
-          <div className="w-48 h-48 md:w-56 md:h-56 rounded-2xl overflow-hidden border border-neutral-900 shadow-lg">
+          <div className="w-48 h-48 md:w-56 md:h-56 rounded-2xl overflow-hidden border-2 border-purple-300 shadow-xl">
             <HeroCarousel
               images={[
                   // make sure these filenames/extensions match
@@ -69,14 +69,14 @@ export function HeroSection() {
 
 
           <div className="space-y-4">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight hover-underline-animation">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight hover-underline-animation text-black">
               Vishal Lakshmi Narayanan
             </h1>
             <div className="mt-3">
               <GlassFlipper />
             </div>
 
-            <p className="text-lg text-muted-foreground max-w-4xl leading-relaxed hover-underline-animation">
+            <p className="text-lg text-black/80 max-w-4xl leading-relaxed hover-underline-animation font-medium">
               Graduate student in Data Science at ASU, building AI-powered applications and data solutions. Passionate about turning complex datasets into real-world impact.
             </p>
           </div>
