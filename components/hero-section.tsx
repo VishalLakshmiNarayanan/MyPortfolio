@@ -95,7 +95,7 @@ export function HeroSection() {
                 }}
               />
               <Image
-                src="/images/hero/portrait.jpg"
+                src="/images/hero/newhero.jpg"
                 alt="Vishal Lakshmi Narayanan portrait"
                 fill
                 priority
