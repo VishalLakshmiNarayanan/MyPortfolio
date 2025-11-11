@@ -20,19 +20,19 @@ const moments: Moment[] = [
     description: "First hackathon experience",
   },
   {
-    title: "HackAZona",
+    title: "HackAZona v0.1 [People's choice award]",
     date: "March",
     image: "/images/Moments/Hackazona.png",
     description: "Innovative solutions at HackAZona",
   },
   {
-    title: "Techipalooza Conference",
+    title: "Techipalooza Conference 2025",
     date: "August",
     image: "/images/Moments/techipaloozaconf.png",
     description: "Tech conference and networking",
   },
   {
-    title: "DevHacks S2 – Winning Edition",
+    title: "DevHacks S2 [WON 1st Place]",
     date: "August",
     image: "/images/Moments/devhackss2.png",
     description: "1st Place victory at DevHacks S2",
@@ -44,19 +44,19 @@ const moments: Moment[] = [
     description: "Building tech for social impact",
   },
   {
-    title: "Data Conference (ASU)",
+    title: "9th Annual ASU Data Conference",
     date: "November",
     image: "/images/Moments/Dataconf.png",
     description: "Data science and AI at ASU",
   },
   {
-    title: "Workshop Conducted",
+    title: "Conducted Portfolio building workshop",
     date: "November",
     image: "/images/Moments/Workshop.png",
     description: "Leading educational workshop",
   },
   {
-    title: "Claude Builder Hackathon Mentorship",
+    title: "Mentored Teams and conducted workshop on Polymarket Track (Claude Builder Hackathon) ",
     date: "November",
     image: "/images/Moments/mentorship.png",
     description: "Mentoring the next generation",
@@ -105,16 +105,20 @@ export default function MovingMomentsGallery() {
           >
             <h2>{moment.title}</h2>
             <em>{moment.date}</em>
-            <Image
-              src={moment.image || "/placeholder.svg"}
-              alt={moment.description}
-              width={400}
-              height={400}
-              className="moment-img"
-              onError={() => handleImageError(moment.title, moment.image)}
-              onLoad={() => handleImageLoad(moment.title)}
-              unoptimized
-            />
+            <div className="stack">
+              <div className="card">
+                <Image
+                  src={moment.image || "/placeholder.svg"}
+                  alt={moment.description}
+                  fill
+                  sizes="(max-width: 768px) 80vw, 400px"
+                  className="image"
+                  onError={() => handleImageError(moment.title, moment.image)}
+                  onLoad={() => handleImageLoad(moment.title)}
+                  unoptimized
+                />
+              </div>
+            </div>
           </article>
         )
       })}

@@ -1,179 +1,131 @@
-/* Moving Moments Gallery - Stacked Card Effect */
-/* Based on CSS custom properties animation technique */
-
-:root {
-  --moments-transition: 0.8s;
-}
-
-/* Register custom properties for smooth transitions */
-@property --p {
-  syntax: "<number>";
-  initial-value: 0;
-  inherits: true;
-}
-
-@property --v {
-  syntax: "<number>";
-  initial-value: 0;
-  inherits: true;
-}
-
 .moments-section {
-  /* Animation calculations using custom properties */
-  --p: var(--k);
-  --abs-p: abs(calc(var(--k) - var(--p)));
-  --end: clamp(0, calc(var(--abs-p) - 1), 1);
-  --dir: calc((1 - 2 * var(--end)) * sign(calc(var(--k) - var(--p))));
-  --fwd: calc(0.5 * (1 + var(--dir)));
-  --v: var(--k);
-  --abs-v: abs(calc(var(--v) - var(--p)));
-  --prg: calc(var(--abs-v) / (1 - var(--end) + var(--end) * (var(--n) - 1)));
-
-  display: grid;
-  grid-gap: 0.5em 4em;
-  grid-template: repeat(2, max-content) 1fr max-content / max-content 1fr;
-  place-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3rem 1rem 4rem;
+  width: min(1200px, 100%);
   margin: 0 auto;
-  padding: 2rem;
-  max-width: 1000px;
-  min-height: 500px;
-  position: relative;
-  /* Changed from light color to dark for better readability */
-  color: #1e293b;
-  font-family: "Inter", sans-serif;
-  counter-reset: k calc(1 + var(--k)) n var(--n);
-  transition: --p 0s var(--moments-transition), --v var(--moments-transition);
+  font-family: "Inter", system-ui, sans-serif;
 }
 
-/* Counter display */
-.moments-section::before {
-  content: counter(k) " / " counter(n);
-  grid-area: 1 / 2;
-  width: 4ch;
-  text-align: right;
-  font-weight: 600;
-  font-size: 0.95rem;
-  /* Changed counter color to dark gray */
-  color: #475569;
-}
-
-/* Stacked card articles */
 .moment-card {
-  --abs-top: abs(calc(var(--k) - var(--i)));
-  --not-top: min(1, var(--abs-top));
-  --top: calc(1 - var(--not-top));
-  --val-mov: calc((1 - var(--fwd)) * var(--p) + var(--fwd) * var(--k) - var(--i));
-  --abs-mov: abs(var(--val-mov));
-  --not-mov: min(1, var(--abs-mov));
-  --mov: calc(1 - var(--not-mov));
-
-  grid-area: 1 / 1 / -1 / -1;
-  display: grid;
-  grid-template: subgrid / subgrid;
-  z-index: mod(calc(var(--n) - 1 + var(--i) - var(--k)), var(--n));
-  transition: z-index var(--moments-transition) cubic-bezier(1, -0.9, 0, 1.9);
+  width: min(420px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
 }
 
-/* Title styling with fade animation */
 .moment-card h2 {
-  grid-area: 2 / 2;
-  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 700;
-  /* Changed title color to black */
-  color: #000000;
-  margin: 0 0 0.5rem 0;
-  line-height: 1.2;
-  translate: 0 calc(var(--not-top) * 1lh);
-  opacity: var(--top);
-  transition: 0.4s calc(var(--top) * 0.4s);
-  transition-property: translate, opacity;
+  margin: 0;
 }
 
-/* Date/description styling */
 .moment-card em {
-  grid-area: 3 / 2;
   font-style: normal;
   font-weight: 500;
-  font-size: 1rem;
-  /* Changed date color to dark gray */
-  color: #334155;
-  translate: 0 calc(var(--not-top) * 1lh);
-  opacity: var(--top);
-  transition: 0.4s calc(var(--top) * 0.4s);
-  transition-property: translate, opacity;
+  color: #475569;
+  margin: 0;
 }
 
-/* Image with slide and rotate animation */
-.moment-img {
-  --sin: sin(calc(var(--prg) * 0.5turn));
-  grid-area: 1 / 1 / -1;
-  height: 400px;
-  width: 400px;
-  object-fit: cover;
+.stack {
+  width: 55%;
+  max-width: 400px;
+  transition: transform 0.25s ease;
+}
+
+.stack:hover {
+  transform: rotate(3deg);
+}
+
+.card {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  border: 4px solid rgba(15, 23, 42, 0.1);
+  background-color: #fff;
+  position: relative;
+  padding: 5% 5% 15% 5%;
   border-radius: 16px;
-  border: 2px solid rgba(175, 109, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  translate: calc(-150% * var(--mov) * sqrt(var(--sin)));
-  rotate: calc((1 - var(--sin)) * var(--a));
-  transition: translate var(--moments-transition) ease-in-out, rotate var(--moments-transition) ease-in-out;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.15);
+  cursor: pointer;
+  transition: transform 0.25s ease;
 }
 
-/* Navigation controls */
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 4px solid rgba(15, 23, 42, 0.05);
+  background-color: #fff;
+  z-index: -1;
+  transition: transform 0.25s ease;
+}
+
+.card::before {
+  transform: translateY(-2%) rotate(-2deg);
+}
+
+.card::after {
+  transform: translateY(2%) rotate(2deg);
+}
+
+.stack:hover .card::before {
+  transform: translateY(-3%) rotate(-3deg);
+}
+
+.stack:hover .card::after {
+  transform: translateY(3%) rotate(3deg);
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 4px solid #fff;
+}
+
 .nav-controls {
   display: flex;
-  gap: 1.5rem;
-  grid-area: 4 / 2;
-  z-index: calc((1 - min(1, var(--abs-p))) * var(--n));
-  margin-top: 1rem;
+  justify-content: center;
+  gap: 1.25rem;
+  width: 100%;
 }
 
 .nav-controls button {
-  --sgn: -1;
-  --prc: calc(var(--hov, 0) * 100%);
-  --c: color-mix(in hsl, #af6dff var(--prc), #6b7280);
-
-  border: none;
   width: 3rem;
   height: 3rem;
-  border-radius: 50%;
-  background: color-mix(in hsl, #af6dff 20%, rgba(255, 255, 255, 0.1));
-  border: 2px solid rgba(175, 109, 255, 0.3);
-  color: #af6dff;
-  font-size: 1.5rem;
-  font-weight: 900;
+  border-radius: 999px;
+  border: none;
+  background: rgba(175, 109, 255, 0.15);
+  color: #7c3aed;
+  font-size: 1.35rem;
   cursor: pointer;
-  position: relative;
-  box-shadow: 0 4px 12px rgba(175, 109, 255, 0.2);
-  transition: all 0.3s ease-out;
+  transition: transform 0.3s ease, background 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.nav-controls button::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) translate(calc(var(--sgn) * -15%), 0) rotate(45deg) scale(var(--sgn));
-  border: solid 2px currentColor;
-  border-width: 2px 2px 0 0;
-  width: 35%;
-  aspect-ratio: 1;
-}
-
-.nav-controls button[data-inc="1"] {
-  --sgn: 1;
-}
-
-.nav-controls button:is(:hover, :focus) {
-  --hov: 1;
-  background: color-mix(in hsl, #af6dff 30%, rgba(255, 255, 255, 0.15));
-  border-color: rgba(175, 109, 255, 0.6);
-  box-shadow: 0 6px 20px rgba(175, 109, 255, 0.35);
+.nav-controls button:hover {
   transform: translateY(-2px);
+  background: rgba(175, 109, 255, 0.25);
 }
 
 .nav-controls button:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(175, 109, 255, 0.25);
 }
 
 .sr-only {
@@ -183,100 +135,22 @@
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  border: 0;
   white-space: nowrap;
-  border-width: 0;
-}
-
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-  .moments-section {
-    grid-template: repeat(2, max-content) 1fr max-content / 1fr;
-    grid-gap: 1.5em;
-    padding: 3rem 1.5rem;
-  }
-
-  .moment-img {
-    grid-area: 1 / 1;
-    width: 320px;
-    height: 320px;
-    margin: 0 auto;
-  }
-
-  .moments-section::before {
-    grid-area: auto;
-    text-align: center;
-    width: 100%;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    text-align: right;
-  }
-
-  .moment-card h2 {
-    grid-area: 2 / 1;
-    text-align: center;
-  }
-
-  .moment-card em {
-    grid-area: 3 / 1;
-    text-align: center;
-  }
-
-  .nav-controls {
-    grid-area: 4 / 1;
-    justify-content: center;
-  }
+  clip-path: inset(100%);
 }
 
 @media (max-width: 768px) {
-  .moments-section {
-    padding: 2rem 1rem;
+  .stack {
+    width: 70%;
   }
 
-  .moment-img {
-    width: 280px;
-    height: 280px;
-  }
-
-  .moment-card h2 {
-    font-size: 1.5rem;
+  .moment-card {
+    width: 100%;
   }
 
   .nav-controls button {
     width: 2.5rem;
     height: 2.5rem;
-  }
-}
-
-/* Fallback for browsers without CSS math functions */
-@supports not (scale: abs(-2)) {
-  .moments-section {
-    --abs-p: max(calc(var(--k) - var(--p)), calc(var(--p) - var(--k)));
-    --abs-v: max(calc(var(--v) - var(--p)), calc(var(--p) - var(--v)));
-  }
-
-  .moment-card {
-    --abs-top: max(calc(var(--k) - var(--i)), calc(var(--i) - var(--k)));
-    --abs-mov: max(var(--val-mov), calc(-1 * var(--val-mov)));
-  }
-}
-
-@supports not (scale: sign(-2)) {
-  .moments-section {
-    --dir: clamp(-1, calc((var(--k) - var(--p)) * 100000), 1);
-  }
-}
-
-/* Reduced motion preference */
-@media (prefers-reduced-motion: reduce) {
-  .moments-section,
-  .moment-card,
-  .moment-img,
-  .moment-card h2,
-  .moment-card em,
-  .nav-controls button {
-    transition: none;
-    animation: none;
   }
 }
