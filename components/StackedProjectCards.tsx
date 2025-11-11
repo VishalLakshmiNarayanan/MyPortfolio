@@ -68,9 +68,9 @@ export default function StackedProjectCards({ projects }: StackedProjectCardsPro
               // Active card is always on top (highest order)
               // Cards cycle through positions
               "--_order": isActive ? 3 : index < activeIndex ? 1 : 2,
-              "--_scale": isActive ? 1 : index < activeIndex ? 0.75 : 0.85,
-              "--_opacity": isActive ? 1 : index < activeIndex ? 0.7 : 0.85,
-              "--_offset": isActive ? "0" : index < activeIndex ? "-12rem" : "-6rem",
+              "--_scale": isActive ? 1 : index < activeIndex ? 0.8 : 0.9,
+              "--_opacity": isActive ? 1 : index < activeIndex ? 0.75 : 0.88,
+              "--_offset": isActive ? "0" : index < activeIndex ? "-6rem" : "-3rem",
             } as React.CSSProperties}
           >
             {/* Card header with title and navigation */}
@@ -102,7 +102,7 @@ export default function StackedProjectCards({ projects }: StackedProjectCardsPro
                 </div>
               )}
 
-              <p className="text-black/80 leading-relaxed">{project.description}</p>
+              <p className="text-black/80 leading-relaxed text-sm">{project.description}</p>
 
               {/* Tech stack */}
               {project.tech && project.tech.length > 0 && (
