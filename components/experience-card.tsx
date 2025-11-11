@@ -36,7 +36,7 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
               <p className="text-lg font-medium text-muted-foreground">{experience.company}</p>
               <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
                 <span>{experience.location}</span>
-                <Badge variant="outline" className="badge-accent">{duration}</Badge>
+                <Badge variant="outline">{duration}</Badge>
               </div>
             </div>
           </div>
@@ -46,7 +46,7 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
           <ul className="space-y-2">
             {experience.achievements.map((achievement, i) => (
               <li key={i} className="text-sm text-muted-foreground flex items-start">
-                <span className="accent-text mr-2 mt-1">•</span>
+                <span className="text-primary mr-2 mt-1">•</span>
                 {achievement}
               </li>
             ))}

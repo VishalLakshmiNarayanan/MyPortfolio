@@ -51,7 +51,7 @@ export default function HomePage() {
       </WavySection>
 
       {/* Experience */}
-      <WavySection id="experience" top bottom>
+      <WavySection id="experience" top bottom className="bg-emerald-500/5">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation">Experience</h2>
@@ -71,7 +71,7 @@ export default function HomePage() {
       </WavySection>
 
       {/* Education */}
-      <WavySection id="education" top bottom>
+      <WavySection id="education" top bottom className="bg-emerald-500/5">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation">Education</h2>
@@ -99,7 +99,7 @@ export default function HomePage() {
       </WavySection>
 
       {/* Publications */}
-      <WavySection id="publications" top bottom>
+      <WavySection id="publications" top bottom className="bg-emerald-500/5">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation">Publications</h2>
@@ -131,7 +131,7 @@ export default function HomePage() {
       </WavySection>
 
       {/* Contact */}
-      <WavySection id="contact" top>
+      <WavySection id="contact" top className="bg-emerald-500/5">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation">Contact</h2>

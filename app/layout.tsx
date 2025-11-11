@@ -34,16 +34,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <div className="min-h-screen w-full relative bg-black text-gray-100 midnight-theme">
-
-            {/* Vercel Grid */}
-            {/* Midnight Radial Glow Background */}
+          <div className="min-h-screen w-full relative bg-black">
+            {/* Emerald Depths radial glow (keep this) */}
             <div
-              className="absolute inset-0 z-0 pointer-events-none"
+              className="absolute inset-0 z-0"
               style={{
-                background: 'radial-gradient(circle at 50% 50%, rgba(226, 232, 240, 0.2) 0%, rgba(226, 232, 240, 0.1) 25%, rgba(226, 232, 240, 0.05) 35%, transparent 50%)',
+                background:
+                  "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(16,185,129,0.25), transparent 70%), #000000",
               }}
             />
+
             {/* ✅ Waves (bottom). Optional: duplicate with `emerald-waves-top` for top waves */}
            
             {/* Optional top waves:

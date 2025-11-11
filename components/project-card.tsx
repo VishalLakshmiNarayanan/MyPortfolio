@@ -18,7 +18,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, index = 0, active = false, animated = false }: ProjectCardProps) {
   const content = (
-    <Card className={`glass glass-hover h-full overflow-hidden ${active ? "accent-ring" : ""}`}>
+    <Card className={`glass glass-hover h-full overflow-hidden ${active ? "ring-1 ring-emerald-400/40" : ""}`}>
       {project.image && (
         <div className="relative h-48 w-full overflow-hidden rounded-t-2xl">
           <Image
@@ -45,7 +45,7 @@ export function ProjectCard({ project, index = 0, active = false, animated = fal
           <div className="space-y-3">
             {project.tech?.length ? (
               <div>
-                <h4 className="text-sm font-medium mb-2 accent-text">Tech Stack</h4>
+                <h4 className="text-sm font-medium mb-2">Tech Stack</h4>
                 <div className="flex flex-wrap gap-1">
                   {project.tech.map((tech) => (
                     <Badge key={tech} variant="secondary" className="text-xs">
@@ -58,10 +58,10 @@ export function ProjectCard({ project, index = 0, active = false, animated = fal
 
             {project.tags?.length ? (
               <div>
-                <h4 className="text-sm font-medium mb-2 accent-text">Tags</h4>
+                <h4 className="text-sm font-medium mb-2">Tags</h4>
                 <div className="flex flex-wrap gap-1">
                   {project.tags.map((tag) => (
-                    <Badge key={tag} className="text-xs badge-accent">
+                    <Badge key={tag} className="text-xs bg-primary/10 text-primary hover:bg-primary/20">
                       {tag}
                     </Badge>
                   ))}

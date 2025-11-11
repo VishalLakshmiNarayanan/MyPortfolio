@@ -1,4 +1,4 @@
-  { name: "Data Mining", category: "data", connections: ["SQL", "Python", "Pandas", "MySQL"] },
+{ name: "Data Mining", category: "data", connections: ["SQL", "Python", "Pandas", "MySQL"] },
   { name: "CPLEX", category: "data", connections: ["Optimization", "Python"] },
   { name: "n8n Workflows", category: "data", connections: ["APIs", "Automation"] },
   { name: "Apache Airflow", category: "data", connections: ["ETL", "Scheduling", "Python"] },

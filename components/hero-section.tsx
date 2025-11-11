@@ -69,7 +69,7 @@ export function HeroSection() {
 
 
           <div className="space-y-4">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight hover-underline-animation accent-text">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight hover-underline-animation">
               Vishal Lakshmi Narayanan
             </h1>
             <div className="mt-3">

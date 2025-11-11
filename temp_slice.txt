@@ -1,4 +1,4 @@
-  {
+{
     slug: "malware-detection",
     title: "Network-Based Malware Detection",
     description:

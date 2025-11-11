@@ -5,13 +5,16 @@ import { cn } from "@/lib/utils"
 const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, children, ...props }, ref) => (
-  <div ref={ref} className={cn("mint-card text-card-foreground", className)} {...props}>
-    <div className="mint-card__bg holographic-card">
-      <div className="mint-card__blob" />
-      {children}
-    </div>
-  </div>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      // glassmorphic surface (uses .glass utility from globals.css)
+      "glass text-card-foreground shadow-lg",
+      className
+    )}
+    {...props}
+  />
 ))
 Card.displayName = "Card"
 

@@ -36,7 +36,7 @@ export function EducationCard({ education, index }: EducationCardProps) {
               <p className="text-lg font-medium text-muted-foreground">{education.school}</p>
               <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
                 <span>{education.location}</span>
-                <Badge variant="outline" className="badge-accent">{duration}</Badge>
+                <Badge variant="outline">{duration}</Badge>
               </div>
             </div>
           </div>
@@ -44,7 +44,7 @@ export function EducationCard({ education, index }: EducationCardProps) {
         <CardContent className="space-y-4">
           {education.notes && <p className="text-sm text-primary font-medium">{education.notes}</p>}
           <div>
-            <h4 className="text-sm font-medium mb-2 accent-text">Relevant Coursework</h4>
+            <h4 className="text-sm font-medium mb-2">Relevant Coursework</h4>
             <div className="flex flex-wrap gap-1">
               {education.coursework.map((course) => (
                 <Badge key={course} variant="secondary" className="text-xs">
