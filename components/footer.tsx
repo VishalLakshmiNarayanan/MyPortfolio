@@ -1,12 +1,15 @@
 import { Github, Linkedin } from "lucide-react"
+import FooterMarquee from "./FooterMarquee"
 
 export function Footer() {
   return (
-    <footer className="border-t border-purple-200/50 py-6 md:py-0 bg-white/50 backdrop-blur-sm">
-      <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+    <footer className="relative overflow-hidden footer-marquee-pause border-t border-purple-200/50 py-6 md:py-0 bg-white/50 backdrop-blur-sm">
+      {/* Marquee background behind content */}
+      <FooterMarquee />
+      <div className="relative z-10 container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
         <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
           <p className="text-center text-sm leading-loose text-black/70 font-medium md:text-left">
-            © Vishal Lakshmi Narayanan. All rights reserved.
+            Ac Vishal Lakshmi Narayanan. All rights reserved.
           </p>
         </div>
         <div className="flex items-center space-x-3">

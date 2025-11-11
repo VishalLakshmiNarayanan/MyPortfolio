@@ -75,6 +75,45 @@
   }
 }
 
+/* Footer marquee background */
+.marquee {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.15; /* subtle */
+}
+
+.marquee-row {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  width: max-content;
+  animation-name: marquee-horizontal;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+.marquee-row.reverse { animation-direction: reverse; }
+
+.marquee-icon {
+  height: 22px;
+  width: auto;
+  opacity: 0.8;
+  filter: grayscale(1);
+}
+
+@keyframes marquee-horizontal {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.footer-marquee-pause:hover .marquee-row { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-row { animation: none; }
+}
+
 /* Custom scrollbar with Aurora Dream theme */
 ::-webkit-scrollbar {
   width: 6px;
