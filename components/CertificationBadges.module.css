@@ -5,11 +5,12 @@
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
+  align-items: stretch;
 }
 
 .badgeCard {
   width: 220px;
-  min-height: 300px;
+  height: 320px;
   border-radius: 28px;
   background: #121212;
   border: 1px solid rgba(255, 255, 255, 0.15);
