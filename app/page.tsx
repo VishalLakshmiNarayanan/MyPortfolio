@@ -11,6 +11,7 @@ import { FloatingSkillsBubble } from "@/components/floating-skills-bubble"
 import SkillGalaxy from "@/components/SkillGalaxy"
 import SkillCarousel from "@/components/SkillCarousel"
 import SkillLoop from "@/components/SkillLoop"
+import SkillReference from "@/components/SkillReference"
 import StackedProjectCards from "@/components/StackedProjectCards"
 import ExperienceTimeline from "@/components/ExperienceTimeline"
 
@@ -45,6 +46,10 @@ export default function HomePage() {
         {/* Full-bleed skill marquee */}
         <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
           <SkillLoop />
+        </div>
+        {/* Category-wise skill reference */}
+        <div className="container mt-12">
+          <SkillReference />
         </div>
       </section>
 

@@ -41,12 +41,14 @@
   place-items: center;
   border-radius: 14px;
   margin-right: 1rem; /* important for seamless loop */
-  background: #000; /* pitch black boxes */
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+  background: rgba(255, 255, 255, 0.08); /* glassmorphism: translucent white */
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
   position: relative;
   overflow: hidden;
-  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
   white-space: nowrap;
 }
 .tile::before { content: none; }
@@ -57,7 +59,7 @@
   animation: tileSweep 6.5s ease-in-out infinite;
   animation-delay: var(--pulseDelay, 0s);
 }
-.tile:hover { transform: translateY(-3px); box-shadow: 0 16px 30px rgba(0,0,0,0.35); border-color: color-mix(in oklab, var(--accent) 40%, white 0%); }
+.tile:hover { transform: translateY(-3px); background: rgba(255, 255, 255, 0.15); box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.25); border-color: rgba(255, 255, 255, 0.3); }
 
 .icon-wrap { width: 90px; height: 90px; margin-top: 14px; display: grid; place-items: center; position: relative; background: transparent; border-radius: 0; }
 .icon-wrap img { width: 72px; height: 72px; object-fit: contain; }
@@ -66,26 +68,34 @@
 /* Shiny sweep */
 .icon-wrap::after { content:""; position:absolute; inset:-40%; background: linear-gradient(70deg, transparent 40%, rgba(255,255,255,.22) 50%, transparent 60%); transform: translateX(-120%) rotate(10deg); animation: shine 3.2s ease-in-out infinite; animation-delay: var(--pulseDelay, 0s); }
 
-.label { margin: 10px 10px 12px; font-size: 13px; font-weight: 800; letter-spacing: .2px; text-align: center; color: #e5e7eb; padding: 6px 8px; border-radius: 8px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); width: calc(100% - 20px); overflow: hidden; text-overflow: ellipsis; }
+.label { margin: 10px 10px 12px; font-size: 13px; font-weight: 800; letter-spacing: .2px; text-align: center; color: #ffffff; text-shadow: 0 1px 2px rgba(0,0,0,0.3); padding: 6px 8px; border-radius: 8px; background: rgba(255,255,255,.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.25); width: calc(100% - 20px); overflow: hidden; text-overflow: ellipsis; }
 
 /* “Random” pulse glow using staggered delays */
 .tile { animation: pulseGlow 9s ease-in-out infinite; animation-delay: var(--pulseDelay, 0s); }
 
 @keyframes shine { from { transform: translateX(-120%) rotate(10deg); } to { transform: translateX(120%) rotate(10deg); } }
 @keyframes tileSweep { 0%, 70% { transform: translateX(-40%); } 90% { transform: translateX(40%); } 100% { transform: translateX(40%); } }
-@keyframes pulseGlow { 0%, 85%, 100% { box-shadow: 0 8px 18px rgba(0,0,0,0.25); } 40% { box-shadow: 0 0 24px 6px color-mix(in oklab, var(--accent) 35%, transparent); } }
+@keyframes pulseGlow {
+  0%, 85%, 100% {
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  }
+  40% {
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2), 0 0 24px 6px color-mix(in oklab, var(--accent) 25%, transparent);
+    background: rgba(255, 255, 255, 0.12);
+  }
+}
 
 .fade-overlay { display: none; }
 
 /* Category lighting accents */
-.accent-dsml { --accent: var(--dsml); }
-.accent-de { --accent: var(--de); }
-.accent-viz { --accent: var(--viz); }
-.accent-misc { --accent: var(--misc); }
-.accent-dsml:hover { box-shadow: 0 0 18px 4px rgba(175,109,255,0.35); border-color: rgba(175,109,255,0.45); }
-.accent-de:hover { box-shadow: 0 0 18px 4px rgba(255,100,180,0.35); border-color: rgba(255,100,180,0.45); }
-.accent-viz:hover { box-shadow: 0 0 18px 4px rgba(255,235,170,0.35); border-color: rgba(255,235,170,0.45); }
-.accent-misc:hover { box-shadow: 0 0 18px 4px rgba(120,190,255,0.35); border-color: rgba(120,190,255,0.45); }
+.accent-dsml { --accent: #af6dff; }
+.accent-de { --accent: #ff64b4; }
+.accent-viz { --accent: #ffebaa; }
+.accent-misc { --accent: #78beff; }
+.accent-dsml:hover { box-shadow: 0 8px 40px 0 rgba(31, 38, 135, 0.25), 0 0 28px 8px rgba(175,109,255,0.4); border-color: rgba(175,109,255,0.5); }
+.accent-de:hover { box-shadow: 0 8px 40px 0 rgba(31, 38, 135, 0.25), 0 0 28px 8px rgba(255,100,180,0.4); border-color: rgba(255,100,180,0.5); }
+.accent-viz:hover { box-shadow: 0 8px 40px 0 rgba(31, 38, 135, 0.25), 0 0 28px 8px rgba(255,235,170,0.4); border-color: rgba(255,235,170,0.5); }
+.accent-misc:hover { box-shadow: 0 8px 40px 0 rgba(31, 38, 135, 0.25), 0 0 28px 8px rgba(120,190,255,0.4); border-color: rgba(120,190,255,0.5); }
 
 @keyframes skill-loop {
   0% { transform: translateX(0); }
