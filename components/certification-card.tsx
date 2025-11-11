@@ -57,7 +57,7 @@ export function CertificationCard({ certification, index }: CertificationCardPro
                 <p className="text-sm text-muted-foreground font-medium mt-1">{certification.organization}</p>
               </div>
             </div>
-            <Badge variant="outline" className="text-xs">
+            <Badge variant="outline" className="text-xs badge-accent">
               {formatDate(certification.date)}
             </Badge>
           </div>

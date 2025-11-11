@@ -66,7 +66,7 @@ export function AwardCard({ award, index }: AwardCardProps) {
                 <p className="text-sm text-muted-foreground font-medium">{award.organization}</p>
               </div>
             </div>
-            <Badge variant="outline" className="text-xs">
+            <Badge variant="outline" className="text-xs badge-accent">
               {formatDate(award.date)}
             </Badge>
           </div>

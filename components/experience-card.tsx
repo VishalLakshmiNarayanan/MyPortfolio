@@ -36,7 +36,7 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
               <p className="text-lg font-medium text-muted-foreground">{experience.company}</p>
               <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
                 <span>{experience.location}</span>
-                <Badge variant="outline">{duration}</Badge>
+                <Badge variant="outline" className="badge-accent">{duration}</Badge>
               </div>
             </div>
           </div>

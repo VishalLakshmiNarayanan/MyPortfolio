@@ -108,7 +108,7 @@ export function SkillCard({ skillGroup, index }: SkillCardProps) {
             {skillGroup.skills.map((skill) => {
               const Icon = getSkillIcon(skill)
               return (
-                <Badge key={skill} className="bg-primary/10 text-primary hover:bg-primary/20 flex items-center gap-1.5">
+                <Badge key={skill} className="badge-accent flex items-center gap-1.5">
                   {Icon ? <Icon className="w-3.5 h-3.5" /> : null}
                   {skill}
                 </Badge>

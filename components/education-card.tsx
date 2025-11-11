@@ -36,7 +36,7 @@ export function EducationCard({ education, index }: EducationCardProps) {
               <p className="text-lg font-medium text-muted-foreground">{education.school}</p>
               <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
                 <span>{education.location}</span>
-                <Badge variant="outline">{duration}</Badge>
+                <Badge variant="outline" className="badge-accent">{duration}</Badge>
               </div>
             </div>
           </div>
