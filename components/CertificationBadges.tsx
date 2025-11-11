@@ -79,49 +79,54 @@ export function CertificationBadges({ certifications }: CertificationBadgesProps
             className="group"
             style={{ animationDelay: `${index * 60}ms` }}
           >
-            <div className="relative h-[232px] w-[216px] overflow-hidden rounded-[28px] border border-white/30 shadow-[0_20px_45px_rgba(15,23,42,0.3)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_25px_75px_rgba(15,23,42,0.35)]">
+            <div
+              className="relative h-[240px] w-[220px] overflow-hidden rounded-[34px] border border-white/30 bg-white/5 shadow-[0_25px_60px_rgba(15,23,42,0.4)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_85px_rgba(15,23,42,0.45)]"
+              role="presentation"
+            >
+              <div className="absolute inset-2 rounded-[30px] border border-white/10 bg-gradient-to-b from-slate-900/40 via-slate-900/30 to-slate-900/20 shadow-[inset_0_0_35px_rgba(15,23,42,0.5)]" />
+
               <svg
                 viewBox="0 0 216 232"
-                className="absolute inset-0 h-full w-full"
+                className="absolute inset-6 h-[220px] w-[210px]"
                 preserveAspectRatio="none"
               >
                 <path fill={brand.ribbon} d={badgePath} />
               </svg>
 
-              <div className="absolute inset-0 flex flex-col items-center justify-between px-6 py-4 text-center text-white">
-                <div className="flex flex-col items-center gap-1">
-                  <span className="text-[10px] uppercase tracking-[0.5em] text-white/80">
+              <div className="absolute inset-4 flex h-[calc(100%-16px)] flex-col items-center justify-between rounded-[28px] px-5 py-6 text-center text-white">
+                <div className="flex flex-col items-center gap-2">
+                  <span className="text-[9px] uppercase tracking-[0.5em] text-white/70">
                     {categoryLabels[certification.category]}
                   </span>
                   <div
-                    className="flex h-16 w-16 items-center justify-center rounded-full border border-white/60 bg-white/90 shadow-[0_12px_30px_rgba(15,23,42,0.3)]"
-                    style={{ boxShadow: `0 12px 30px ${brand.ribbon}50` }}
+                    className="flex h-20 w-20 items-center justify-center rounded-full border border-white/60 bg-white/90 shadow-[0_12px_28px_rgba(15,23,42,0.4)]"
+                    style={{ boxShadow: `0 14px 40px ${brand.ribbon}60` }}
                   >
                     <Image
                       src={brand.logo}
                       alt={`${certification.organization} logo`}
-                      width={52}
-                      height={52}
-                      className="h-12 w-12 object-contain"
+                      width={56}
+                      height={56}
+                      className="h-14 w-14 object-contain"
                       priority={false}
                     />
                   </div>
                 </div>
 
-                <p className="text-[1.55rem] font-bold uppercase leading-tight tracking-[0.3em]">
+                <p className="text-[1.8rem] font-semibold uppercase leading-tight tracking-[0.25em]">
                   <span className="whitespace-pre-line break-words">{title}</span>
                 </p>
 
                 <div className="flex flex-col items-center gap-1">
-                  <span className="text-[0.8rem] font-semibold uppercase tracking-[0.4em] text-white/90">
+                  <span className="text-[0.85rem] font-semibold uppercase tracking-[0.4em] text-white/75">
                     {certification.organization}
                   </span>
-                  <span className="text-[0.65rem] tracking-[0.6em] transition-[letter-spacing] duration-300 group-hover:tracking-[1em]">
+                  <span className="text-[0.7rem] tracking-[0.65em] transition-[letter-spacing] duration-300 group-hover:tracking-[1em]">
                     {stars.join(" ")}
                   </span>
                 </div>
 
-                <span className="text-[0.65rem] uppercase tracking-[0.35em] text-white/70">
+                <span className="text-[0.7rem] uppercase tracking-[0.35em] text-white/65">
                   {formatDate(certification.date)}
                 </span>
               </div>
