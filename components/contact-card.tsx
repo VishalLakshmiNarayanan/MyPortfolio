@@ -55,11 +55,11 @@ export function ContactCard() {
       className="contact-card-shell"
     >
       <div className="contact-card-panel">
-        <p className="eyebrow">Let&apos;s collaborate</p>
-        <h2>Drop a hello, I&apos;m always open to new challenges.</h2>
+        <p className="eyebrow">Let&apos;s connect</p>
+        <h2>Drop a hello</h2>
         <p className="description">
-          Whether you&apos;re looking to solve a tricky automation problem, build a high-performing
-          product, or just want to chat about what&apos;s next, I&apos;d love to connect.
+          I’m always open to conversations, collaborations, or new opportunities in AI, data science, and product engineering.  
+    Reach out anytime — I’d love to hear from you.
         </p>
 
         <div className="details-grid">
