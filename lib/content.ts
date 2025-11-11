@@ -391,7 +391,7 @@ export const certifications: Certification[] = [
 export const heroStats = [
   { id: "projects",  label: "Projects",       rolling: ["19", "8"] }, 
   { id: "hackathons",label: "Hackathon Wins", value: "3" },
-  { id: "linkedin",  label: "Followers",      value: "1300+" },
-  { id: "stack",     label: "Tech Stack",     value: "28" },
-  { id: "domains",   label: "Domains",        value: "5" },
+  { id: "linkedin",  label: "Followers",      value: "1500+" },
+  { id: "stack",     label: "Tech Stack",     value: "38" },
+  { id: "domains",   label: "Domains",        value: "6" },
 ] as const;
