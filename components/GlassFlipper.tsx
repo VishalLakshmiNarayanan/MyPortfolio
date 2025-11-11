@@ -12,7 +12,7 @@ type Props = {
 }
 
 export default function GlassFlipper({
-  items = ["Data Scientist", "Data Engineer", "Data Analyst","ML Engineer"],
+  items = ["Data Scientist", "Data Engineer", "Data Analyst", "ML Engineer"],
   intervalMs = 2000,
   className,
 }: Props) {
@@ -30,18 +30,18 @@ export default function GlassFlipper({
   return (
     <div
       className={cn(
-        // glassy pill that matches Aurora Dream theme
-        "glass mx-auto w-fit rounded-xl ring-1 ring-purple-300/40 px-4 py-2",
-        "shadow-[0_18px_80px_-20px_rgba(175,109,255,.4)]",
+        // glassy pill
+        "glass mx-auto w-fit rounded-xl ring-1 ring-purple-300/40 px-6 py-3",
+        "shadow-[0_18px_80px_-20px_rgba(175,109,255,.4)] text-base sm:text-lg",
         className
       )}
       aria-live="polite"
     >
       <div className="flex items-center gap-2">
-        <span className="hidden sm:inline text-black/70 text-sm font-medium">I'm a</span>
+        <span className="hidden sm:inline text-black/70 font-medium">I'm a</span>
 
         {/* viewport keeps height fixed while text slides */}
-        <div className="relative h-7 sm:h-8 overflow-hidden min-w-[14ch] sm:min-w-[16ch]">
+        <div className="relative h-8 sm:h-10 overflow-hidden min-w-[16ch] sm:min-w-[18ch]">
           <AnimatePresence initial={false} mode="popLayout">
             <motion.div
               key={current}
