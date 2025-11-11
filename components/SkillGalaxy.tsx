@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react"
 import { motion } from "framer-motion"
 import { skillGroups } from "@/lib/content"
+import "./skill-galaxy.css"
 
 type CategoryKey = "dsml" | "de" | "viz" | "misc"
 
@@ -132,30 +133,18 @@ function Orbit({
   const duration = hover ? 28 : 18
 
   return (
-    <div
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      className="relative w-72 h-72 md:w-80 md:h-80 flex items-center justify-center"
-    >
-      {/* Central Planet */}
-      <motion.div
-        className={`w-24 h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center text-center font-semibold text-white ${gradient} shadow-lg border border-white/20`}
-        animate={{ scale: hover ? 1.08 : 1, boxShadow: hover ? "0 0 30px rgba(255,255,255,0.6)" : "0 10px 25px rgba(0,0,0,0.15)" }}
-        transition={{ type: "spring", stiffness: 200, damping: 15 }}
-      >
-        <span className="px-3 text-sm leading-tight drop-shadow">{label}</span>
-      </motion.div>
+    <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} className="relative flex items-center justify-center">
+      <div className="orbit-container" style={{ ['--size' as any]: '110px', ['--duration' as any]: `${duration}s` }}>
+        {/* Central Planet */}
+        <motion.div
+          className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center text-center font-semibold text-white ${gradient} shadow-lg border border-white/20`}
+          animate={{ scale: hover ? 1.08 : 1, boxShadow: hover ? "0 0 30px rgba(255,255,255,0.6)" : "0 10px 25px rgba(0,0,0,0.15)" }}
+          transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+        >
+          <span className="px-3 text-sm leading-tight drop-shadow">{label}</span>
+        </motion.div>
 
-      {/* Orbit ring */}
-      <div className="absolute w-60 h-60 md:w-72 md:h-72 rounded-full border border-black/20" />
-
-      {/* Orbiting satellites */}
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ repeat: Infinity, ease: "linear", duration }}
-        className="absolute inset-0"
-        style={{ transformOrigin: "50% 50%" }}
-      >
+        {/* Satellites */}
         {satellites.map(({ s, i }) => {
           const angle = (i / satellites.length) * Math.PI * 2
           const radius = 110
@@ -163,31 +152,24 @@ function Orbit({
           const y = Math.sin(angle) * radius
           const icon = resolveIcon(s)
           return (
-            <div key={s + i} className="absolute left-1/2 top-1/2" style={{ transform: `translate(${x}px, ${y}px)` }}>
-              <motion.div
-                className="flex flex-col items-center"
-                animate={{ scale: hover ? 1.1 : 1, filter: hover ? "drop-shadow(0 0 10px rgba(0,0,0,0.25))" : "none" }}
-                transition={{ duration: 0.3 }}
-              >
-                {icon.type === "iconify" ? (
-                  <img
-                    src={`https://api.iconify.design/${encodeURIComponent(icon.value)}.svg`}
-                    alt={s}
-                    className="w-7 h-7 md:w-8 md:h-8"
-                  />
-                ) : icon.type === "devicon" ? (
-                  <i className={`${icon.value} text-[28px] leading-none`}></i>
-                ) : (
-                  <span className="text-[11px] md:text-xs font-semibold text-black bg-white/80 rounded px-1.5 py-0.5 border border-black/10">
-                    {s}
-                  </span>
-                )}
-                <span className="text-[10px] md:text-xs mt-1 opacity-70 text-black hidden md:block">{s}</span>
-              </motion.div>
+            <div key={s + i} className="item place-self-center" style={{ transform: `translate(${x}px, ${y}px)` }}>
+              {icon.type === 'iconify' ? (
+                <div className="icon">
+                  <img src={`https://api.iconify.design/${encodeURIComponent(icon.value)}.svg`} alt={s} style={{ width: '70%', height: '70%' }} />
+                </div>
+              ) : icon.type === 'devicon' ? (
+                <div className="icon">
+                  <i className={`${icon.value}`} style={{ fontSize: '28px', lineHeight: 1 }} />
+                </div>
+              ) : (
+                <div className="icon">
+                  <span className="text-[11px] md:text-xs font-semibold text-black bg-white/80 rounded px-1.5 py-0.5 border border-black/10">{s}</span>
+                </div>
+              )}
             </div>
           )
         })}
-      </motion.div>
+      </div>
     </div>
   )
 }
@@ -214,4 +196,3 @@ export default function SkillGalaxy() {
     </section>
   )
 }
-
