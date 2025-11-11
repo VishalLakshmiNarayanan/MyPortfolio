@@ -106,9 +106,10 @@ function Row({
         {dup.map((it, idx) => {
           const icon = resolveIcon(it.name)
           const accent = `accent-${it.cat}`
+          const delay = ((idx * 137) % 110) / 10 // 0..11s stagger
           return (
-            <span key={`${it.name}-${idx}`} className={`tag ${accent}`}>
-              <span className="ico">
+            <div key={`${it.name}-${idx}`} className={`tile ${accent}`} style={{ ['--pulseDelay' as any]: `${delay}s` }}>
+              <div className="icon-wrap">
                 {icon.type === 'iconify' ? (
                   <img src={`https://api.iconify.design/${encodeURIComponent(icon.value)}.svg${icon.value.startsWith('logos:') ? '' : '?color=%23cfd6ff'}`} alt="" />
                 ) : icon.type === 'devicon' ? (
@@ -116,9 +117,9 @@ function Row({
                 ) : (
                   <i className="devicon-git-plain colored"></i>
                 )}
-              </span>
-              {it.name}
-            </span>
+              </div>
+              <div className="label">{it.name}</div>
+            </div>
           )
         })}
       </div>
@@ -140,14 +141,27 @@ export default function SkillLoop() {
   }, [])
 
   return (
-    <div className="skills-loop">
-      <div className="tag-list">
-        <Row items={rows[0]} duration="35s" />
-        <Row items={rows[1]} duration="45s" reverse />
-        <Row items={rows[2]} duration="55s" />
-        <div className="fade-overlay" />
+    <div className="skills-loop min-h-[460px] w-full">
+      <div
+        className="bg-aurora"
+        style={{
+          background: `
+            radial-gradient(ellipse 120% 80% at 70% 20%, rgba(255, 20, 147, 0.15), transparent 50%),
+            radial-gradient(ellipse 100% 60% at 30% 10%, rgba(0, 255, 255, 0.12), transparent 60%),
+            radial-gradient(ellipse 90% 70% at 50% 0%, rgba(138, 43, 226, 0.18), transparent 65%),
+            radial-gradient(ellipse 110% 50% at 80% 30%, rgba(255, 215, 0, 0.08), transparent 40%),
+            #000000
+          `,
+        }}
+      />
+      <div className="content">
+        <div className="tag-list">
+          <Row items={rows[0]} duration="32s" />
+          <Row items={rows[1]} duration="44s" reverse />
+          <Row items={rows[2]} duration="56s" />
+          <div className="fade-overlay" />
+        </div>
       </div>
     </div>
   )
 }
-
