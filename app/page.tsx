@@ -5,7 +5,8 @@ import { FlipEducationCard } from "@/components/flip-education-card"
 import { SkillCard } from "@/components/skill-card"
 import { PublicationCard } from "@/components/publication-card"
 import { ContactCard } from "@/components/contact-card"
-import JourneyTimeline from "@/components/JourneyTimeline"
+import { AwardCard } from "@/components/award-card"
+import MovingMomentsGallery from "@/components/MovingMomentsGallery"
 import { CertificationBadges } from "@/components/CertificationBadges"
 import { FloatingSkillsBubble } from "@/components/floating-skills-bubble"
 import SkillGalaxy from "@/components/SkillGalaxy"
@@ -22,6 +23,7 @@ import {
   skillGroups,
   publications,
   allProjects,
+  awards,
   certifications,
 } from "@/lib/content"
 
@@ -85,8 +87,30 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Journey Timeline */}
-      <JourneyTimeline />
+      {/* Awards & Recognition */}
+      <section id="awards" className="py-12 md:py-20">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Awards & Recognition</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {awards.map((award, index) => (
+              <AwardCard key={`${award.title}-${award.date}`} award={award} index={index} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Moving Moments Gallery */}
+      <section id="moments" className="py-12 md:py-20 bg-white">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Journey Through Moments</h2>
+            <p className="text-black/70 max-w-2xl mx-auto">A glimpse into the hackathons, conferences, and milestones that shaped my path in 2025</p>
+          </div>
+          <MovingMomentsGallery />
+        </div>
+      </section>
 
       {/* Publications */}
       <section id="publications" className="py-12 md:py-20">

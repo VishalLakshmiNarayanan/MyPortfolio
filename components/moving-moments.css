@@ -1,0 +1,293 @@
+/* Moving Moments Gallery - Stacked Card Effect */
+
+:root {
+  --moments-transition: 0.8s;
+}
+
+/* CSS custom properties for animation */
+@property --p {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: true;
+}
+
+@property --v {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: true;
+}
+
+.moments-stack-section {
+  /* Animation calculations */
+  --p: var(--k);
+  --abs-p: abs(calc(var(--k) - var(--p)));
+  --end: clamp(0, calc(var(--abs-p) - 1), 1);
+  --dir: calc((1 - 2 * var(--end)) * sign(calc(var(--k) - var(--p))));
+  --fwd: calc(0.5 * (1 + var(--dir)));
+  --v: var(--k);
+  --abs-v: abs(calc(var(--v) - var(--p)));
+  --prg: calc(var(--abs-v) / (1 - var(--end) + var(--end) * (var(--n) - 1)));
+
+  display: grid;
+  grid-gap: 0.5em 4em;
+  grid-template: repeat(2, max-content) 1fr max-content / max-content 1fr;
+  place-self: center;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  max-width: 1000px;
+  min-height: 600px;
+  position: relative;
+
+  color: #000000;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  counter-reset: k calc(1 + var(--k)) n var(--n);
+
+  transition: --p 0s var(--moments-transition), --v var(--moments-transition);
+}
+
+/* Counter display */
+.moments-counter::before {
+  content: counter(k) ' / ' counter(n);
+  grid-area: 1 / 2;
+  width: 4ch;
+  text-align: right;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Stacked articles */
+.moment-article {
+  --abs-top: abs(calc(var(--k) - var(--i)));
+  --not-top: min(1, var(--abs-top));
+  --top: calc(1 - var(--not-top));
+  --val-mov: calc((1 - var(--fwd)) * var(--p) + var(--fwd) * var(--k) - var(--i));
+  --abs-mov: abs(var(--val-mov));
+  --not-mov: min(1, var(--abs-mov));
+  --mov: calc(1 - var(--not-mov));
+
+  grid-area: 1 / 1 / -1 / -1;
+  display: grid;
+  grid-template: subgrid / subgrid;
+  z-index: mod(calc(var(--n) - 1 + var(--i) - var(--k)), var(--n));
+  transition: z-index var(--moments-transition) cubic-bezier(1, -0.9, 0, 1.9);
+}
+
+/* Image wrapper */
+.moment-image-wrapper {
+  grid-area: 1 / 1 / -1;
+  position: relative;
+  width: 350px;
+  height: 450px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.moment-stack-image {
+  --sin: sin(calc(var(--prg) * 0.5turn));
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  translate: calc(-150% * var(--mov) * sqrt(var(--sin)));
+  rotate: calc((1 - var(--sin)) * var(--a));
+  transition: translate var(--moments-transition) ease-in-out,
+    rotate var(--moments-transition) ease-in-out;
+}
+
+/* Title */
+.moment-stack-title {
+  grid-area: 2 / 2;
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 700;
+  color: #000000;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+  translate: 0 calc(var(--not-top) * 1lh);
+  opacity: var(--top);
+  transition: 0.4s calc(var(--top) * 0.4s);
+  transition-property: translate, opacity;
+}
+
+/* Description */
+.moment-stack-desc {
+  grid-area: 3 / 2;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.8);
+  max-width: 450px;
+  margin: 0;
+  translate: 0 calc(var(--not-top) * 1lh);
+  opacity: var(--top);
+  transition: 0.4s calc(var(--top) * 0.4s);
+  transition-property: translate, opacity;
+}
+
+.moment-stack-desc em {
+  color: rgba(0, 0, 0, 0.6);
+  font-style: normal;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Navigation buttons */
+.moments-nav-buttons {
+  display: flex;
+  gap: 1.5rem;
+  grid-area: 4 / 2;
+  z-index: calc((1 - min(1, var(--abs-p))) * var(--n));
+  margin-top: 1rem;
+}
+
+.nav-btn {
+  --sgn: -1;
+  --prc: calc(var(--hov, 0) * 100%);
+  --c: color-mix(in hsl, #af6dff var(--prc), #6b7280);
+
+  border: none;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: color-mix(in hsl, #af6dff 20%, rgba(255, 255, 255, 0.9));
+  border: 2px solid rgba(175, 109, 255, 0.3);
+  color: #af6dff;
+  font-size: 1.5rem;
+  font-weight: 900;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(175, 109, 255, 0.2);
+  transition: all 0.3s ease-out;
+}
+
+.nav-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translate(calc(var(--sgn) * -15%), 0)
+    rotate(45deg) scale(var(--sgn));
+  border: solid 2px currentColor;
+  border-width: 2px 2px 0 0;
+  width: 35%;
+  aspect-ratio: 1;
+}
+
+.nav-btn[data-inc='1'] {
+  --sgn: 1;
+}
+
+.nav-btn:is(:hover, :focus) {
+  --hov: 1;
+  background: color-mix(in hsl, #af6dff 30%, rgba(255, 255, 255, 0.95));
+  border-color: rgba(175, 109, 255, 0.6);
+  box-shadow: 0 6px 20px rgba(175, 109, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+.nav-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(175, 109, 255, 0.25);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .moments-stack-section {
+    grid-template: repeat(2, max-content) 1fr max-content / 1fr;
+    grid-gap: 1.5em;
+    padding: 3rem 1.5rem;
+  }
+
+  .moment-image-wrapper {
+    grid-area: 1 / 1;
+    width: 300px;
+    height: 380px;
+    margin: 0 auto;
+  }
+
+  .moments-counter::before {
+    grid-area: 1 / 1;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    text-align: right;
+  }
+
+  .moment-stack-title {
+    grid-area: 2 / 1;
+    text-align: center;
+  }
+
+  .moment-stack-desc {
+    grid-area: 3 / 1;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .moments-nav-buttons {
+    grid-area: 4 / 1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .moments-stack-section {
+    padding: 2rem 1rem;
+    min-height: 500px;
+  }
+
+  .moment-image-wrapper {
+    width: 260px;
+    height: 340px;
+  }
+
+  .moment-stack-title {
+    font-size: 1.5rem;
+  }
+
+  .moment-stack-desc {
+    font-size: 0.9rem;
+  }
+
+  .nav-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+/* Fallback for browsers without CSS math functions support */
+@supports not (scale: abs(-2)) {
+  .moments-stack-section {
+    --abs-p: max(calc(var(--k) - var(--p)), calc(var(--p) - var(--k)));
+    --abs-v: max(calc(var(--v) - var(--p)), calc(var(--p) - var(--v)));
+  }
+
+  .moment-article {
+    --abs-top: max(calc(var(--k) - var(--i)), calc(var(--i) - var(--k)));
+    --abs-mov: max(var(--val-mov), calc(-1 * var(--val-mov)));
+  }
+}
+
+@supports not (scale: sign(-2)) {
+  .moments-stack-section {
+    --dir: clamp(-1, calc((var(--k) - var(--p)) * 100000), 1);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .moments-stack-section,
+  .moment-article,
+  .moment-stack-image,
+  .moment-stack-title,
+  .moment-stack-desc,
+  .nav-btn {
+    transition: none;
+    animation: none;
+  }
+}
