@@ -72,10 +72,10 @@ const skillsData: SkillData[] = [
 
 // Neon palette per new categories
 const categoryColors = {
-  dsml: "#05f792", // Data Science & ML
-  de: "#2a754f", // Data Engineering & Infra
-  viz: "#52b486", // Analytics & Visualization
-  misc: "#95f0c2", // Additional Proficiencies
+  dsml: "#e2e8f0", // Data Science & ML
+  de: "#e2e8f0", // Data Engineering & Infra
+  viz: "#e2e8f0", // Analytics & Visualization
+  misc: "#e2e8f0", // Additional Proficiencies
 }
 
 
@@ -422,3 +422,4 @@ export function FloatingSkillsBubble() {
     </motion.div>
   )
 }
+
