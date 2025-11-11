@@ -6,6 +6,7 @@ import { SkillCard } from "@/components/skill-card"
 import { PublicationCard } from "@/components/publication-card"
 import { ContactCard } from "@/components/contact-card"
 import { AwardCard } from "@/components/award-card"
+import MomentsGallery from "@/components/MomentsGallery"
 import { CertificationBadges } from "@/components/CertificationBadges"
 import { FloatingSkillsBubble } from "@/components/floating-skills-bubble"
 import SkillGalaxy from "@/components/SkillGalaxy"
@@ -86,18 +87,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Awards */}
-      <section id="awards" className="py-12 md:py-20">
+      {/* Moments Gallery */}
+      <section id="moments" className="py-12 md:py-20">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Awards & Recognition</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {awards.map((award, index) => (
-              <AwardCard key={`${award.title}-${award.date}`} award={award} index={index} />
-            ))}
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Moments Gallery</h2>
+            <p className="text-black/70 max-w-2xl mx-auto">A memory map of hackathons, achievements, and special moments</p>
           </div>
         </div>
+        <MomentsGallery moments={awards} />
       </section>
 
       {/* Publications */}
