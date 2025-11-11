@@ -61,7 +61,7 @@ const iconifyIdMap: Record<string, string> = {
   "CI/CD pipelines": "simple-icons:githubactions",
 }
 
-interface Node {
+interface SkillNode {
   id: string
   skill: string
   category: CategoryKey
@@ -90,7 +90,7 @@ export function FloatingSkillsBubble() {
     return () => window.removeEventListener("resize", onResize)
   }, [])
 
-  const { nodes, edges } = useMemo(() => {
+  const { skillNodes, skillEdges } = useMemo(() => {
     const w = Math.max(size.w || 900, 900)
     const h = Math.max(size.h || 500, 500)
     const centers: Record<CategoryKey, { x: number; y: number }> = {
@@ -100,8 +100,8 @@ export function FloatingSkillsBubble() {
       misc: { x: w * 0.75, y: h * 0.75 },
     }
 
-    const nodes: Node[] = []
-    const edges: Edge[] = []
+    const skillNodes: SkillNode[] = []
+    const skillEdges: Edge[] = []
 
     for (const group of skillGroups) {
       const key = categoryKeyMap[group.category]
@@ -116,29 +116,29 @@ export function FloatingSkillsBubble() {
         const x = cx + Math.cos(angle) * radius
         const y = cy + Math.sin(angle) * radius
         const id = `${key}-${i}-${skill}`
-        nodes.push({ id, skill, category: key, x, y, r: 24, icon: iconifyIdMap[skill] })
+        skillNodes.push({ id, skill, category: key, x, y, r: 24, icon: iconifyIdMap[skill] })
       })
     }
 
     // Intra-category ring connections
-    const byCat: Record<CategoryKey, Node[]> = { dsml: [], de: [], viz: [], misc: [] }
-    nodes.forEach((n) => byCat[n.category].push(n))
+    const byCat: Record<CategoryKey, SkillNode[]> = { dsml: [], de: [], viz: [], misc: [] }
+    skillNodes.forEach((n) => byCat[n.category].push(n))
     (Object.keys(byCat) as CategoryKey[]).forEach((k) => {
       const arr = byCat[k]
       arr.forEach((n, i) => {
         const to = arr[(i + 1) % arr.length]
-        edges.push({ from: n.id, to: to.id, category: k })
+        skillEdges.push({ from: n.id, to: to.id, category: k })
       })
     })
 
     // Light cross-category bridges
     const minLen = Math.min(byCat.dsml.length, byCat.de.length, byCat.viz.length, byCat.misc.length)
     for (let i = 0; i < Math.min(minLen, 6); i++) {
-      edges.push({ from: byCat.dsml[i].id, to: byCat.de[i].id, category: "dsml" })
-      edges.push({ from: byCat.viz[i].id, to: byCat.misc[i].id, category: "viz" })
+      skillEdges.push({ from: byCat.dsml[i].id, to: byCat.de[i].id, category: "dsml" })
+      skillEdges.push({ from: byCat.viz[i].id, to: byCat.misc[i].id, category: "viz" })
     }
 
-    return { nodes, edges }
+    return { skillNodes, skillEdges }
   }, [size])
 
   const findProject = (skill: string) => {
@@ -160,9 +160,9 @@ export function FloatingSkillsBubble() {
     >
       <svg width="100%" height="100%" viewBox={`0 0 ${Math.max(size.w, 900)} ${Math.max(size.h, 500)}`}>
         {/* Edges */}
-        {edges.map((e, idx) => {
-          const a = nodes.find((n) => n.id === e.from)!
-          const b = nodes.find((n) => n.id === e.to)!
+        {skillEdges.map((e, idx) => {
+          const a = skillNodes.find((n) => n.id === e.from)!
+          const b = skillNodes.find((n) => n.id === e.to)!
           const active = hovered && (hovered === a.id || hovered === b.id)
           return (
             <motion.line
@@ -181,7 +181,7 @@ export function FloatingSkillsBubble() {
         })}
 
         {/* Nodes */}
-        {nodes.map((n, idx) => {
+        {skillNodes.map((n, idx) => {
           const highlight = hovered === n.id
           const iconHref = n.icon ? `https://api.iconify.design/${encodeURIComponent(n.icon)}.svg` : null
           return (
@@ -266,4 +266,3 @@ export function FloatingSkillsBubble() {
     </div>
   )
 }
-
