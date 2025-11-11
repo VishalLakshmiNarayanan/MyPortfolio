@@ -74,15 +74,6 @@ export function ContactCard() {
           ))}
         </div>
 
-        <div className="action-row">
-          <a className="button" href="mailto:lvishal1607@gmail.com" aria-label="Email Vishal">
-            Email Me
-          </a>
-          <a className="button secondary" href="tel:+14803041340" aria-label="Call Vishal">
-            Call
-          </a>
-        </div>
-
         <div className="social-links">
           {socialLinks.map(({ href, label, icon }) => (
             <a
