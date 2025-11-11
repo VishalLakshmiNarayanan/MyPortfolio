@@ -182,12 +182,12 @@ export default function SkillLoop() {
   }, [])
 
   return (
-    <div className="skills-loop min-h-[460px] w-full">
+    <div className="skills-loop w-full">
       <div className="content">
         <div className="tag-list">
-          <Row items={rows[0]} duration="32s" />
-          <Row items={rows[1]} duration="44s" reverse />
-          <Row items={rows[2]} duration="56s" />
+          <Row items={rows[0]} duration="50s" />
+          <Row items={rows[1]} duration="65s" reverse />
+          <Row items={rows[2]} duration="80s" />
           <div className="fade-overlay" />
         </div>
       </div>
