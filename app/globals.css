@@ -109,6 +109,7 @@
 }
 
 .footer-marquee-pause:hover .marquee-row { animation-play-state: paused; }
+.header-marquee-pause:hover .marquee-row { animation-play-state: paused; }
 
 @media (prefers-reduced-motion: reduce) {
   .marquee-row { animation: none; }

@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
+import HeaderMarquee from "./HeaderMarquee"
 
 const navigation = [
   { name: "Home", href: "#top" },
@@ -29,8 +30,10 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-purple-200/50 bg-white/70 backdrop-blur-lg">
-      <div className="container flex h-14 items-center">
+    <header className="sticky top-0 z-50 w-full relative overflow-hidden header-marquee-pause border-b border-purple-200/50 bg-white/70 backdrop-blur-lg">
+      {/* Marquee background behind content */}
+      <HeaderMarquee />
+      <div className="relative z-10 container flex h-14 items-center">
         <div className="mr-4 hidden md:flex">
           <div className="mr-6 flex items-center space-x-2">
             <span className="hidden font-bold sm:inline-block text-black">Vishal Lakshmi Narayanan</span>
