@@ -71,8 +71,10 @@ export function Header() {
         </div>
       </div>
       {mobileMenuOpen && (
-        <div className="border-t border-purple-200/50 bg-white/80 md:hidden">
-          <nav className="flex flex-col space-y-1 p-4">
+        <div className="relative overflow-hidden border-t border-purple-200/50 bg-white/80 md:hidden">
+          {/* Marquee background for mobile menu */}
+          <HeaderMarquee />
+          <nav className="relative z-10 flex flex-col space-y-1 p-4">
             {navigation.map((item) => (
               <Link
                 key={item.name}

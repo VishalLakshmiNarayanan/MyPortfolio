@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
 import type { Education } from "@/lib/content"
 import "./flip-card-styles.css"
 
@@ -10,6 +11,26 @@ interface FlipEducationCardProps {
 }
 
 export function FlipEducationCard({ education, index }: FlipEducationCardProps) {
+  const [scale, setScale] = useState(1)
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth
+      if (width <= 480) {
+        setScale(0.65)
+      } else if (width <= 640) {
+        setScale(0.75)
+      } else if (width <= 768) {
+        setScale(0.85)
+      } else {
+        setScale(1)
+      }
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
@@ -28,6 +49,7 @@ export function FlipEducationCard({ education, index }: FlipEducationCardProps) 
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="flip-card"
+      style={{ transform: `scale(${scale})` }}
     >
       <div className="flip-content">
         {/* Front of Card */}

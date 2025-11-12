@@ -13,7 +13,7 @@ export default function ExperienceTimeline({ items }: { items: any[] }) {
   const grow = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
 
   return (
-    <div ref={ref} className="relative mx-auto max-w-5xl">
+    <div ref={ref} className="relative mx-auto max-w-5xl px-2 md:px-0">
       {/* desktop center line */}
       <div className="absolute inset-y-0 left-1/2 hidden w-px -translate-x-1/2 bg-purple-400/30 md:block" />
       {/* animated overlay */}
@@ -22,9 +22,9 @@ export default function ExperienceTimeline({ items }: { items: any[] }) {
         style={{ height: grow }}
       />
       {/* mobile line */}
-      <div className="absolute left-4 top-0 bottom-0 w-px bg-purple-400/30 md:hidden" />
+      <div className="absolute left-3 sm:left-4 top-0 bottom-0 w-px bg-purple-400/30 md:hidden" />
 
-      <ul className="space-y-12">
+      <ul className="space-y-8 md:space-y-12">
         {items.map((exp, i) => {
           const key = `${exp.company}-${exp.startDate}`
 
@@ -32,14 +32,14 @@ export default function ExperienceTimeline({ items }: { items: any[] }) {
             <li key={key} className="relative">
               {/* dot */}
               <div
-                className={`absolute top-7 z-[1] h-3.5 w-3.5 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 ring-4 ring-purple-300/30
-                  ${"left-4 -translate-x-1/2 md:left-1/2 md:-translate-x-1/2"}`}
+                className={`absolute top-5 sm:top-7 z-[1] h-3 w-3 sm:h-3.5 sm:w-3.5 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 ring-3 sm:ring-4 ring-purple-300/30
+                  ${"left-3 sm:left-4 -translate-x-1/2 md:left-1/2 md:-translate-x-1/2"}`}
               />
               {/* layout */}
               <div className="md:grid md:grid-cols-2 md:gap-10">
-                {/* left side */}
+                {/* left side - desktop only */}
                 {i % 2 === 0 && (
-                  <div className="md:pr-12">
+                  <div className="hidden md:block md:pr-12">
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
@@ -50,9 +50,9 @@ export default function ExperienceTimeline({ items }: { items: any[] }) {
                     </motion.div>
                   </div>
                 )}
-                {/* right side */}
+                {/* right side - desktop only */}
                 {i % 2 !== 0 && (
-                  <div className="md:col-start-2 md:pl-12">
+                  <div className="hidden md:block md:col-start-2 md:pl-12">
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}

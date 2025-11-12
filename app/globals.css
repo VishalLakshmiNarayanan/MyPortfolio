@@ -111,6 +111,36 @@
 .footer-marquee-pause:hover .marquee-row { animation-play-state: paused; }
 .header-marquee-pause:hover .marquee-row { animation-play-state: paused; }
 
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .marquee {
+    opacity: 0.12; /* slightly more subtle on mobile */
+  }
+
+  .marquee-row {
+    gap: 20px; /* reduced gap for mobile */
+  }
+
+  .marquee-icon {
+    height: 16px; /* smaller icons on mobile */
+  }
+}
+
+/* Extra small screens (phones) */
+@media (max-width: 480px) {
+  .marquee {
+    opacity: 0.1;
+  }
+
+  .marquee-row {
+    gap: 16px; /* even tighter spacing */
+  }
+
+  .marquee-icon {
+    height: 14px; /* even smaller icons */
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee-row { animation: none; }
 }
@@ -804,4 +834,157 @@ html {
 
 .stack-nav-control:hover {
   rotate: 90deg;
+}
+
+/* ===== COMPREHENSIVE MOBILE RESPONSIVE STYLES ===== */
+
+/* Mobile: Project Stack Cards - Scale down proportionally */
+@media (max-width: 768px) {
+  .project-stack {
+    transform: scale(0.9);
+    transform-origin: top center;
+    width: 111%; /* compensate for scale */
+    margin-left: -5.5%;
+  }
+}
+
+@media (max-width: 640px) {
+  .project-stack {
+    transform: scale(0.8);
+    transform-origin: top center;
+    width: 125%; /* compensate for scale */
+    margin-left: -12.5%;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-stack {
+    transform: scale(0.7);
+    transform-origin: top center;
+    width: 142.86%; /* compensate for scale */
+    margin-left: -21.43%;
+  }
+}
+
+/* Mobile: Cards - Scale down proportionally */
+@media (max-width: 768px) {
+  .holographic-card,
+  .holographic-card-enhanced {
+    transform: scale(0.95);
+    transform-origin: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .holographic-card,
+  .holographic-card-enhanced {
+    transform: scale(0.85);
+    transform-origin: center;
+  }
+}
+
+/* Mobile: Prevent scale hover conflicts */
+@media (max-width: 768px) {
+  .holographic-card:hover,
+  .holographic-card-enhanced:hover {
+    transform: scale(0.97) translateZ(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .holographic-card:hover,
+  .holographic-card-enhanced:hover {
+    transform: scale(0.87) translateZ(0);
+  }
+}
+
+/* Mobile: Section Headings */
+@media (max-width: 768px) {
+  section h2 {
+    font-size: 1.875rem !important;
+  }
+
+  section h1 {
+    font-size: 2.25rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  section h2 {
+    font-size: 1.5rem !important;
+  }
+
+  section h1 {
+    font-size: 1.875rem !important;
+  }
+}
+
+/* Mobile: Hero title responsive scaling */
+@media (max-width: 360px) {
+  #home h1 {
+    font-size: 1.5rem !important;
+  }
+}
+
+@media (min-width: 361px) and (max-width: 480px) {
+  #home h1 {
+    font-size: 1.75rem !important;
+  }
+}
+
+/* Mobile: Section Padding */
+@media (max-width: 768px) {
+  section {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+}
+
+/* Mobile: Container Padding */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
+/* Mobile: Ensure proper spacing with scaled cards */
+@media (max-width: 768px) {
+  #awards .grid {
+    gap: 1.5rem;
+  }
+
+  #education .flex {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  #education .flex {
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #awards .grid {
+    gap: 1rem;
+  }
+
+  #education .flex {
+    gap: 1rem;
+  }
 }

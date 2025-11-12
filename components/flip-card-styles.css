@@ -272,106 +272,62 @@
   transform: translateX(-60%);
 }
 
-/* Responsive Design */
+/* Transform origin for scaling (set by JS) */
+.flip-card {
+  transform-origin: center center;
+}
+
+/* Ensure all content scales proportionally on mobile */
 @media (max-width: 768px) {
-  .flip-card {
-    max-width: 400px;
-    height: 360px;
-  }
-
-  .flip-front h2 {
-    font-size: 1.2em;
-    letter-spacing: 2px;
-  }
-
-  .flip-stats-row {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5em;
-  }
-
   .flip-info span {
-    font-size: 1.2em;
+    font-size: 1.3em;
   }
 
   .flip-icon span {
-    font-size: 0.52em;
+    font-size: 0.55em;
   }
 
-  .flip-back {
-    width: 65%;
+  .flip-header-row {
+    font-size: 1em;
+  }
+
+  .degree-title {
+    font-size: 1em;
+  }
+
+  .flip-description {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 640px) {
+  .flip-info span {
+    font-size: 1.3em;
+  }
+
+  .flip-icon span {
+    font-size: 0.55em;
+  }
+
+  .flip-stats-row {
+    gap: 0.6em;
   }
 }
 
 @media (max-width: 480px) {
-  .flip-card {
-    max-width: 340px;
-    height: 320px;
-  }
-
-  .flip-front h2 {
-    font-size: 1em;
-    letter-spacing: 1.5px;
-  }
-
-  .flip-stats-row {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.4em;
-  }
-
-  .flip-info {
-    padding: 0.4em 0.25em;
-  }
-
   .flip-info span {
-    font-size: 1.1em;
+    font-size: 1.3em;
   }
 
   .flip-icon span {
-    font-size: 0.5em;
+    font-size: 0.55em;
   }
 
-  .flip-back {
-    width: 70%;
+  .flip-stats-row {
+    gap: 0.6em;
   }
 
-  .flip-back .flip-inner {
-    padding: 1em;
-    grid-row-gap: 0.6em;
-  }
-
-  .flip-header-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.2em;
-    padding-bottom: 0.3em;
-  }
-
-  .flip-location,
-  .flip-duration {
-    font-size: 0.75em;
-  }
-
-  .degree-title {
-    font-size: 0.9em;
-    margin-bottom: 0.4em;
-  }
-
-  .flip-description {
-    font-size: 0.75em;
-  }
-
-  .coursework-section h4 {
-    font-size: 0.8em;
-  }
-
-  .coursework-section ul li {
-    font-size: 0.9em;
-    padding: 0.15em 0;
-  }
-
-  .flip-button {
-    font-size: 0.8em;
-    height: 2.2em;
-    line-height: 2.1em;
+  .flip-info {
+    padding: 0.5em 0.35em;
   }
 }

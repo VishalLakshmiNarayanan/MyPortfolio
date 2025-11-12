@@ -22,10 +22,10 @@ export function HeroSection() {
           {/* Time pill removed */}
 
           {/* Left copy */}
-          <div className="space-y-4 order-2 md:order-1 text-center md:text-left">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-black">Vishal Lakshmi Narayanan</h1>
-            <div className="mt-1">
-              <GlassFlipper className="mx-0" />
+          <div className="space-y-4 order-2 md:order-1 text-center md:text-left overflow-hidden">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-black whitespace-nowrap">Vishal Lakshmi Narayanan</h1>
+            <div className="mt-1 flex justify-center md:justify-start">
+              <GlassFlipper />
             </div>
             <p className="text-base md:text-lg text-black/80 max-w-2xl leading-relaxed font-medium">
               I’m Vishal Lakshmi Narayanan, a data science enthusiast who loves turning complex problems into simple, intelligent solutions. I explore how AI, analytics, and real-world data can work together to drive innovation and make technology more human.
@@ -77,10 +77,10 @@ export function HeroSection() {
 
           {/* Right visual with lighting + floating socials */}
           <div className="order-1 md:order-2 flex justify-center md:justify-end">
-            <div className="relative w-[20rem] h-[20rem] md:w-[44rem] md:h-[46rem] lg:w-[48rem] lg:h-[50rem]">
+            <div className="relative w-full max-w-[280px] h-[280px] sm:max-w-[320px] sm:h-[320px] md:max-w-[400px] md:h-[420px] lg:max-w-[480px] lg:h-[500px]">
               {/* Soft theme lighting */}
               <div
-                className="pointer-events-none absolute -inset-6 rounded-[2rem]"
+                className="pointer-events-none absolute -inset-4 sm:-inset-5 md:-inset-6 rounded-[2rem]"
                 style={{
                   background:
                     `radial-gradient(ellipse 90% 70% at 60% 35%, rgba(175,109,255,.35), transparent 60%),` +
@@ -95,7 +95,7 @@ export function HeroSection() {
                 fill
                 priority
                 className="object-contain object-center scale-[1.08] drop-shadow-xl"
-                sizes="(min-width: 768px) 480px, 320px"
+                sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 400px, 480px"
               />
               {/* Floating socials removed per request (restored bottom buttons) */}
             </div>

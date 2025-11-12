@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 const iconIds: string[] = [
   "logos:python",
@@ -51,11 +51,25 @@ function Row({ reverse, duration }: { reverse?: boolean; duration?: number }) {
 }
 
 export default function HeaderMarquee() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
+
+  // Faster speeds for mobile
+  const speeds = isMobile
+    ? { speed1: 24, speed2: 32, speed3: 40 }
+    : { speed1: 36, speed2: 48, speed3: 60 }
+
   return (
     <div className="marquee" aria-hidden>
-      <Row duration={36} />
-      <Row reverse duration={48} />
-      <Row duration={60} />
+      <Row duration={speeds.speed1} />
+      <Row reverse duration={speeds.speed2} />
+      <Row duration={speeds.speed3} />
     </div>
   )
 }
