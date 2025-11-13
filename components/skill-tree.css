@@ -24,6 +24,12 @@
   z-index: 1;
 }
 
+.skill-card.small {
+  width: min(100%, 420px);
+  min-height: 460px;
+  padding: 2rem 1.5rem 1.25rem;
+}
+
 .skill-card::before {
   content: "";
   position: absolute;
@@ -186,18 +192,34 @@
 
 @media (max-width: 960px) {
   .skill-layer {
-    padding: clamp(1.5rem, 4vw, 2.5rem);
+    padding: clamp(1.5rem, 4vw, 2.25rem);
   }
 
   .skill-card {
     width: 100%;
-    min-height: 560px;
+    min-height: 520px;
+  }
+}
+
+@media (max-width: 720px) {
+  .skill-card {
+    min-height: 480px;
+    padding: 2.25rem 1.75rem 1.25rem;
+  }
+
+  .skill-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 }
 
 @media (max-width: 520px) {
+  .skill-card {
+    min-height: 460px;
+    padding: 2rem 1.25rem 1.25rem;
+  }
+
   .skill-grid {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   }
 
   .card-footer {
