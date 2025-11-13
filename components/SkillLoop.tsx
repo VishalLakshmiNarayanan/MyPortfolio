@@ -1,202 +1,288 @@
 "use client"
 
-import React, { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { skillGroups } from "@/lib/content"
 import "./skill-loop.css"
 
-type Cat = "dsml" | "de" | "viz" | "misc"
+type Cat = "dsml" | "analytics" | "dei" | "web" | "tools"
+
 const catKey: Record<string, Cat> = {
   "Data Science & Machine Learning": "dsml",
-  "Data Engineering & Infrastructure": "de",
-  "Data Analytics & Visualization": "viz",
-  "Additional Proficiencies": "misc",
+  "Data Analytics & Visualization": "analytics",
+  "Data Engineering & Infrastructure": "dei",
+  "Web Development": "web",
+  "Development Tools & Automation": "tools",
 }
 
-// Iconify mapping
+const categoryMeta: Record<Cat, { label: string; accent: string; theme: string; border: string }> = {
+  dsml: { label: "Data Science & ML", accent: "#0ea5e9", theme: "rgba(14, 165, 233, 0.2)", border: "rgba(14, 165, 233, 0.6)" },
+  analytics: { label: "Analytics & Viz", accent: "#22c55e", theme: "rgba(34, 197, 94, 0.2)", border: "rgba(34, 197, 94, 0.65)" },
+  dei: { label: "Data Engineering", accent: "#fb7185", theme: "rgba(251, 113, 133, 0.15)", border: "rgba(251, 113, 133, 0.65)" },
+  web: { label: "Web Development", accent: "#c084fc", theme: "rgba(192, 132, 252, 0.15)", border: "rgba(192, 132, 252, 0.65)" },
+  tools: { label: "Tools & Automation", accent: "#fbbf24", theme: "rgba(251, 191, 36, 0.2)", border: "rgba(251, 191, 36, 0.65)" },
+}
+
+const skillDescriptions: Record<string, string> = {
+  Python: "Automation, alerting, and multi-agent experimentation.",
+  R: "Statistical modeling, attribution, and academic research builds.",
+  TensorFlow: "Neural network prototyping with visual explainability.",
+  PyTorch: "Vision + LLM mashups and research-ready tooling.",
+  "Scikit-learn": "Reliable classical modeling pipelines for quick iterations.",
+  "Hugging Face": "Model zoo, datasets, inference, and enterprise APIs.",
+  Julia: "High-performance numeric computing and experimentation.",
+  "Natural Language Processing": "Dialogue, text understanding, and prompt flows.",
+  "Recommendation Systems": "Personalized ranking logic that drives engagement.",
+  "Statistical Modeling": "Confidence intervals, shrinkage, and significance.",
+  "Time Series Analysis": "Forecasting, anomaly detection, and instrumentation.",
+  "Causal Inference": "Treatment experiments and actionable insights.",
+  "A/B Testing": "Hypotheses, rollout control, and KPI validation.",
+  Tableau: "Executive dashboards, storytelling, and insight delivery.",
+  "Power BI": "Accessible analytics refreshes and alert automation.",
+  Streamlit: "Internal data apps for rapid experimentation and prototypes.",
+  Matplotlib: "Plot customization, animation, and publication-ready figures.",
+  Seaborn: "Statistically-backed visualizations with aesthetic defaults.",
+  Excel: "Business modeling, financial pivots, and instrumentation.",
+  "Linear Optimization (CPLEX)": "Integer programming for scheduling & planning.",
+  "D3.js": "Interactive, branded visual prototypes for data stories.",
+  MySQL: "Transactional persistence and performant joins.",
+  SQLite: "Local tooling, instrumentation, and prototypes.",
+  Redis: "Fast, in-memory stores for caching and queues.",
+  Docker: "Reproducible environments across experiments and prod.",
+  "Apache Spark": "Distributed compute for ETL, modeling, and streaming.",
+  Databricks: "Managed clusters, experiments, and governance hooks.",
+  "Apache Airflow": "DAG orchestration, retries, and observability.",
+  MLflow: "Experiment tracking, packaging, and registry automations.",
+  Supabase: "Realtime data APIs with auth and edge functions.",
+  "REST APIs": "Service wiring, schema contracts, and automation.",
+  HTML: "Semantic markup and accessible structures.",
+  CSS: "Design systems, layout choreography, and responsive theming.",
+  JavaScript: "Client-side logic, events, and progressive enhancement.",
+  "TypeScript": "Typed JavaScript that scales across teams.",
+  React: "Component-driven interfaces with hooks and suspense.",
+  "Next.js": "Full-stack React with routing, middleware, and ISR.",
+  "Tailwind CSS": "Utility-first styles that stay composable.",
+  "Node.js": "Event-driven backends, API responses, and tooling.",
+  Express: "Minimal server scaffolding for REST and GraphQL.",
+  MongoDB: "Document storage with rich querying and aggregation.",
+  Firebase: "Realtime apps, hosting, and auth integrations.",
+  Vercel: "Instant deployments with edge functions.",
+  "Google Cloud Platform": "Scalable compute, storage, and data services.",
+  Git: "Repo hygiene, branch guardrails, and CI triggers.",
+  GitHub: "Release automation, workflows, and code reviews.",
+  Linux: "Command-line fluency, tooling, and service ops.",
+  "n8n Workflows": "Low-code event-driven automations.",
+  "CI/CD pipelines": "Linting, tests, and rollout automation.",
+}
+
 const iconifyIdMap: Record<string, string> = {
   Python: "logos:python",
   R: "logos:r-lang",
-  "Scikit-learn": "simple-icons:scikitlearn",
   TensorFlow: "logos:tensorflow",
   PyTorch: "logos:pytorch-icon",
-  NLP: "ph:brain-duotone",
+  "Scikit-learn": "simple-icons:scikitlearn",
+  "Hugging Face": "simple-icons:huggingface",
+  Julia: "simple-icons:julia",
+  "Natural Language Processing": "mdi:brain",
   "Recommendation Systems": "ph:star-duotone",
-  "LLM Integration": "lucide:brain-circuit",
+  "Statistical Modeling": "mdi:chart-box-outline",
   "Time Series Analysis": "mdi:chart-timeline-variant",
   "Causal Inference": "mdi:graph-outline",
   "A/B Testing": "mdi:flask-outline",
-  SQL: "vscode-icons:file-type-sql",
-  PySpark: "simple-icons:apachespark",
-  Databricks: "simple-icons:databricks",
-  "Apache Airflow": "simple-icons:apacheairflow",
-  MLflow: "simple-icons:mlflow",
-  Docker: "logos:docker-icon",
-  "REST APIs": "tabler:api",
-  MySQL: "logos:mysql-icon",
-  PostgreSQL: "logos:postgresql",
-  "SQL Server": "simple-icons:microsoftsqlserver",
-  SQLite: "simple-icons:sqlite",
-  Supabase: "simple-icons:supabase",
   Tableau: "simple-icons:tableau",
   "Power BI": "simple-icons:powerbi",
   Streamlit: "simple-icons:streamlit",
-  // Prefer Devicon (Python) or generic chart for these; no official devicon
-  // Matplotlib/Seaborn will be resolved via getDeviconClass or fallback
+  Matplotlib: "simple-icons:matplotlib",
+  Seaborn: "simple-icons:seaborn",
   Excel: "vscode-icons:file-type-excel",
-  "Statistical Modeling": "mdi:chart-box-outline",
   "Linear Optimization (CPLEX)": "mdi:chart-line-variant",
   "D3.js": "simple-icons:d3dotjs",
+  MySQL: "logos:mysql-icon",
+  SQLite: "simple-icons:sqlite",
+  Redis: "logos:redis",
+  Docker: "logos:docker-icon",
+  "Apache Spark": "simple-icons:apachespark",
+  Databricks: "simple-icons:databricks",
+  "Apache Airflow": "simple-icons:apacheairflow",
+  MLflow: "simple-icons:mlflow",
+  Supabase: "simple-icons:supabase",
+  "REST APIs": "tabler:api",
+  HTML: "vscode-icons:file-type-html",
+  CSS: "vscode-icons:file-type-css",
+  JavaScript: "logos:javascript",
+  "TypeScript": "logos:typescript-icon",
+  React: "logos:react",
+  "Next.js": "logos:nextjs",
+  "Tailwind CSS": "logos:tailwindcss-icon",
+  "Node.js": "logos:nodejs-icon",
+  Express: "simple-icons:express",
+  MongoDB: "logos:mongodb-icon",
+  Firebase: "simple-icons:firebase",
+  Vercel: "simple-icons:vercel",
+  "Google Cloud Platform": "logos:google-cloud",
   Git: "logos:git-icon",
-  "API Integration": "tabler:api",
+  GitHub: "logos:github",
+  Linux: "logos:linux-tux",
   "n8n Workflows": "simple-icons:n8n",
-  Julia: "simple-icons:julia",
   "CI/CD pipelines": "simple-icons:githubactions",
 }
 
-function getDeviconClass(name: string): string | null {
-  const n = name.toLowerCase()
-  const map: Array<[RegExp, string | null]> = [
-    [/^python$/, "devicon-python-plain colored"],
-    [/^r$/, "devicon-r-plain colored"],
-    [/scikit|sklearn/, "devicon-scikitlearn-plain colored"],
-    [/tensorflow/, "devicon-tensorflow-original colored"],
-    [/pytorch|torch/, "devicon-pytorch-original colored"],
-    [/^sql$/, null],
-    [/spark|pyspark/, "devicon-apachespark-original colored"],
-    [/airflow/, "devicon-apacheairflow-plain colored"],
-    [/docker/, "devicon-docker-plain colored"],
-    [/mysql/, "devicon-mysql-original colored"],
-    [/postgres/, "devicon-postgresql-plain colored"],
-    [/sql server|mssql|microsoft sql/, "devicon-microsoftsqlserver-plain colored"],
-    [/sqlite/, "devicon-sqlite-plain colored"],
-    [/supabase/, "devicon-supabase-plain colored"],
-    [/mongodb/, "devicon-mongodb-plain colored"],
-    [/tableau/, "devicon-tableau-plain colored"],
-    [/power\s*bi/, "devicon-powerbi-plain colored"],
-    [/streamlit/, "devicon-streamlit-plain colored"],
-    [/d3\.js|d3js|d3/, "devicon-d3js-plain colored"],
-    [/git/, "devicon-git-plain colored"],
-    [/julia/, "devicon-julia-plain colored"],
-    [/matplotlib|seaborn/, "devicon-python-plain colored"],
-  ]
-  for (const [re, cls] of map) if (re.test(n)) return cls
-  return null
+const customLogoMap: Record<string, string> = {
+  "REST APIs": "/images/logos/rest-apis.svg",
+  Matplotlib: "/images/logos/matplotlib.svg",
+  Seaborn: "/images/logos/seaborn.svg",
 }
 
-function resolveIcon(skill: string): { type: "iconify" | "devicon" | "text"; value: string } {
+function resolveIcon(skill: string): { type: "iconify" | "custom" | "text"; value: string } {
+  const custom = customLogoMap[skill]
+  if (custom) return { type: "custom", value: custom }
   const id = iconifyIdMap[skill]
   if (id) return { type: "iconify", value: id }
-  const dev = getDeviconClass(skill)
-  if (dev) return { type: "devicon", value: dev }
   return { type: "text", value: skill }
 }
 
-function Row({
-  items,
-  duration,
-  reverse,
-}: {
-  items: Array<{ name: string; cat: Cat }>
-  duration: string
-  reverse?: boolean
-}) {
-  const dup = [...items, ...items]
-  return (
-    <div className="loop-slider" style={{ ['--duration' as any]: duration, ['--direction' as any]: reverse ? 'reverse' : 'normal' }}>
-      <div className="inner">
-        {dup.map((it, idx) => {
-          const icon = resolveIcon(it.name)
-          const accent = `accent-${it.cat}`
-          const delay = ((idx * 137) % 110) / 10 // 0..11s stagger
-          const brandColorMap: Record<string, string> = {
-            Python: '3776AB',
-            R: '276DC3',
-            'Scikit-learn': 'F7931E',
-            TensorFlow: 'FF6F00',
-            PyTorch: 'EE4C2C',
-            NLP: 'A855F7',
-            'Recommendation Systems': '3B82F6',
-            'LLM Integration': '00C3FF',
-            'Time Series Analysis': '14B8A6',
-            'Causal Inference': '6366F1',
-            'A/B Testing': 'E11D48',
-            SQL: '00758F',
-            PySpark: 'E25A1C',
-            Databricks: 'FF3621',
-            'Apache Airflow': '00A699',
-            MLflow: '0194E2',
-            Docker: '2496ED',
-            'REST APIs': '0EA5E9',
-            MySQL: '4479A1',
-            PostgreSQL: '336791',
-            'SQL Server': 'CC2927',
-            SQLite: '003B57',
-            Supabase: '3ECF8E',
-            Tableau: '00AEEF',
-            'Power BI': 'F2C811',
-            Streamlit: 'FF4B4B',
-            Matplotlib: '11557C',
-            Seaborn: '4BC0C0',
-            Excel: '217346',
-            'Statistical Modeling': '1E3A8A',
-            'Linear Optimization (CPLEX)': '052FAD',
-            'D3.js': 'F9A03C',
-            Git: 'F05032',
-            'API Integration': '6366F1',
-            'n8n Workflows': 'E36E5D',
-            Julia: '9558B2',
-            'CI/CD pipelines': '2088FF',
-          }
-          const themeColor = brandColorMap[it.name] ?? (it.cat === 'dsml' ? 'af6dff' : it.cat === 'de' ? 'ff64b4' : it.cat === 'viz' ? 'ffd966' : '78beff')
-          return (
-            <div key={`${it.name}-${idx}`} className={`tile ${accent}`} style={{ ['--pulseDelay' as any]: `${delay}s` }}>
-              <div className="icon-wrap">
-                {icon.type === 'iconify' ? (
-                  <img src={`https://api.iconify.design/${encodeURIComponent(icon.value)}.svg${icon.value.startsWith('logos:') ? '' : `?color=%23${themeColor}`}`} alt="" />
-                ) : icon.type === 'devicon' ? (
-                  <i className={`${icon.value}`}></i>
-                ) : (
-                  <img src={`https://api.iconify.design/tabler:chart-bar.svg?color=%23${themeColor}`} alt="" />
-                )}
-              </div>
-              <div className="label">{it.name}</div>
-            </div>
-          )
-        })}
-      </div>
-    </div>
-  )
+interface TileData {
+  name: string
+  cat: Cat
+  category: string
+  icon: ReturnType<typeof resolveIcon>
+  shortDescription: string
 }
 
 export default function SkillLoop() {
-  const rows = useMemo(() => {
-    const all: Array<{ name: string; cat: Cat }> = []
-    for (const g of skillGroups) {
-      const cat = catKey[g.category]
+  const tiles = useMemo(() => {
+    const all: TileData[] = []
+    for (const group of skillGroups) {
+      const cat = catKey[group.category]
       if (!cat) continue
-      for (const s of g.skills) all.push({ name: s, cat })
+      const description =
+        group.skills.length > 1 ? group.skills.slice(0, 2).join(" • ") : group.skills[0]
+      group.skills.forEach((skill) => {
+        all.push({
+          name: skill,
+          cat,
+          category: group.category,
+          icon: resolveIcon(skill),
+          shortDescription: skillDescriptions[skill] ?? description,
+        })
+      })
     }
-    // split into 4 equal rows
-    const quarter = Math.ceil(all.length / 4)
-    return [
-      all.slice(0, quarter),
-      all.slice(quarter, quarter * 2),
-      all.slice(quarter * 2, quarter * 3),
-      all.slice(quarter * 3)
-    ]
+    return all
   }, [])
 
+  const defaultCategory = tiles[0]?.category ?? ""
+  const defaultSkill = tiles[0] ?? null
+  const [activeCategory, setActiveCategory] = useState(defaultCategory)
+  const [activeSkill, setActiveSkill] = useState<TileData | null>(defaultSkill)
+  const activeTiles = tiles.filter((tile) => tile.category === activeCategory)
+
+  const updateActiveSkill = (tile: TileData) => {
+    setActiveSkill(tile)
+  }
+
+  const handleCategorySelect = (category: string) => {
+    setActiveCategory(category)
+    const firstTile = tiles.find((tile) => tile.category === category)
+    if (firstTile) {
+      setActiveSkill(firstTile)
+    }
+  }
+
   return (
-    <div className="skills-loop w-full">
-      <div className="content">
-        <div className="tag-list">
-          <Row items={rows[0]} duration="45s" />
-          <Row items={rows[1]} duration="55s" reverse />
-          <Row items={rows[2]} duration="65s" />
-          <Row items={rows[3]} duration="75s" reverse />
-          <div className="fade-overlay" />
-        </div>
+    <section className="skill-gallery">
+      <div className="skill-gallery__intro">
+        <p className="skill-gallery__intro-label">SKILLS</p>
+        <h3 className="skill-gallery__intro-title">Core Expertise</h3>
       </div>
-    </div>
+
+      <div className="skill-gallery__content">
+        <article className="skill-gallery__card skill-gallery__card--categories">
+          <div className="skill-gallery__card-heading">
+            <p className="skill-gallery__card-title">Explore categories</p>
+          </div>
+          <div className="skill-gallery__category-buttons">
+            {skillGroups.map((group) => (
+              <button
+                key={group.category}
+                type="button"
+                className={`category-button${activeCategory === group.category ? " is-active" : ""}`}
+                onClick={() => handleCategorySelect(group.category)}
+              >
+                {group.category}
+              </button>
+            ))}
+          </div>
+          <div className="skill-gallery__tiles">
+            {activeTiles.length === 0 && <p className="skill-gallery__empty">No skills available yet.</p>}
+            {activeTiles.map((tile) => {
+              const theme = categoryMeta[tile.cat]
+              const iconHref =
+                tile.icon.type === "iconify"
+                  ? `https://api.iconify.design/${encodeURIComponent(tile.icon.value)}.svg`
+                  : tile.icon.type === "custom"
+                  ? tile.icon.value
+                  : null
+              const isActiveTile = activeSkill?.name === tile.name
+              return (
+                <button
+                  key={tile.name}
+                  type="button"
+                  className="skill-tile"
+                  style={{
+                    background: isActiveTile ? theme.theme : "rgba(255,255,255,0.18)",
+                    borderColor: theme.border,
+                    boxShadow: isActiveTile ? `0 15px 30px ${theme.border}` : "none",
+                  }}
+                  onMouseEnter={() => updateActiveSkill(tile)}
+                  onFocus={() => updateActiveSkill(tile)}
+                >
+                  <div className="skill-tile__icon" style={{ borderColor: theme.accent }}>
+                    {iconHref ? (
+                      <img src={iconHref} alt="" aria-hidden="true" />
+                    ) : (
+                      <span>{tile.name.slice(0, 2).toUpperCase()}</span>
+                    )}
+                  </div>
+                  <span className="skill-tile__label">{tile.name}</span>
+                </button>
+              )
+            })}
+          </div>
+        </article>
+
+        <article className="skill-gallery__card skill-gallery__card--detail">
+          <p className="skill-gallery__card-title">Detailed preview</p>
+          {activeSkill ? (
+            <>
+              <div className="skill-detail__header">
+                <div
+                  className="skill-detail__icon"
+                  style={{ background: categoryMeta[activeSkill.cat].theme, borderColor: categoryMeta[activeSkill.cat].border }}
+                >
+                  {(() => {
+                    const iconHref =
+                      activeSkill.icon.type === "iconify"
+                        ? `https://api.iconify.design/${encodeURIComponent(activeSkill.icon.value)}.svg`
+                        : activeSkill.icon.type === "custom"
+                        ? activeSkill.icon.value
+                        : null
+                    if (iconHref) {
+                      return <img src={iconHref} alt="" aria-hidden="true" />
+                    }
+                    return <span>{activeSkill.icon.value.slice(0, 2).toUpperCase()}</span>
+                  })()}
+                </div>
+                <div>
+                  <p className="skill-detail__title">{activeSkill.name}</p>
+                  <p className="skill-detail__category">{categoryMeta[activeSkill.cat].label}</p>
+                </div>
+              </div>
+              <p className="skill-detail__description">{activeSkill.shortDescription}</p>
+            </>
+          ) : (
+            <p className="skill-detail__description">Select a skill to review its role.</p>
+          )}
+        </article>
+      </div>
+    </section>
   )
 }

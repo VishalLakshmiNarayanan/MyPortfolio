@@ -1,26 +1,18 @@
 "use client"
 import { HeroSection } from "@/components/hero-section"
-import { ExperienceCard } from "@/components/experience-card"
 import { FlipEducationCard } from "@/components/flip-education-card"
-import { SkillCard } from "@/components/skill-card"
 import { PublicationCard } from "@/components/publication-card"
 import { ContactCard } from "@/components/contact-card"
 import { AwardCard } from "@/components/award-card"
 import MovingMomentsGallery from "@/components/MovingMomentsGallery"
 import { CertificationBadges } from "@/components/CertificationBadges"
-import { FloatingSkillsBubble } from "@/components/floating-skills-bubble"
-import SkillGalaxy from "@/components/SkillGalaxy"
-import SkillCarousel from "@/components/SkillCarousel"
-import SkillLoop from "@/components/SkillLoop"
-import SkillReference from "@/components/SkillReference"
+import SkillTree from "@/components/SkillTree"
 import StackedProjectCards from "@/components/StackedProjectCards"
 import ExperienceTimeline from "@/components/ExperienceTimeline"
-
 
 import {
   experiences,
   education,
-  skillGroups,
   publications,
   allProjects,
   awards,
@@ -38,17 +30,14 @@ export default function HomePage() {
       </section>
 
       {/* Skills */}
-      <section id="skills" className="py-12 md:py-20 relative overflow-hidden min-h-[500px] md:min-h-[700px]">
-        <div className="container relative z-10">
-          <div className="text-center mb-8 md:mb-12">
+      <section id="skills" className="py-12 md:py-16 relative overflow-hidden bg-gradient-to-b from-transparent via-black/[0.02] to-transparent">
+        <div className="container relative z-10 max-w-[1600px]">
+          <div className="text-center mb-6 md:mb-10">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Skills</h2>
+            <p className="text-sm md:text-base text-black/70 max-w-2xl mx-auto px-4">Explore my technical skills organized by category</p>
           </div>
-          {/* Category-wise skill reference */}
-          <SkillReference />
-        </div>
-        {/* Background skill marquee - fills entire section */}
-        <div className="absolute top-0 left-0 right-0 bottom-0 pointer-events-none opacity-30 z-0 flex items-center justify-center">
-          <SkillLoop />
+          {/* Skill Tree - Decision Tree Layout */}
+          <SkillTree />
         </div>
       </section>
 
