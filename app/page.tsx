@@ -4,11 +4,12 @@ import { FlipEducationCard } from "@/components/flip-education-card"
 import { PublicationCard } from "@/components/publication-card"
 import { ContactCard } from "@/components/contact-card"
 import { AwardCard } from "@/components/award-card"
-import MovingMomentsGallery from "@/components/MovingMomentsGallery"
+import InstagramMomentsCarousel from "@/components/InstagramMomentsCarousel"
 import { CertificationBadges } from "@/components/CertificationBadges"
 import SkillTree from "@/components/SkillTree"
 import StackedProjectCards from "@/components/StackedProjectCards"
 import ExperienceTimeline from "@/components/ExperienceTimeline"
+import { MediumBlogSection } from "@/components/medium-blog-section"
 
 import {
   experiences,
@@ -97,7 +98,7 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Moments Gallery</h2>
             <p className="text-sm md:text-base text-black/70 max-w-2xl mx-auto px-4">A glimpse into the hackathons, conferences, and milestones that shaped my path</p>
           </div>
-          <MovingMomentsGallery />
+          <InstagramMomentsCarousel />
         </div>
       </section>
 
@@ -112,6 +113,19 @@ export default function HomePage() {
               <PublicationCard key={publication.title} publication={publication} index={index} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Blog */}
+      <section id="blog" className="py-12 md:py-20 bg-gradient-to-b from-transparent via-black/[0.02] to-transparent">
+        <div className="container">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Blog</h2>
+            <p className="text-sm md:text-base text-black/70 max-w-2xl mx-auto px-4">
+              Insights and stories from my journey in tech, AI, and data science
+            </p>
+          </div>
+          <MediumBlogSection username="lvishal1607" limit={6} />
         </div>
       </section>
 

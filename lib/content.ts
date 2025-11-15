@@ -69,6 +69,16 @@ export interface Certification {
   category: "ai" | "cloud" | "programming" | "data" | "other"
 }
 
+export interface MediumArticle {
+  title: string
+  link: string
+  pubDate: string
+  thumbnail?: string
+  description: string
+  categories: string[]
+  author: string
+}
+
 export const allProjects: Project[] = [
   {
     slug: "celestia-ai",
