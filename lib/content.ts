@@ -81,6 +81,18 @@ export interface MediumArticle {
 
 export const allProjects: Project[] = [
   {
+    slug: "tailrisk-library",
+    title: "TailRisk Python Package",
+    description: "Developed and published an open-source Python package for tail risk modeling with specialized loss functions (LaR, CVaR) and hybrid meta-learning ensembles. Improves tail coverage ratio by 76% over baseline models, available on PyPI with comprehensive documentation and scikit-learn compatibility.",
+    tech: ["Python", "scikit-learn", "XGBoost", "NumPy", "PyPI"],
+    tags: ["Python Package", "Machine Learning", "Risk Analytics", "Open Source"],
+    github: "https://github.com/VishalLakshmiNarayanan/TailriskLib",
+    demo: "https://pypi.org/project/tailrisk/",
+    date: "2025-11-01",
+    featured: true,
+    image: "/images/projects/tailrisk-lib.png",
+  },
+  {
     slug: "career-pulse",
     title: "Career Pulse",
     description: "Built an AI-powered resume-job matching platform using semantic embeddings and transparency scoring to match candidates based on capability rather than keywords. Developed dual portals for job seekers and recruiters, with automated candidate ranking, multi-criteria scoring, and AI-generated job-specific resumes via LaTeX.",
