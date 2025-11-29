@@ -35,7 +35,7 @@ export default function HomePage() {
         <div className="container relative z-10 max-w-[1600px]">
           <div className="text-center mb-6 md:mb-10">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Skills</h2>
-            <p className="text-sm md:text-base text-black/70 max-w-2xl mx-auto px-4">Explore my technical skills organized by category</p>
+            <p className="text-sm md:text-base text-black/70 max-w-2xl mx-auto px-4">Explore my technical skills as bubbles</p>
           </div>
           {/* Skill Tree - Decision Tree Layout */}
           <SkillTree />
