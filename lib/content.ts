@@ -220,10 +220,23 @@ export const allProjects: Project[] = [
 
 export const experiences: Experience[] = [
   {
-    title: "Technical Officer",
+    title: "Project Manager",
+    company: "The AI Society at ASU",
+    location: "Arizona, United States",
+    startDate: "2026-02-01",
+    current: true,
+    description:
+      "The AI Makerspace Project Manager",
+    achievements: [
+      "Oversee progress for multiple AI MakerSpace teams, serving as the primary liaison between students and mentors to ensure resource support.",
+     
+    ],
+  },
+  {
+    title: "Data Engineer & Lead Technical Officer",
     company: "Devlabs",
     location: "Arizona, United States",
-    startDate: "2025-10-01",
+    startDate: "2025-11-01",
     current: true,
     description:
       "Contributing to the AI-driven Builder Intelligence system for resume understanding, skill extraction, and candidate–job ranking using embeddings and vector search.",
@@ -271,9 +284,9 @@ export const education: Education[] = [
     current: true,
     coursework: ["Statistical Machine Learning", "Big Data Analysis", "Data Mining", "Data Processing"],
     stats: [
-      { label: "CGPA", value: "3.83 / 4.00" },
-      { label: "Credits Earned", value: "18 / 18" },
-      { label: "Projects", value: "7" },
+      { label: "CGPA", value: "3.60 / 4.00" },
+      { label: "Credits Earned", value: "27 / 27" },
+      { label: "Projects", value: "11" },
       { label: "Hackathons Won", value: "2" },
     ],
     image: "/images/education/asu.jpg",
@@ -462,9 +475,9 @@ export const certifications: Certification[] = [
 ]
 
 export const heroStats = [
-  { id: "projects",  label: "Projects",       rolling: ["19", "8"] }, 
+  { id: "projects",  label: "Projects",       rolling: ["23", "11"] }, 
   { id: "hackathons",label: "Hackathon Wins", value: "3" },
-  { id: "linkedin",  label: "Followers",      value: "1500+" },
-  { id: "stack",     label: "Tech Stack",     value: "38" },
-  { id: "domains",   label: "Domains",        value: "6" },
+  { id: "linkedin",  label: "Followers",      value: "1800+" },
+  { id: "stack",     label: "Leetcode Solved",     value: "348" },
+  { id: "domains",   label: "Blogs",        value: "6" },
 ] as const;

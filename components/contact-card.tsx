@@ -66,14 +66,7 @@ export function ContactCard() {
             >
               <span className="icon text-sm font-bold">M</span>
             </a>
-            <a
-              href="https://leetcode.com/u/lvleetcode/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon leetcode w-10 h-10 flex items-center justify-center"
-            >
-              <span className="icon text-xs font-bold">LC</span>
-            </a>
+           
           </div>
         </CardContent>
       </Card>

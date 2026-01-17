@@ -60,15 +60,7 @@ export function HeroSection() {
                 <span className="icon text-lg font-bold">M</span>
                 <span className="text font-medium">Medium</span>
               </a>
-              <a
-                href="https://leetcode.com/u/lvleetcode/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hero-social-btn leetcode"
-              >
-                <span className="icon text-sm font-bold">LC</span>
-                <span className="text font-medium">LeetCode</span>
-              </a>
+              
             </div>
             <div className="pt-4">
               <HeroStats />
