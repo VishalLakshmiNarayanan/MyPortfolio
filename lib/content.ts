@@ -483,5 +483,5 @@ export const heroStats = [
   { id: "hackathons",label: "Hackathon Wins", value: "3" },
   { id: "linkedin",  label: "Followers",      value: "2K+" },
   { id: "stack",     label: "Leetcode Solved",     value: "348" },
-  { id: "domains",   label: "Blogs",        value: "7" },
+  { id: "domains",   label: "Blogs",        value: "8" },
 ] as const;
