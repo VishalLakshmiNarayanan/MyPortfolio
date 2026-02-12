@@ -21,9 +21,7 @@ export default function SkillTree() {
           return (
             <article key={group.category} className="skill-card" style={{ borderColor: meta.tint }}>
               <header className="skill-card__header" style={{ background: meta.tint }}>
-                <span className="skill-card__pill" style={{ color: meta.accent, background: meta.tint }}>
-                  {group.skills.length} skills
-                </span>
+                
                 <h3 className="skill-card__title" style={{ color: meta.accent }}>
                   {group.category}
                 </h3>
