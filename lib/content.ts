@@ -9,6 +9,7 @@ export interface Project {
   date: string
   featured?: boolean
   image?: string
+  category: "ai-ml" | "data-engineering" | "web-dev" | "security" | "automation" | "healthcare"
 }
 
 export interface Experience {
@@ -81,6 +82,28 @@ export interface MediumArticle {
 
 export const allProjects: Project[] = [
   {
+    slug: "gcp-ecommerce-funnel-optimization",
+    title: "GCP E-Commerce Funnel Optimization",
+    description: "A comprehensive e-commerce audit leveraging Google Cloud Platform to analyze 2,336 unique user events. Transforms raw event logs into a structured 5-stage sales funnel, identifying high-intent traffic sources, validating technical checkout efficiency, and establishing data-backed financial guardrails for marketing spend.",
+    tech: ["Google Cloud Platform", "BigQuery", "SQL", "Data Analysis"],
+    tags: ["E-Commerce", "Funnel Analysis", "Marketing Analytics", "GCP"],
+    github: "https://github.com/VishalLakshmiNarayanan/gcp-ecommerce-funnel-optimization",
+    date: "2026-02-01",
+    featured: true,
+    category: "data-engineering",
+  },
+  {
+    slug: "marketing-campaign-data-cleaning",
+    title: "Marketing Campaign Data Cleaning",
+    description: "An end-to-end data cleaning pipeline for a messy marketing campaign dataset. Demonstrates real-world data wrangling where analysts spend the majority of their time cleaning data to ensure accuracy. Transforms raw, inconsistent marketing data into a structured format suitable for business analysis.",
+    tech: ["Python", "Pandas", "NumPy", "Jupyter"],
+    tags: ["Data Cleaning", "ETL", "Marketing Analytics", "Data Wrangling"],
+    github: "https://github.com/VishalLakshmiNarayanan/Marketing_campaign_data_cleaning",
+    date: "2026-02-01",
+    featured: true,
+    category: "data-engineering",
+  },
+  {
     slug: "tailrisk-library",
     title: "TailRisk Python Package",
     description: "Developed and published an open-source Python package for tail risk modeling with specialized loss functions (LaR, CVaR) and hybrid meta-learning ensembles. Improves tail coverage ratio by 76% over baseline models, available on PyPI with comprehensive documentation and scikit-learn compatibility.",
@@ -90,7 +113,7 @@ export const allProjects: Project[] = [
     demo: "https://pypi.org/project/tailrisk/",
     date: "2025-11-01",
     featured: true,
-    image: "/images/projects/tailrisklib.png",
+    category: "ai-ml",
   },
   {
     slug: "career-pulse",
@@ -101,7 +124,7 @@ export const allProjects: Project[] = [
     github: "https://github.com/VishalLakshmiNarayanan/Career-Pulse",
     date: "2025-11-01",
     featured: true,
-    image: "/images/projects/cpulse.png",
+    category: "ai-ml",
   },
   {
     slug: "tail-risk-management",
@@ -112,110 +135,96 @@ export const allProjects: Project[] = [
     github: "https://github.com/VishalLakshmiNarayanan/Tail-Risk-Analysis",
     date: "2025-10-01",
     featured: true,
-    image: "/images/projects/tailrisk.png",
+    category: "ai-ml",
   },
   {
     slug: "celestia-ai",
     title: "Celestia AI",
-    description:"Celestia AI turns maps into living worlds. Drop a marker anywhere and watch a holographic mascot bring the place to life with cinematic video loops, six fact cards, and real-time narration. Instead of reading static text, users step into a guided storytelling experience where culture, heritage, and history feel tangible.",
-    tech: ["Next.js","Three.js","ReAct-globe","TailwindCSS","Typescript"],
-    tags: ["AI","Exploration","Visual-UI","Accessibility"],
+    description: "Celestia AI turns maps into living worlds. Drop a marker anywhere and watch a holographic mascot bring the place to life with cinematic video loops, six fact cards, and real-time narration. Instead of reading static text, users step into a guided storytelling experience where culture, heritage, and history feel tangible.",
+    tech: ["Next.js", "Three.js", "ReAct-globe", "TailwindCSS", "Typescript"],
+    tags: ["AI", "Exploration", "Visual-UI", "Accessibility"],
     github: "https://github.com/VishalLakshmiNarayanan/Celestia-gl",
     demo: "https://aicelestia.vercel.app/",
     date: "2023-09-01",
     featured: true,
-    image: "/images/projects/celestia.png",
+    category: "web-dev",
   },
   {
-  slug: "slidesage-ai",
-  title: "SlideSage AI",
-  description:
-    "An AI-powered learning assistant that transforms dense concepts into short, dialogue-based explainer videos with quizzes, streaks, and badges. If a student doesn’t understand a concept the first time, SlideSage instantly regenerates with fresh analogies or examples until it clicks — making learning adaptive, fun, and addictive.",
-  tech: ["Next.js", "TailwindCSS", "shadcn/ui", "Groq", "Pexels API", "TypeScript", "Vercel"],
-  tags: ["AI", "EdTech", "Video"],
-  github: "https://github.com/VishalLakshmiNarayanan/SlideSage-v3",
-  demo: "https://slidesageai.vercel.app/",          // <- your “Visit Website” link
-  date: "2025-09-01",
-  featured: true,                                   // <- ensures it appears in the carousel
-  image: "/images/projects/slidesage.png",
-},
+    slug: "slidesage-ai",
+    title: "SlideSage AI",
+    description: "An AI-powered learning assistant that transforms dense concepts into short, dialogue-based explainer videos with quizzes, streaks, and badges. If a student doesn't understand a concept the first time, SlideSage instantly regenerates with fresh analogies or examples until it clicks.",
+    tech: ["Next.js", "TailwindCSS", "shadcn/ui", "Groq", "Pexels API", "TypeScript", "Vercel"],
+    tags: ["AI", "EdTech", "Video"],
+    github: "https://github.com/VishalLakshmiNarayanan/SlideSage-v3",
+    demo: "https://slidesageai.vercel.app/",
+    date: "2025-09-01",
+    featured: true,
+    category: "web-dev",
+  },
   {
     slug: "ai-travel-planner",
     title: "AI Travel Itinerary Planner",
-    description:
-      "Engineered an AI-driven platform that generates optimized multi-day travel itineraries with real-time route refinement. Integrated cost estimation, weather forecasts, and interactive map visualizations, improving planning accuracy by 30%. Won People's choice Award for this project at Hackazona v0.1.",
+    description: "Engineered an AI-driven platform that generates optimized multi-day travel itineraries with real-time route refinement. Integrated cost estimation, weather forecasts, and interactive map visualizations, improving planning accuracy by 30%. Won People's Choice Award at Hackazona v0.1.",
     tech: ["Streamlit", "Groq LLaMA", "Python"],
     tags: ["AI", "Travel", "Optimization"],
     github: "https://github.com/VishalLakshmiNarayanan/Zoro",
     date: "2025-05-01",
     featured: true,
-    image: "/images/projects/ai-travel-planner.jpg",
+    category: "ai-ml",
   },
   {
     slug: "path2pro",
-    title: "Path2Pro – AI Job Portal",
-    description:
-      "Built an AI job-matching portal with semantic similarity scoring and automated resume parsing for 100+ applications. Developed secure recruiter/applicant dashboards with authentication, job posting, and real-time resume uploads.",
+    title: "Path2Pro - AI Job Portal",
+    description: "Built an AI job-matching portal with semantic similarity scoring and automated resume parsing for 100+ applications. Developed secure recruiter/applicant dashboards with authentication, job posting, and real-time resume uploads.",
     tech: ["Python", "Streamlit", "SentenceTransformers", "SQLite"],
     tags: ["NLP", "Job Matching", "AI"],
     github: "https://github.com/VishalLakshmiNarayanan/AFK-coders",
     date: "2025-03-01",
     featured: true,
-    image: "/images/projects/path2pro.png",
+    category: "ai-ml",
   },
   {
     slug: "maily",
-    title: "MAILY – AI Mailing & Scheduling Agent",
-    description:
-      "Developed an n8n AI agent that automates email and scheduling via Gmail, Calendar, and Sheets. Implemented contact verification workflows ensuring email addresses are validated before sending messages.",
+    title: "MAILY - AI Mailing & Scheduling Agent",
+    description: "Developed an n8n AI agent that automates email and scheduling via Gmail, Calendar, and Sheets. Implemented contact verification workflows ensuring email addresses are validated before sending messages.",
     tech: ["n8n", "Groq LLM", "Google APIs"],
     tags: ["Automation", "AI", "Productivity"],
     github: "https://github.com/VishalLakshmiNarayanan/n8n",
     date: "2025-06-01",
     featured: true,
-    image: "/images/projects/maily.jpg",
+    category: "automation",
   },
   {
     slug: "phishguard",
-    title: "PhishGuard – AI-Based Phishing Detection",
-    description:
-      "PhishGuard is a Chrome extension that uses AI and VirusTotal to detect phishing websites in real-time. Click the PhishGuard icon in the Chrome toolbar, choose “Analyze This Page,” and view the risk level and detailed recommendation in the popup.",
-    tech: [
-      "JavaScript",
-      "Chrome Extension",
-      "Llama (LLM)",
-      "VirusTotal API",
-      "HTML/CSS"
-    ],
+    title: "PhishGuard - AI Phishing Detection",
+    description: "PhishGuard is a Chrome extension that uses AI and VirusTotal to detect phishing websites in real-time. Click the PhishGuard icon in the Chrome toolbar, choose 'Analyze This Page,' and view the risk level and detailed recommendation in the popup.",
+    tech: ["JavaScript", "Chrome Extension", "Llama (LLM)", "VirusTotal API", "HTML/CSS"],
     tags: ["Security", "Browser Extension", "AI"],
     github: "https://github.com/VishalLakshmiNarayanan/PhishGuard-",
-    date: "2025-05-01",          // use YYYY-MM-DD; adjust if you prefer
-    featured: true,             // set true if you want it in any featured sections
-    image: "/images/projects/phishguard.png"
+    date: "2025-05-01",
+    featured: true,
+    category: "security",
   },
   {
     slug: "diabetic-retinopathy",
     title: "Diabetic Retinopathy Detection",
-    description:
-      "Built a Flask-based web application using EfficientNetB0 for medical image classification. Designed for low-cost, smartphone-compatible retina scans to support early diagnosis in rural healthcare settings.",
+    description: "Built a Flask-based web application using EfficientNetB0 for medical image classification. Designed for low-cost, smartphone-compatible retina scans to support early diagnosis in rural healthcare settings.",
     tech: ["Flask", "EfficientNetB0", "Python", "OpenCV"],
     tags: ["Healthcare", "Deep Learning", "Medical Imaging"],
     date: "2023-11-01",
     featured: true,
-    image: "/images/projects/diabetic-retinopathy.jpg",
+    category: "healthcare",
   },
   {
     slug: "malware-detection",
     title: "Network-Based Malware Detection",
-    description:
-      "Extracted network traffic features and trained machine learning models for real-time cybersecurity applications. Built a threat classification pipeline using supervised learning techniques.",
+    description: "Extracted network traffic features and trained machine learning models for real-time cybersecurity applications. Built a threat classification pipeline using supervised learning techniques.",
     tech: ["Python", "scikit-learn", "NetworkX", "Pandas"],
     tags: ["Cybersecurity", "Machine Learning", "Network Analysis"],
     date: "2023-09-01",
     featured: true,
-    image: "/images/projects/malware-detection.png",
+    category: "security",
   },
-  
 ]
 
 export const experiences: Experience[] = [
@@ -479,7 +488,7 @@ export const certifications: Certification[] = [
 ]
 
 export const heroStats = [
-  { id: "projects",  label: "Projects",       rolling: ["23", "11"] }, 
+  { id: "projects",  label: "Projects",       rolling: ["25", "13"] }, 
   { id: "hackathons",label: "Hackathon Wins", value: "3" },
   { id: "linkedin",  label: "Followers",      value: "2K+" },
   { id: "stack",     label: "Leetcode Solved",     value: "348" },
