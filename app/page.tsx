@@ -7,7 +7,7 @@ import { AwardCard } from "@/components/award-card"
 import InstagramMomentsCarousel from "@/components/InstagramMomentsCarousel"
 import { CertificationBadges } from "@/components/CertificationBadges"
 import SkillTree from "@/components/SkillTree"
-import CategorizedProjects from "@/components/CategorizedProjects"
+import StackedProjectCards from "@/components/StackedProjectCards"
 import ExperienceTimeline from "@/components/ExperienceTimeline"
 import { MediumBlogSection } from "@/components/medium-blog-section"
 
@@ -50,14 +50,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Projects */}
+      {/* Featured Projects */}
       <section id="projects" className="py-12 md:py-20">
         <div className="container">
           <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Projects</h2>
-            <p className="text-sm md:text-base text-black/70 max-w-2xl mx-auto px-4">Click any card to expand details and links</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Featured Projects</h2>
+            <p className="text-sm md:text-base text-black/70 max-w-2xl mx-auto px-4">Click the arrow or press space to explore each project</p>
           </div>
-          <CategorizedProjects projects={allProjects} />
+          <StackedProjectCards projects={allProjects} />
         </div>
       </section>
 
