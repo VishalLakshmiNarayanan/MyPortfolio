@@ -21,8 +21,6 @@ import {
 } from "@/lib/content"
 
 export default function HomePage() {
-  const featuredProjects = allProjects.filter((project) => project.featured)
-
   return (
     <div className="min-h-screen relative" id="top">
       {/* Hero */}
@@ -59,7 +57,7 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 hover-underline-animation text-black">Featured Projects</h2>
             <p className="text-sm md:text-base text-black/70 max-w-2xl mx-auto px-4">Click the arrow or press space to explore each project</p>
           </div>
-          <StackedProjectCards projects={featuredProjects} />
+          <StackedProjectCards projects={allProjects} />
         </div>
       </section>
 

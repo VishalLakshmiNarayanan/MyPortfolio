@@ -1,11 +1,19 @@
 "use client"
 
 import * as React from "react"
-import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ChevronRight, Github, ExternalLink } from "lucide-react"
 import type { Project } from "@/lib/content"
+
+const categoryLabels: Record<string, string> = {
+  "ai-ml": "AI & ML",
+  "data-engineering": "Data Engineering",
+  "web-dev": "Web & Product",
+  "security": "Security",
+  "automation": "Automation",
+  "healthcare": "Healthcare",
+}
 
 interface StackedProjectCardsProps {
   projects: Project[]
@@ -14,12 +22,10 @@ interface StackedProjectCardsProps {
 export default function StackedProjectCards({ projects }: StackedProjectCardsProps) {
   const [activeIndex, setActiveIndex] = React.useState(0)
 
-  // Cycle through projects
   const handleNext = () => {
     setActiveIndex((prev) => (prev + 1) % projects.length)
   }
 
-  // Keyboard navigation
   React.useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight" || e.key === " ") {
@@ -33,12 +39,10 @@ export default function StackedProjectCards({ projects }: StackedProjectCardsPro
 
   if (projects.length === 0) return null
 
-  // Color variants cycle through Aurora Dream colors
   const colorVariants = ["purple", "pink", "yellow", "blue"]
 
   return (
     <section className="project-stack" aria-label="Featured Projects">
-      {/* Hidden radio inputs for state management */}
       {projects.map((_, i) => (
         <input
           key={i}
@@ -52,7 +56,6 @@ export default function StackedProjectCards({ projects }: StackedProjectCardsPro
         />
       ))}
 
-      {/* Project cards */}
       {projects.map((project, index) => {
         const isActive = index === activeIndex
         const variant = colorVariants[index % colorVariants.length]
@@ -64,16 +67,12 @@ export default function StackedProjectCards({ projects }: StackedProjectCardsPro
             data-variant={variant}
             data-active={isActive}
             style={{
-              // Dynamic ordering based on active card
-              // Active card is always on top (highest order)
-              // Cards cycle through positions
               "--_order": isActive ? 3 : index < activeIndex ? 1 : 2,
               "--_scale": isActive ? 1 : index < activeIndex ? 0.8 : 0.9,
               "--_opacity": isActive ? 1 : index < activeIndex ? 0.75 : 0.88,
               "--_offset": isActive ? "0" : index < activeIndex ? "-6rem" : "-3rem",
             } as React.CSSProperties}
           >
-            {/* Card header with title and navigation */}
             <header className="card-header">
               <h3 className="text-xl font-semibold text-black m-0">{project.title}</h3>
               {isActive && (
@@ -87,24 +86,18 @@ export default function StackedProjectCards({ projects }: StackedProjectCardsPro
               )}
             </header>
 
-            {/* Card content - only shown on active card */}
             <div className="card-content">
-              {project.image && (
-                <div className="relative w-full h-48 overflow-hidden rounded-xl">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 48rem"
-                    priority={isActive}
-                  />
+              {/* Category badge */}
+              {project.category && (
+                <div>
+                  <Badge className="text-xs bg-black/80 text-white hover:bg-black border-0">
+                    {categoryLabels[project.category] || project.category}
+                  </Badge>
                 </div>
               )}
 
               <p className="text-black/80 leading-relaxed text-sm">{project.description}</p>
 
-              {/* Tech stack */}
               {project.tech && project.tech.length > 0 && (
                 <div>
                   <h4 className="text-sm font-semibold mb-2 text-black">Tech Stack</h4>
@@ -122,7 +115,6 @@ export default function StackedProjectCards({ projects }: StackedProjectCardsPro
                 </div>
               )}
 
-              {/* Tags */}
               {project.tags && project.tags.length > 0 && (
                 <div>
                   <h4 className="text-sm font-semibold mb-2 text-black">Tags</h4>
@@ -139,7 +131,6 @@ export default function StackedProjectCards({ projects }: StackedProjectCardsPro
                 </div>
               )}
 
-              {/* Action buttons */}
               <div className="flex flex-col sm:flex-row gap-3 mt-4">
                 {project.github && (
                   <Button
@@ -173,7 +164,6 @@ export default function StackedProjectCards({ projects }: StackedProjectCardsPro
         )
       })}
 
-      {/* Progress indicator */}
       <div className="mt-8 flex justify-center gap-2">
         {projects.map((_, i) => (
           <button
