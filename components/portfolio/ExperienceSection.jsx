@@ -11,8 +11,8 @@ const experiences = [
     startDate: "2026-02-01",
     current: true,
     achievements: [
-      "Led 12 student project teams, coordinating scope definition, milestone tracking, and technical reviews.",
-      "Served as the primary liaison between students and mentors to ensure resource support.",
+      "Leading 12 student project teams, coordinating scope definition, milestone tracking, and technical reviews.",
+      "Serving as the primary liaison between students and mentors to ensure resource support.",
     ],
   },
   {
@@ -37,8 +37,11 @@ const experiences = [
     current: false,
     achievements: [
       "Automated monthly sales reporting, reducing processing time from 5 hours to 45 minutes.",
-      "Identified 7 underperforming regions across 32 retail outlets by analyzing SKU-level performance.",
-      "Partnered with sales teams to track inventory movement and flag stock imbalances.",
+      "Analyzed SKU-level sales and inventory data across 32 retail outlets to identify 7 key underperforming regions.",
+  "Collaborated with sales and operations teams to track SKU-level movement and build a system for flagging stock imbalances.",
+  "Presented regional performance insights to sales managers to facilitate data-driven distribution planning.",
+  "Implemented data cleaning and validation protocols to improve reporting accuracy and cross-team consistency.",
+      
     ],
   },
 ];

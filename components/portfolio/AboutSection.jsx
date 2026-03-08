@@ -2,10 +2,22 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const focuses = [
-  { title: "Business Impact", desc: "Moving beyond models for their own sake to improve revenue, reduce risk, and accelerate decisions." },
-  { title: "Data Reliability", desc: "Rigorous validation ensuring executive actions rest on a solid, trustworthy foundation." },
-  { title: "Practical Usability", desc: "Engineering systems that prioritize the end-user, from searchable recruitment tools to operational dashboards." },
-  { title: "Strategic Communication", desc: "Distilling technical complexity into persuasive narratives that influence growth and product strategy." },
+  { 
+    title: "Business Impact", 
+    desc: "Focusing on the 'why' behind the data to drive revenue, lower risk, and help teams make faster, smarter decisions." 
+  },
+  { 
+    title: "Data Reliability", 
+    desc: "Applying rigorous validation so that every insight and executive report is built on a foundation of total trust." 
+  },
+  { 
+    title: "Practical Usability", 
+    desc: "Designing intuitive dashboards and search tools that make it easy for non-technical teams to find exactly what they need." 
+  },
+  { 
+    title: "Strategic Communication", 
+    desc: "Turning complex datasets into clear, persuasive stories that help stakeholders shape product and growth strategies." 
+  },
 ];
 
 export default function AboutSection() {
