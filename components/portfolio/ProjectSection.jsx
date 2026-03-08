@@ -254,9 +254,7 @@ export default function ProjectsSection() {
         >
           <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">Projects</p>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured work</h2>
-          <p className="text-sm text-muted-foreground mb-12 max-w-xl">
-            Click "Read writeup" on any card to explore the full methodology, findings, and business impact.
-          </p>
+          
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6">
