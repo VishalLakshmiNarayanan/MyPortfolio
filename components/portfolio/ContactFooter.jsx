@@ -51,7 +51,7 @@ export default function ContactFooter() {
         </motion.div>
 
         <div className="mt-24 pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Vishal Lakshmi Narayanan</p>
+          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Vishal</p>
           
         </div>
       </div>
