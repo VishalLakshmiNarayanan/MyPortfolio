@@ -12,7 +12,7 @@ const moments = [
   {
     label: "AI Summit 2026",
     sublabel: "Led management on information desk, communicating with industry partners",
-    img: "/images/Moments/AG-24.jpg",
+    img: "/images/Moments/AG-24.png",
     accent: "Leadership",
   },
   {
