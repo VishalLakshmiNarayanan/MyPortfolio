@@ -76,17 +76,24 @@ export default function ProjectModal({ project, onClose }) {
                     <ChevronRight size={14} className="text-primary" />
                     {section.heading}
                   </h3>
-                  {Array.isArray(section.content) ? (
-                    <ul className="space-y-2 pl-5">
-                      {section.content.map((item, j) => (
-                        <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <span className="mt-2 w-1 h-1 rounded-full bg-primary/60 flex-shrink-0" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="text-sm text-muted-foreground leading-relaxed pl-5">{section.content}</p>
+                  {section.content && (
+                    Array.isArray(section.content) ? (
+                      <ul className="space-y-4 pl-5 mb-4">
+                        {section.content.map((item, j) => (
+                          <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
+                            <span className="mt-2 w-1 h-1 rounded-full bg-primary/60 flex-shrink-0" />
+                            <div>{item}</div>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div className="text-sm text-muted-foreground leading-relaxed pl-5 mb-4">{section.content}</div>
+                    )
+                  )}
+                  {section.image && (
+                    <div className="pl-5 mt-4">
+                      <img src={section.image} alt={section.heading} className="w-full rounded-xl border border-white/10" />
+                    </div>
                   )}
                 </div>
               ))}
@@ -99,6 +106,13 @@ export default function ProjectModal({ project, onClose }) {
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border text-sm text-muted-foreground hover:text-primary hover:border-primary/40 transition-all duration-300">
                   <Github size={15} />
                   View on GitHub
+                </a>
+              )}
+              {project.notion && (
+                <a href={project.notion} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition-all duration-300">
+                  <ExternalLink size={15} />
+                  Notion
                 </a>
               )}
               {project.demo && (

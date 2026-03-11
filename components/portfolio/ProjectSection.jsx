@@ -1,9 +1,74 @@
 import React, { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, ArrowUpRight } from "lucide-react";
+import { Github, ArrowUpRight, ExternalLink } from "lucide-react";
 import ProjectModal from "./ProjectModal";
 
 const projects = [
+  {
+    title: "Strategic Price-Point Analysis and Margin Optimization",
+    tagline: "Margin recovery and waste mitigation within the Dairy category",
+    description: "An automated ETL pipeline to balance revenue recovery with community accessibility, identifying instances of Margin Erosion and Waste Accumulation.",
+    tech: ["Google BigQuery", "Python", "SQL", "Tableau", "ETL"],
+    github: "https://github.com/VishalLakshmiNarayanan/kroger_dairy_analysis",
+    notion: "https://www.notion.so/Kroger-Strategic-Price-Point-Analysis-31cca9f49901804e8a89faea970dee4e?source=copy_link",
+    category: "data analytics-margin optimization",
+    writeup: [
+      {
+        heading: "Project Background",
+        content: "The retail grocery sector operates on razor thin margins where profitability is dictated by the efficiency of inventory turnover and the precision of promotional discounting. This project addresses critical operational inefficiencies within the Dairy category at a high volume location in Tempe, Arizona. By architecting an automated ETL pipeline to ingest data from the Kroger Developer Products API, this analysis identifies instances of Margin Erosion, where high demand items are unnecessarily discounted and Waste Accumulation, where high stock items face spoilage risks due to static pricing. The project establishes a data driven framework to balance revenue recovery with community accessibility, specifically monitoring SNAP eligibility and wellness benchmarks."
+      },
+      {
+        heading: "Executive Summary",
+        content: "A comprehensive audit conducted via Google BigQuery reveals significant opportunities for margin recovery and waste mitigation. The analysis identified a stark 148.9% price premium ($7.79 vs. $3.13) between National Premium brands and Private Label alternatives in the one gallon milk segment. While the store maintains exceptional promotional integrity with 100% compliance in protecting margins for low stock items, the audit flagged several high stock SKUs at critical spoilage risk due to a lack of promotional triggers. Furthermore, the study confirms that 100% of high wellness staples remain priced under $2.20, successfully meeting the strategic goal of maintaining SNAP eligible accessibility for the local demographic."
+      },
+      {
+        heading: "Stakeholders",
+        content: [
+          "Primary Stakeholder: Dairy Category Manager (Focus: Inventory Velocity and Category Margin)",
+          "Secondary Stakeholders: Pricing Strategist and Inventory Planner (Focus: Discount Guardrails and Stock to Sales Alignment)"
+        ]
+      },
+      {
+        heading: "Data Architecture and Schema",
+        content: "The technical foundation relies on a Star Schema designed to transform nested JSON API responses into high performance relational tables. This structure enables granular multi dimensional analysis across product attributes, pricing tiers, and inventory risk codes.",
+        image: "/schema_dashboard/star_schema.png"
+      },
+      {
+        heading: "Data Tables Overview",
+        content: [
+          "Fact Table (fact_pricing_inventory): Tracks base and sale prices, total shelf facings, and inventory risk codes.",
+          "Dimension Tables: Includes dim_product (brand tier, SNAP status, wellness scores), dim_location (Store #124), and dim_date (temporal trends)."
+        ]
+      },
+      {
+        heading: "Technical Implementation Summary",
+        content: [
+          "Extraction and Loading: A Python based ETL engine (script_data_loader.py) handles OAuth2 authentication with the Kroger API, ingesting real time pricing and stock level markers.",
+          "Data Warehousing: Data is staged and processed within Google BigQuery, utilizing SQL for complex transformations and roll up logic (such as aggregating shelf facings across multiple aisle locations).",
+          "Audit Engine: Five SQL scripts automate the identification of margin erosion, spoilage alerts, and brand tier price gaps.",
+          <span key="tableau">Visualization: Insights are surfaced via a <a href="https://public.tableau.com/views/kroger_dairy_analysis/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Tableau Dashboard</a> for real time stakeholder monitoring.</span>
+        ]
+      },
+      {
+        heading: "Key Insights and Recommendations",
+        content: [
+          <span key="1"><strong>1. Brand Premium and Organic Tax:</strong> Analysis reveals that premium brand name organic milk carries a 148.9% premium over Private Label alternatives. Recommendation: Implement a mid tier Value Organic promotional track.</span>,
+          <span key="2"><strong>2. Margin Integrity and Recovery:</strong> The Margin_erosion.sql audit confirmed 100% compliance in protecting margins for items with Risk Code 1 (Low Stock). Recommendation: Maintain current automated guardrails.</span>,
+          <span key="3"><strong>3. Spoilage Mitigation:</strong> Spoilage_alert.sql identified multiple SKUs with Risk Code 0 (High Stock) that are currently listed at full MSRP. Recommendation: Trigger immediate dynamic markdowns or Flash Sales for identified high stock SKUs.</span>,
+          <span key="4"><strong>4. Wellness and Social Responsibility:</strong> 100% of core staples with wellness scores &gt;60 are priced below the $2.20 threshold. Recommendation: Use these metrics in corporate social responsibility reporting.</span>
+        ],
+        image: "/schema_dashboard/analysis_dashboard.png"
+      },
+      {
+        heading: "Assumptions and Caveats",
+        content: [
+          "Inventory Accuracy: Inventory risk codes are derived from categorical API markers (HIGH/LOW/OUT_OF_STOCK) rather than exact unit counts.",
+          "Data Snapshot: The analysis reflects a specific point in time data pull; intraday fluctuations in stock levels are not captured between refresh cycles.",
+          "Attribution of Facings: Shelf facing counts assume adherence to the corporate planogram; any off shelf displays or end caps are not currently integrated into the facings audit."
+        ]
+      }
+    ]
+  },
   {
     title: "GCP E-Commerce Funnel Optimization",
     tagline: "Pinpointing where customers drop off and why",
@@ -217,16 +282,32 @@ function ProjectCard({ project, index, onOpen }) {
 
         {/* Actions */}
         <div className="flex items-center justify-between pt-5 border-t border-white/6">
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors duration-300"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Github size={13} />
-            Source
-          </a>
+          <div className="flex items-center gap-4">
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors duration-300"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Github size={13} />
+                Source
+              </a>
+            )}
+            {project.notion && (
+              <a
+                href={project.notion}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors duration-300"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ExternalLink size={13} />
+                Notion
+              </a>
+            )}
+          </div>
           <button
             onClick={() => onOpen(project)}
             className="inline-flex items-center gap-1.5 text-xs text-primary hover:text-primary/80 transition-colors duration-300 font-medium"
@@ -254,7 +335,7 @@ export default function ProjectsSection() {
         >
           <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">Projects</p>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured work</h2>
-          
+
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6">
