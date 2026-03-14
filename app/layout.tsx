@@ -15,12 +15,12 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Vishal Lakshmi Narayanan - Data Science Graduate Student",
+    default: "Vishal Lakshmi Narayanan - Portfolio",
     template: "%s | Vishal Lakshmi Narayanan",
   },
   description:
-    "Data Science graduate student at Arizona State University focused on AI/ML, NLP, optimization, and applied research.",
-  keywords: ["Data Science", "Machine Learning", "AI", "NLP", "Research", "ASU"],
+    "Operations Data Analyst, specializing in data-driven decision making and process optimization. Grad Student at ASU.",
+  keywords: ["Data Analysis", "Operations", "Optimization", "Decision Making", "Process Improvement"],
   authors: [{ name: "Vishal Lakshmi Narayanan" }],
   creator: "Vishal Lakshmi Narayanan",
   generator: 'v0.app',
