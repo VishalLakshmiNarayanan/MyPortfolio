@@ -1,140 +1,125 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X, ZoomIn } from "lucide-react";
+import React from "react";
+import { motion } from "framer-motion";
 
 const moments = [
   {
-    label: "DevHacks S2",
-    sublabel: "1st Place (Solo Participant) out of 175 teams",
+    titlePart1: "DevHacks",
+    titlePart2: "S2",
+    date: "September 2025",
+    description: "My 3rd Hackathon Victory! Built an AI video-based educating platform and won 1st place out of 175 participating teams as a solo developer.",
     img: "/images/Moments/devhackss2.png",
-    accent: "Hackathon Win",
   },
   {
-    label: "AI Summit 2026",
-    sublabel: "Led management on information desk, communicating with industry partners",
-    img: "/images/Moments/AG-24.png",
-    accent: "Leadership",
-  },
-  {
-    label: "HackAZona v0.1",
-    sublabel: "People's Choice Award at ASU",
+    titlePart1: "Hackazona",
+    titlePart2: "v0.1",
+    date: "March 2025",
+    description: "Built an agentic framework-based trip planner and won the People's Choice Award. The event was partnered with Microsoft Azure.",
     img: "/images/Moments/Hackazona.png",
-    accent: "Hackathon Win",
   },
   {
-    label: "Hacks for Humanity",
-    sublabel: "Annual hacker event focused on social good",
-    img: "/images/Moments/HHH.png",
-    accent: "Community",
+    titlePart1: "AI Summit",
+    titlePart2: "2026",
+    date: "February 2026",
+    description: "The largest-scale AI event organized by the ASU AI Society, where I successfully led the information desk management.",
+    img: "/images/Moments/AG-24.png",
   },
   {
-    label: "Technical Mentorship",
-    sublabel: "Mentored at Claude Builder Club Hackathon",
+    titlePart1: "Tech",
+    titlePart2: "Mentorship",
+    date: "November 2025",
+    description: "Helped 5 teams architect their hackathon ideas, assisting closely with the technical implementations of LLM-based frameworks.",
     img: "/images/Moments/mentorship.png",
-    accent: "Mentorship",
   },
   {
-    label: "ASU Workshop Lead",
-    sublabel: "Taught students to build personal portfolio websites",
+    titlePart1: "Hacks for",
+    titlePart2: "Humanity",
+    date: "October 2025",
+    description: "A hacker event focused entirely on social good—building tools for the community using AI and ensuring its use remains humane.",
+    img: "/images/Moments/HHH.png",
+  },
+  {
+    titlePart1: "Workshop",
+    titlePart2: "Lead",
+    date: "October 2025",
+    description: "Led an intensive technical workshop teaching engineering students how to build and deploy their own personal portfolio websites.",
     img: "/images/Moments/Workshop.png",
-    accent: "Workshops",
   },
 ];
 
 export default function GallerySection() {
-  const [lightbox, setLightbox] = useState(null);
-
   return (
-    <section id="gallery" className="py-32 bg-card/20">
-      <div className="max-w-6xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
+    <section id="gallery" className="relative py-24 bg-background z-10 w-full overflow-hidden">
+      <div className="container mx-auto px-6 md:px-12 max-w-7xl">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-14 text-center"
         >
-          <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">Gallery</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">Notable moments</h2>
-          <p className="text-sm text-muted-foreground mb-12 max-w-lg">
-            Snapshots from hackathons, mentoring students, and the teams I have been a part of.
+          <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3 font-semibold">Gallery</p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-foreground">Notable Moments</h2>
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            A visual walkthrough of hackathon victories, community workshops, and leadership moments that shaped my technical journey.
           </p>
         </motion.div>
 
-        {/* Masonry-style grid */}
-        <div className="columns-2 md:columns-3 gap-4 space-y-4">
-          {moments.map((m, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.5 }}
-              className="break-inside-avoid group relative rounded-xl overflow-hidden cursor-pointer"
-              onClick={() => setLightbox(m)}
-            >
-              <img
-                src={m.img}
-                alt={m.label}
-                className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                style={{ height: i % 3 === 0 ? "240px" : i % 3 === 1 ? "180px" : "200px" }}
-              />
+        {/* Bento Grid Collage */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 auto-rows-[300px] sm:auto-rows-[350px] md:auto-rows-[400px]">
+          {moments.map((m, i) => {
+            // Asymmetrical grid spans for a dynamic collage look
+            let colSpan = "md:col-span-12"; 
+            if (i === 0) colSpan = "md:col-span-6 lg:col-span-5";
+            else if (i === 1) colSpan = "md:col-span-6 lg:col-span-7";
+            else if (i === 2) colSpan = "md:col-span-6 lg:col-span-7";
+            else if (i === 3) colSpan = "md:col-span-6 lg:col-span-5";
+            else if (i === 4) colSpan = "md:col-span-6 lg:col-span-6";
+            else if (i === 5) colSpan = "md:col-span-6 lg:col-span-6";
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-400" />
-
-              {/* Zoom icon */}
-              <div className="absolute top-3 right-3 w-7 h-7 rounded-full bg-background/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <ZoomIn size={13} className="text-primary" />
-              </div>
-
-              {/* Label */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-400">
-                <span className="text-[10px] text-primary tracking-wider uppercase">{m.accent}</span>
-                <p className="text-sm font-semibold text-foreground leading-tight">{m.label}</p>
-                <p className="text-xs text-muted-foreground">{m.sublabel}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-      </div>
-
-      {/* Lightbox */}
-      <AnimatePresence>
-        {lightbox && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-6"
-            onClick={() => setLightbox(null)}
-          >
-            <div className="absolute inset-0 bg-background/90 backdrop-blur-2xl" />
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="relative max-w-2xl w-full rounded-2xl overflow-hidden"
-              style={{ border: "1px solid rgba(255,255,255,0.1)" }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <img src={lightbox.img} alt={lightbox.label} className="w-full object-cover max-h-[70vh]" />
-              <div className="p-5" style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(12px)" }}>
-                <span className="text-[10px] text-primary tracking-wider uppercase">{lightbox.accent}</span>
-                <p className="text-base font-semibold text-foreground">{lightbox.label}</p>
-                <p className="text-sm text-muted-foreground">{lightbox.sublabel}</p>
-              </div>
-              <button
-                onClick={() => setLightbox(null)}
-                className="absolute top-3 right-3 p-2 rounded-full bg-background/70 backdrop-blur-sm text-muted-foreground hover:text-foreground transition-colors"
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: (i % 3) * 0.1 }}
+                className={`group relative overflow-hidden rounded-2xl ${colSpan} cursor-pointer bg-muted border border-border/50 shadow-sm`}
               >
-                <X size={16} />
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                {/* Background Image */}
+                <img 
+                  src={m.img} 
+                  alt={m.titlePart1} 
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" 
+                />
+                
+                {/* Dark Gradient Overlay for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent transition-opacity duration-300 opacity-80 group-hover:opacity-95" />
+
+                {/* Content Overlay (Bottom aligned) */}
+                <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
+                  <motion.div 
+                    initial={{ y: 15, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.4, delay: 0.3 + ((i % 3) * 0.1) }}
+                    className="transform transition-transform duration-500 group-hover:translate-y-0"
+                  >
+                    <p className="text-primary font-bold tracking-widest uppercase text-xs md:text-sm mb-2 drop-shadow-md">
+                      {m.date}
+                    </p>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 drop-shadow-lg leading-tight">
+                      {m.titlePart1} {m.titlePart2}
+                    </h3>
+                    <div className="overflow-hidden">
+                      <p className="text-white/80 text-sm md:text-base line-clamp-2 md:line-clamp-3 transition-colors duration-300 drop-shadow-md">
+                        {m.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
     </section>
   );
 }
