@@ -4,6 +4,13 @@ import { motion } from "framer-motion";
 const moments = [
   {
     titlePart1: "DevHacks",
+    titlePart2: "Change the World",
+    date: "March 2026",
+    description: "My 4th Hackathon Victory! Built AI Personas that provides reasoning and justification, that purely judges you in a high stake meeting based environment. Gamified experience to stress test the human reasoning and build a pressure environment that can be integrated with VR to have a mock meeting setup.",
+    img: "/images/Moments/devhacks3.png",
+  },
+  {
+    titlePart1: "DevHacks",
     titlePart2: "S2",
     date: "September 2025",
     description: "My 3rd Hackathon Victory! Built an AI video-based educating platform and won 1st place out of 175 participating teams as a solo developer.",
@@ -63,18 +70,9 @@ export default function GallerySection() {
           </p>
         </motion.div>
 
-        {/* Bento Grid Collage */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 auto-rows-[300px] sm:auto-rows-[350px] md:auto-rows-[400px]">
+        {/* Masonry Gallery Collage */}
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-4 md:gap-6">
           {moments.map((m, i) => {
-            // Asymmetrical grid spans for a dynamic collage look
-            let colSpan = "md:col-span-12"; 
-            if (i === 0) colSpan = "md:col-span-6 lg:col-span-5";
-            else if (i === 1) colSpan = "md:col-span-6 lg:col-span-7";
-            else if (i === 2) colSpan = "md:col-span-6 lg:col-span-7";
-            else if (i === 3) colSpan = "md:col-span-6 lg:col-span-5";
-            else if (i === 4) colSpan = "md:col-span-6 lg:col-span-6";
-            else if (i === 5) colSpan = "md:col-span-6 lg:col-span-6";
-
             return (
               <motion.div
                 key={i}
@@ -82,38 +80,33 @@ export default function GallerySection() {
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: (i % 3) * 0.1 }}
-                className={`group relative overflow-hidden rounded-2xl ${colSpan} cursor-pointer bg-muted border border-border/50 shadow-sm`}
+                className="group relative overflow-hidden rounded-2xl cursor-pointer bg-muted border border-border/50 shadow-sm break-inside-avoid mb-4 md:mb-6"
               >
                 {/* Background Image */}
                 <img 
                   src={m.img} 
                   alt={m.titlePart1} 
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" 
+                  className="w-full h-auto block transition-transform duration-700 ease-out" 
                 />
                 
                 {/* Dark Gradient Overlay for text readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent transition-opacity duration-300 opacity-80 group-hover:opacity-95" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-all duration-500 opacity-0 group-hover:opacity-100" />
 
                 {/* Content Overlay (Bottom aligned) */}
                 <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
-                  <motion.div 
-                    initial={{ y: 15, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.4, delay: 0.3 + ((i % 3) * 0.1) }}
-                    className="transform transition-transform duration-500 group-hover:translate-y-0"
-                  >
-                    <p className="text-primary font-bold tracking-widest uppercase text-xs md:text-sm mb-2 drop-shadow-md">
+                  <div className="transform transition-all duration-500 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                    <p className="text-primary font-bold tracking-widest uppercase text-[10px] md:text-xs mb-1 md:mb-2 drop-shadow-md">
                       {m.date}
                     </p>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 drop-shadow-lg leading-tight">
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2 drop-shadow-lg leading-tight">
                       {m.titlePart1} {m.titlePart2}
                     </h3>
                     <div className="overflow-hidden">
-                      <p className="text-white/80 text-sm md:text-base line-clamp-2 md:line-clamp-3 transition-colors duration-300 drop-shadow-md">
+                      <p className="text-white/80 text-xs md:text-sm leading-relaxed transition-colors duration-300 drop-shadow-md">
                         {m.description}
                       </p>
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
               </motion.div>
             );
