@@ -34,13 +34,7 @@ export default function ProjectModal({ project, onClose }) {
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
           onClick={(e) => e.stopPropagation()}
-          className="relative w-full max-w-3xl max-h-[85vh] overflow-y-auto rounded-2xl"
-          style={{
-            background: "rgba(255,255,255,0.04)",
-            border: "1px solid rgba(255,255,255,0.1)",
-            backdropFilter: "blur(24px)",
-            WebkitBackdropFilter: "blur(24px)",
-          }}
+          className="relative w-full max-w-3xl max-h-[85vh] overflow-y-auto rounded-[2rem] bg-card border-none shadow-[inset_2px_2px_8px_rgba(255,255,255,0.1),_inset_-3px_-3px_10px_rgba(0,0,0,0.5),_6px_10px_20px_rgba(0,0,0,0.4)]"
         >
           {/* Close */}
           <button
@@ -103,21 +97,21 @@ export default function ProjectModal({ project, onClose }) {
             <div className="flex items-center gap-5 mt-10 pt-8 border-t border-white/8">
               {project.github && (
                 <a href={project.github} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border text-sm text-muted-foreground hover:text-primary hover:border-primary/40 transition-all duration-300">
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-none bg-card shadow-[inset_1px_1px_4px_rgba(255,255,255,0.1),_inset_-2px_-2px_6px_rgba(0,0,0,0.4),_4px_4px_10px_rgba(0,0,0,0.3)] text-sm text-muted-foreground hover:text-primary hover:shadow-[inset_1px_1px_6px_rgba(255,255,255,0.2),_inset_-2px_-2px_6px_rgba(0,0,0,0.5),_2px_2px_6px_rgba(0,0,0,0.4)] hover:brightness-110 transition-all duration-300 active:scale-95">
                   <Github size={15} />
                   View on GitHub
                 </a>
               )}
               {project.notion && (
                 <a href={project.notion} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition-all duration-300">
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary shadow-[inset_2px_2px_6px_rgba(255,255,255,0.3),_inset_-3px_-3px_8px_rgba(0,0,0,0.3),_4px_8px_16px_rgba(var(--primary),0.4)] hover:shadow-[inset_4px_4px_8px_rgba(255,255,255,0.4),_inset_-4px_-4px_10px_rgba(0,0,0,0.4),_2px_4px_8px_rgba(var(--primary),0.6)] text-primary-foreground text-sm transition-all duration-300 active:scale-95">
                   <ExternalLink size={15} />
                   Notion
                 </a>
               )}
               {project.demo && (
                 <a href={project.demo} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition-all duration-300">
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary shadow-[inset_2px_2px_6px_rgba(255,255,255,0.3),_inset_-3px_-3px_8px_rgba(0,0,0,0.3),_4px_8px_16px_rgba(var(--primary),0.4)] hover:shadow-[inset_4px_4px_8px_rgba(255,255,255,0.4),_inset_-4px_-4px_10px_rgba(0,0,0,0.4),_2px_4px_8px_rgba(var(--primary),0.6)] text-primary-foreground text-sm transition-all duration-300 active:scale-95">
                   <ExternalLink size={15} />
                   Live Demo
                 </a>

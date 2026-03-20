@@ -208,13 +208,7 @@ function ProjectCard({ project, index, onOpen }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ delay: index * 0.15, duration: 0.5 }}
-      className="group relative rounded-2xl overflow-hidden flex flex-col"
-      style={{
-        background: "rgba(255,255,255,0.03)",
-        border: "1px solid rgba(255,255,255,0.08)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
-      }}
+      className="group relative rounded-[2rem] overflow-hidden flex flex-col bg-card border-none shadow-[inset_2px_2px_8px_rgba(255,255,255,0.1),_inset_-3px_-3px_10px_rgba(0,0,0,0.5),_8px_12px_24px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-1 hover:brightness-110"
     >
       {/* Mouse glow */}
       <div
@@ -268,12 +262,7 @@ function ProjectCard({ project, index, onOpen }) {
           {project.tech.map((t) => (
             <span
               key={t}
-              className="text-[10px] px-2.5 py-1 rounded-full"
-              style={{
-                background: "rgba(255,255,255,0.05)",
-                border: "1px solid rgba(255,255,255,0.09)",
-                color: "rgba(255,255,255,0.45)",
-              }}
+              className="text-[10px] px-3 py-1.5 rounded-full border-none bg-card shadow-[inset_1px_1px_4px_rgba(255,255,255,0.1),_inset_-2px_-2px_6px_rgba(0,0,0,0.4),_2px_2px_6px_rgba(0,0,0,0.3)] text-muted-foreground"
             >
               {t}
             </span>
@@ -288,7 +277,7 @@ function ProjectCard({ project, index, onOpen }) {
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors duration-300"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border-none bg-card shadow-[inset_1px_1px_4px_rgba(255,255,255,0.1),_inset_-2px_-2px_6px_rgba(0,0,0,0.4),_2px_2px_6px_rgba(0,0,0,0.3)] text-xs text-muted-foreground hover:text-primary hover:shadow-[inset_1px_1px_6px_rgba(255,255,255,0.2),_inset_-2px_-2px_6px_rgba(0,0,0,0.5),_2px_2px_8px_rgba(0,0,0,0.4)] hover:brightness-110 active:scale-95 transition-all duration-300"
                 onClick={(e) => e.stopPropagation()}
               >
                 <Github size={13} />
@@ -300,7 +289,7 @@ function ProjectCard({ project, index, onOpen }) {
                 href={project.notion}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors duration-300"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border-none bg-card shadow-[inset_1px_1px_4px_rgba(255,255,255,0.1),_inset_-2px_-2px_6px_rgba(0,0,0,0.4),_2px_2px_6px_rgba(0,0,0,0.3)] text-xs text-muted-foreground hover:text-primary hover:shadow-[inset_1px_1px_6px_rgba(255,255,255,0.2),_inset_-2px_-2px_6px_rgba(0,0,0,0.5),_2px_2px_8px_rgba(0,0,0,0.4)] hover:brightness-110 active:scale-95 transition-all duration-300"
                 onClick={(e) => e.stopPropagation()}
               >
                 <ExternalLink size={13} />
@@ -310,7 +299,7 @@ function ProjectCard({ project, index, onOpen }) {
           </div>
           <button
             onClick={() => onOpen(project)}
-            className="inline-flex items-center gap-1.5 text-xs text-primary hover:text-primary/80 transition-colors duration-300 font-medium"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary shadow-[inset_2px_2px_6px_rgba(255,255,255,0.3),_inset_-3px_-3px_8px_rgba(0,0,0,0.3),_2px_4px_8px_rgba(var(--primary),0.4)] hover:shadow-[inset_2px_2px_8px_rgba(255,255,255,0.4),_inset_-2px_-2px_6px_rgba(0,0,0,0.4),_1px_2px_6px_rgba(var(--primary),0.6)] text-primary-foreground text-xs font-medium transition-all duration-300 active:scale-95"
           >
             Read writeup
             <ArrowUpRight size={13} />
@@ -332,13 +321,32 @@ export default function ProjectsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
+          className="relative flex flex-col md:flex-row items-center md:items-end justify-between mb-16 md:mb-24 mt-8"
         >
-          <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">Projects</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured work</h2>
+          {/* Text Content */}
+          <div className="flex-1 w-full text-center md:text-left z-20">
+            <h2 className="text-xs md:text-sm tracking-[0.3em] uppercase text-primary mb-3 font-bold">Projects</h2>
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-4 leading-tight tracking-tight">
+              Explore My Featured work<span className="text-primary">.</span>
+            </h2>
 
+          </div>
+
+          {/* Laptop Character Beside Title */}
+          <div className="w-full md:w-auto flex justify-center md:justify-end shrink-0 mt-12 md:mt-0 z-10">
+            <motion.img
+              initial={{ opacity: 0, x: 30, scale: 0.95 }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+              src="/images/hero/hero_projects.png"
+              alt="Vishal sitting with laptop mapping out projects"
+              className="w-[280px] sm:w-[320px] md:w-[400px] lg:w-[480px] h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)] pointer-events-none"
+            />
+          </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-6 pb-12">
           {projects.map((p, i) => (
             <ProjectCard key={p.title} project={p} index={i} onOpen={setSelected} />
           ))}

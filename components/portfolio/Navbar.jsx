@@ -52,7 +52,7 @@ export default function Navbar() {
             href="https://drive.google.com/file/d/1yNYIyJncSy28G_jh4X9gHFQVi8y-rc-d/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm px-4 py-1.5 border border-primary/40 text-primary rounded-full hover:bg-primary/10 transition-all duration-300"
+            className="text-sm px-5 py-2 border-none bg-card shadow-[inset_1px_1px_4px_rgba(255,255,255,0.1),_inset_-2px_-2px_6px_rgba(0,0,0,0.4),_4px_4px_10px_rgba(0,0,0,0.3)] text-primary rounded-full hover:shadow-[inset_1px_1px_6px_rgba(255,255,255,0.2),_inset_-2px_-2px_6px_rgba(0,0,0,0.5),_2px_2px_6px_rgba(0,0,0,0.4)] hover:brightness-110 transition-all duration-300 active:scale-95"
           >
             Resume
           </a>
@@ -60,7 +60,7 @@ export default function Navbar() {
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-foreground"
+          className="md:hidden p-2 rounded-full border-none bg-card shadow-[inset_1px_1px_4px_rgba(255,255,255,0.1),_inset_-2px_-2px_6px_rgba(0,0,0,0.4),_4px_4px_10px_rgba(0,0,0,0.3)] text-foreground hover:shadow-[inset_1px_1px_6px_rgba(255,255,255,0.2),_inset_-2px_-2px_6px_rgba(0,0,0,0.5),_2px_2px_6px_rgba(0,0,0,0.4)] transition-all duration-300 active:scale-95"
         >
           {mobileOpen ? <X size={20} /> : <Menu size={20} />}
         </button>

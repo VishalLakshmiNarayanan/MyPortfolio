@@ -34,15 +34,35 @@ export default function ResearchSection() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">Research</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-16">Academic contributions</h2>
+          <p className="text-xs md:text-sm tracking-[0.3em] uppercase text-primary mb-3 font-bold">Research</p>
+          <h2 className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-4 leading-tight tracking-tight">
+            Academic contributions<span className="text-primary">.</span>
+          </h2>
         </motion.div>
 
-        <div className="relative">
-          <div className="absolute left-[19px] md:left-[23px] top-0 bottom-0 w-px bg-border" />
+        <div className="flex flex-col md:flex-row gap-8 lg:gap-16 items-stretch mt-8 md:mt-16">
+          {/* Left side Image - Sticky on Desktop */}
+          <div className="w-full md:w-2/5 flex justify-center items-start relative z-10 mb-12 md:mb-0">
+            <div className="sticky top-24 md:top-36 md:pb-24 pt-4 w-full flex justify-center">
+              <motion.img
+                initial={{ opacity: 0, x: -30, scale: 0.95 }}
+                whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+                viewport={{ once: true, margin: "-100px" }}
+                src="/images/hero/hero_research.png"
+                alt="Vishal Research Illustration"
+                className="w-[280px] sm:w-[340px] w-[full] max-w-[450px] h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)] pointer-events-none"
+              />
+            </div>
+          </div>
 
-          <div className="space-y-12">
-            {research.map((r, i) => (
+          {/* Right side Timeline */}
+          <div className="w-full md:w-3/5 relative pb-12">
+            {/* Timeline line */}
+            <div className="absolute left-[19px] md:left-[23px] top-0 bottom-0 w-px bg-border" />
+
+            <div className="space-y-14 md:space-y-20">
+              {research.map((r, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, x: -20 }}
@@ -72,6 +92,7 @@ export default function ResearchSection() {
                 </ul>
               </motion.div>
             ))}
+            </div>
           </div>
         </div>
       </div>

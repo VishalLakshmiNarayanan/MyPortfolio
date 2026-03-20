@@ -43,9 +43,31 @@ export default function SkillsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
+          className="relative flex flex-col md:flex-row items-center md:items-end justify-between mb-16 md:mb-24 mt-8"
         >
-          <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">Skills</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Technical toolkit</h2>
+          {/* Text Content */}
+          <div className="flex-1 w-full text-center md:text-left z-20">
+            <h2 className="text-xs md:text-sm tracking-[0.3em] uppercase text-primary mb-3 font-bold">Skills</h2>
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-4 leading-tight tracking-tight">
+              My Core Skills<span className="text-primary">.</span>
+            </h2>
+            <p className="text-muted-foreground text-base md:text-lg lg:text-xl max-w-xl mx-auto md:mx-0 leading-relaxed mt-4 md:mt-6">
+              A comprehensive overview of the analytics tools, languages, and strategic frameworks I leverage to drive impact.
+            </p>
+          </div>
+
+          {/* Laptop Character */}
+          <div className="w-full md:w-auto flex justify-center md:justify-end shrink-0 mt-12 md:mt-0 z-10">
+            <motion.img 
+              initial={{ opacity: 0, x: 30, scale: 0.95 }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+              src="/images/hero/hero_skills.png" 
+              alt="Vishal Skills Illustration"
+              className="w-[280px] sm:w-[320px] md:w-[400px] lg:w-[480px] h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)] pointer-events-none"
+            />
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -56,14 +78,14 @@ export default function SkillsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="p-6 rounded-xl border border-border bg-card/30"
+              className="p-6 rounded-[2rem] border-none bg-card shadow-[inset_2px_2px_8px_rgba(255,255,255,0.1),_inset_-3px_-3px_10px_rgba(0,0,0,0.5),_6px_10px_20px_rgba(0,0,0,0.4)]"
             >
               <h3 className="text-sm font-semibold text-foreground mb-4">{cat.title}</h3>
               <div className="flex flex-wrap gap-2">
                 {cat.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="text-xs px-3 py-1.5 rounded-full border border-border text-muted-foreground hover:border-primary/40 hover:text-primary transition-all duration-300"
+                    className="text-xs px-4 py-2 rounded-full border-none bg-card shadow-[inset_1px_1px_4px_rgba(255,255,255,0.1),_inset_-2px_-2px_6px_rgba(0,0,0,0.4),_4px_4px_10px_rgba(0,0,0,0.3)] text-muted-foreground hover:text-primary hover:shadow-[inset_1px_1px_6px_rgba(255,255,255,0.2),_inset_-2px_-2px_6px_rgba(0,0,0,0.5),_2px_2px_6px_rgba(0,0,0,0.4)] hover:brightness-110 transition-all duration-300"
                   >
                     {skill}
                   </span>

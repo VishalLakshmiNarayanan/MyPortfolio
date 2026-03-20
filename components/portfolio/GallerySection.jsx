@@ -61,13 +61,31 @@ export default function GallerySection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-14 text-center"
+          className="relative flex flex-col md:flex-row items-center md:items-end justify-between mb-16 md:mb-24 mt-8"
         >
-          <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3 font-semibold">Gallery</p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 text-foreground">Notable Moments</h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            A visual walkthrough of hackathon victories, community workshops, and leadership moments that shaped my technical journey.
-          </p>
+          {/* Text Content */}
+          <div className="flex-1 w-full text-center md:text-left z-20">
+            <h2 className="text-xs md:text-sm tracking-[0.3em] uppercase text-primary mb-3 font-bold">Gallery</h2>
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-4 leading-tight tracking-tight">
+              Notable Moments<span className="text-primary">.</span>
+            </h2>
+            <p className="text-muted-foreground text-base md:text-lg lg:text-xl max-w-xl mx-auto md:mx-0 leading-relaxed mt-4 md:mt-6">
+              A visual walkthrough of hackathon victories, community workshops, and leadership moments that shaped my technical journey.
+            </p>
+          </div>
+
+          {/* Moment Character Beside Title */}
+          <div className="w-full md:w-auto flex justify-center md:justify-end shrink-0 mt-12 md:mt-0 z-10">
+            <motion.img 
+              initial={{ opacity: 0, x: 30, scale: 0.95 }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+              src="/images/hero/hero_moments.png" 
+              alt="Vishal Moments Illustration"
+              className="w-[280px] sm:w-[320px] md:w-[400px] lg:w-[480px] h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)] pointer-events-none"
+            />
+          </div>
         </motion.div>
 
         {/* Masonry Gallery Collage */}
@@ -80,20 +98,20 @@ export default function GallerySection() {
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: (i % 3) * 0.1 }}
-                className="group relative overflow-hidden rounded-2xl cursor-pointer bg-muted border border-border/50 shadow-sm break-inside-avoid mb-4 md:mb-6"
+                className="group relative overflow-hidden rounded-[2rem] cursor-pointer bg-card border-none shadow-[inset_2px_2px_8px_rgba(255,255,255,0.1),_inset_-3px_-3px_10px_rgba(0,0,0,0.5),_6px_10px_20px_rgba(0,0,0,0.4)] break-inside-avoid mb-4 md:mb-6 p-2 md:p-3 hover:-translate-y-1 hover:brightness-110 transition-all duration-300"
               >
                 {/* Background Image */}
                 <img 
                   src={m.img} 
                   alt={m.titlePart1} 
-                  className="w-full h-auto block transition-transform duration-700 ease-out" 
+                  className="w-full h-auto block rounded-[1.25rem] md:rounded-[1.5rem] transition-transform duration-700 ease-out" 
                 />
                 
                 {/* Dark Gradient Overlay for text readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-all duration-500 opacity-0 group-hover:opacity-100" />
+                <div className="absolute inset-2 md:inset-3 rounded-[1.25rem] md:rounded-[1.5rem] overflow-hidden bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-all duration-500 opacity-0 group-hover:opacity-100" />
 
                 {/* Content Overlay (Bottom aligned) */}
-                <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
+                <div className="absolute inset-2 md:inset-3 p-4 md:p-6 flex flex-col justify-end overflow-hidden">
                   <div className="transform transition-all duration-500 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
                     <p className="text-primary font-bold tracking-widest uppercase text-[10px] md:text-xs mb-1 md:mb-2 drop-shadow-md">
                       {m.date}
