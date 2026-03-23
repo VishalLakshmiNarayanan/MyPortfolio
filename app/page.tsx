@@ -5,7 +5,6 @@ import Navbar from "../components/portfolio/Navbar";
 import HeroSection from "../components/portfolio/HeroSection";
 import AboutSection from "../components/portfolio/AboutSection";
 import ExperienceSection from "../components/portfolio/ExperienceSection";
-import ResearchSection from "../components/portfolio/ResearchSection";
 import ProjectSection from "../components/portfolio/ProjectSection";
 import GallerySection from "../components/portfolio/GallerySection";
 import SkillsSection from "../components/portfolio/SkillsSection";
@@ -20,7 +19,6 @@ export default function Home() {
       <ExperienceSection />
       <ProjectSection />
       <SkillsSection />
-      <ResearchSection />
       <GallerySection />
       <ContactFooter />
     </div>

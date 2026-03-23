@@ -1,31 +1,52 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { format } from "date-fns";
-import { Briefcase } from "lucide-react";
+
+function formatMonthYear(dateString) {
+  const [year, month, day = "1"] = dateString.split("-").map(Number);
+  return format(new Date(year, month - 1, day), "MMM yyyy");
+}
 
 const experiences = [
   {
     title: "Project Manager",
     company: "The AI Society at ASU",
-    location: "Arizona, United States",
-    startDate: "2026-02-01",
+    location: "Tempe, AZ",
+    startDate: "2026-01-01",
     current: true,
     achievements: [
-      "Leading 12 student project teams, coordinating scope definition, milestone tracking, and technical reviews.",
-      "Serving as the primary liaison between students and mentors to ensure resource support.",
+      "Directing eight teams through a 12-week build cycle focused on computer vision, recommendation engines, and autonomous agent applications.",
+      "Reviewing GitHub activity and Notion updates each week to keep engineering progress, documentation quality, and milestone delivery on track.",
+      "Working with mentors and industry collaborators to keep project scope aligned with practical product expectations and technical feasibility.",
     ],
   },
   {
-    title: "Data Engineer & Lead Technical Officer",
+    title: "Data Science Project Contributor",
+    company: "The Unit of Data Science & Analytics Lab ASU",
+    location: "Tempe, AZ",
+    startDate: "2026-01-01",
+    endDate: "2026-03-01",
+    current: false,
+    achievements: [
+      "Built a transcript ingestion workflow that pulled raw YouTube speech data into a cleaned dataset for immigration narrative analysis.",
+      "Used LDA topic modeling to trace how themes in political messaging shifted across the speech corpus.",
+      "Fine-tuned a DistilBERT-based sentiment pipeline to classify audience response patterns across multiple media contexts.",
+      "Connected FRED economic indicators with sentiment outputs and surfaced a 143% rise in the Migration Fear Index versus its long-run baseline.",
+    ],
+  },
+  {
+    title: "Data Engineer",
     company: "Devlabs",
-    location: "Arizona, United States",
-    startDate: "2025-11-01",
+    location: "Tempe, AZ",
+    startDate: "2025-10-01",
     endDate: "2026-02-01",
     current: false,
     achievements: [
-      "Built a resume-matching system using vector embeddings to improve skill-based search across 670+ candidate profiles.",
-      "Implemented cosine similarity retrieval to return top 10 matches within 5-10 seconds.",
-      "Developed an incremental update process to embed only new profiles, reducing unnecessary recomputation.",
+      "Built a RAG ingestion pipeline that parsed 670+ resumes and converted unstructured candidate data into dense vector representations.",
+      "Designed a MongoDB Atlas vector store to persist embedded profiles and support scalable retrieval.",
+      "Implemented cosine similarity ranking to return the ten strongest candidate matches in under five seconds.",
+      "Reduced embedding overhead by processing only newly added resumes, which cut repeated compute and API spend.",
+      "Adjusted ranking behavior from founder feedback to make search results more relevant for recruiter decision-making.",
     ],
   },
   {
@@ -36,12 +57,24 @@ const experiences = [
     endDate: "2023-07-31",
     current: false,
     achievements: [
-      "Automated monthly sales reporting, reducing processing time from 5 hours to 45 minutes.",
-      "Analyzed SKU-level sales and inventory data across 32 retail outlets to identify 7 key underperforming regions.",
-      "Collaborated with sales and operations teams to track SKU-level movement and build a system for flagging stock imbalances.",
-      "Presented regional performance insights to sales managers to facilitate data-driven distribution planning.",
-      "Implemented data cleaning and validation protocols to improve reporting accuracy and cross-team consistency.",
-
+      "Replaced a manual monthly reporting workflow with Python automation, cutting turnaround time from five hours to roughly forty-five minutes.",
+      "Mapped outlet performance with GeoPandas across 32 retail locations and highlighted seven regions that needed distribution attention.",
+      "Tracked SKU movement trends to expose stock imbalances and support faster coordination with sales and operations teams.",
+      "Presented regional performance patterns to sales leadership to guide territory-level distribution decisions.",
+      "Cleaned and validated raw sales records so downstream reporting stayed consistent and reliable for management review.",
+    ],
+  },
+  {
+    title: "Research & Development Intern",
+    company: "Vellore Institute of Technology",
+    location: "Chennai, India",
+    startDate: "2022-12-01",
+    endDate: "2023-06-01",
+    current: false,
+    achievements: [
+      "Partnered on a healthcare innovation initiative with Global Health Research and Innovations in Canada, exploring edge computing and AR/VR for equitable care delivery.",
+      "Assessed whether bandwidth-intensive immersive systems could realistically operate within constrained medical environments.",
+      "Contributed to a published paper in the Dovepress Journal of Multidisciplinary Healthcare on deployment strategies for edge-enabled medical platforms.",
     ],
   },
 ];
@@ -100,12 +133,12 @@ export default function ExperienceSection() {
 
                   {/* Date */}
                   <p className="text-xs text-muted-foreground mb-1">
-                    {format(new Date(exp.startDate), "MMM yyyy")}
+                    {formatMonthYear(exp.startDate)}
                     {" to "}
                     {exp.current ? (
                       <span className="text-primary">Present</span>
                     ) : (
-                      format(new Date(exp.endDate), "MMM yyyy")
+                      formatMonthYear(exp.endDate)
                     )}
                   </p>
 
