@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 const skillCategories = [
   {
     title: "Languages & Tools",
-    description: "Core languages and daily tools I use to analyze, build, automate, and ship.",
     skills: [
       "Python",
       "SQL",
@@ -20,7 +19,6 @@ const skillCategories = [
   },
   {
     title: "AI & ML",
-    description: "Modeling, semantic systems, and LLM application skills reflected across my projects.",
     skills: [
       "Machine Learning",
       "Predictive Modeling",
@@ -38,7 +36,6 @@ const skillCategories = [
   },
   {
     title: "Frameworks",
-    description: "Frameworks and libraries I use across data science, data engineering, and AI product development.",
     skills: [
       "Pandas",
       "NumPy",
@@ -56,7 +53,6 @@ const skillCategories = [
   },
   {
     title: "Data",
-    description: "Warehouses, databases, and analytics systems I use for storage, modeling, and querying.",
     skills: [
       "BigQuery",
       "MongoDB",
@@ -72,7 +68,6 @@ const skillCategories = [
   },
   {
     title: "Cloud & DevOps",
-    description: "Deployment, containerization, versioning, and cloud-adjacent tools used in my application work.",
     skills: [
       "Google Cloud Platform",
       "Vercel",
@@ -88,7 +83,6 @@ const skillCategories = [
   },
   {
     title: "Analytics & Decisioning",
-    description: "The analysis methods I use to turn data into decisions stakeholders can act on.",
     skills: [
       "Exploratory Data Analysis",
       "Funnel Analysis",
@@ -122,9 +116,7 @@ export default function SkillsSection() {
             <h2 className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-4 leading-tight tracking-tight">
               Data, AI, and Product Engineering<span className="text-primary">.</span>
             </h2>
-            <p className="text-muted-foreground text-base md:text-lg lg:text-xl max-w-2xl mx-auto md:mx-0 leading-relaxed mt-4 md:mt-6">
-              My stack spans analytics, machine learning, LLM application development, data systems, and full-stack delivery. This section reflects the actual tooling and methods behind the projects on this portfolio.
-            </p>
+            
           </div>
 
           <div className="w-full md:w-auto flex justify-center md:justify-end shrink-0 mt-12 md:mt-0 z-10">
@@ -151,7 +143,6 @@ export default function SkillsSection() {
               className="p-6 rounded-[2rem] border-none bg-card shadow-[inset_2px_2px_8px_rgba(255,255,255,0.1),_inset_-3px_-3px_10px_rgba(0,0,0,0.5),_6px_10px_20px_rgba(0,0,0,0.4)]"
             >
               <h3 className="text-sm font-semibold text-foreground mb-3">{cat.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-5">{cat.description}</p>
               <div className="flex flex-wrap gap-2">
                 {cat.skills.map((skill) => (
                   <span
