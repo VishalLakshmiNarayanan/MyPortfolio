@@ -85,8 +85,14 @@ export default function ProjectModal({ project, onClose }) {
                     )
                   )}
                   {section.image && (
-                    <div className="pl-5 mt-4">
-                      <img src={section.image} alt={section.heading} className="w-full rounded-xl border border-white/10" />
+                    <div className="pl-5 mt-6 mb-6 w-full flex justify-center">
+                      <div className="relative w-full max-w-4xl rounded-2xl overflow-hidden border border-border/50 bg-card/50 p-2 shadow-sm">
+                        <img 
+                          src={section.image} 
+                          alt={section.heading} 
+                          className="w-full h-auto object-contain rounded-xl block max-h-[600px] mx-auto drop-shadow-md" 
+                        />
+                      </div>
                     </div>
                   )}
                 </div>

@@ -110,11 +110,12 @@ export default function HeroSection() {
            className="order-1 md:order-2 bg-background/80 md:bg-transparent backdrop-blur-xl md:backdrop-blur-none border border-border/50 md:border-none p-6 md:p-0 rounded-[2rem] md:rounded-none max-w-md md:max-w-[24rem] text-center md:text-left self-center mt-4 md:mt-32 w-full md:w-auto relative"
         >
            <h3 className="text-3xl md:text-4xl font-bold mb-4 leading-[1.2]">
-             Operations <span className="text-primary">Data Analyst</span>
+             Data Scientist, <span className="text-primary">AI Engineer</span> & Analyst
            </h3>
            <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 md:mb-8">
-             Quantifying Uncertainty to Build <br className="hidden md:block" />
-             <span className="font-semibold text-foreground">Resilient Business Strategies.</span>
+             Building intelligent analytics, LLM-powered products, and data systems that turn messy information into
+             <br className="hidden md:block" />
+             <span className="font-semibold text-foreground">clear decisions, useful automation, and production-ready experiences.</span>
            </p>
            
            <div className="relative inline-block mt-2">

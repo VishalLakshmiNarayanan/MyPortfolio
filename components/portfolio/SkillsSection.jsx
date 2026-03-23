@@ -4,32 +4,102 @@ import { motion } from "framer-motion";
 const skillCategories = [
   {
     title: "Languages & Tools",
-    skills: ["Python", "SQL", "Google BigQuery", "Tableau", "Power BI", "Excel", "Git"],
-  },
-  {
-    title: "Analytics & ML",
+    description: "Core languages and daily tools I use to analyze, build, automate, and ship.",
     skills: [
-      "Data Modeling",
-      "A/B Testing",
-      "Hypothesis Testing",
-      "Regression",
-      "Causal Inference",
-      "Machine Learning",
-      "XGBoost",
-      "scikit-learn",
+      "Python",
+      "SQL",
+      "JavaScript",
+      "TypeScript",
+      "Git",
+      "GitHub",
+      "Jupyter",
+      "Excel",
+      "Postman",
+      "REST APIs",
     ],
   },
   {
-    title: "Data Engineering",
-    skills: ["GCP", "BigQuery", "Pandas", "NumPy", "ETL Pipelines", "Vector Embeddings"],
+    title: "AI & ML",
+    description: "Modeling, semantic systems, and LLM application skills reflected across my projects.",
+    skills: [
+      "Machine Learning",
+      "Predictive Modeling",
+      "Feature Engineering",
+      "Model Evaluation",
+      "XGBoost",
+      "scikit-learn",
+      "Embeddings",
+      "Vector Search Concepts",
+      "LLM Prompt Engineering",
+      "RAG Concepts",
+      "LLM Evaluation",
+      "AI Agents",
+    ],
   },
   {
-    title: "Professional",
+    title: "Frameworks",
+    description: "Frameworks and libraries I use across data science, data engineering, and AI product development.",
     skills: [
-      "Project Tracking",
+      "Pandas",
+      "NumPy",
+      "Streamlit",
+      "Next.js",
+      "React",
+      "Framer Motion",
+      "LangChain",
+      "GeoPandas",
+      "Plotly",
+      "Tableau",
+      "Power BI",
+      "React Three Fiber",
+    ],
+  },
+  {
+    title: "Data",
+    description: "Warehouses, databases, and analytics systems I use for storage, modeling, and querying.",
+    skills: [
+      "BigQuery",
+      "MongoDB",
+      "PostgreSQL",
+      "MySQL",
+      "Supabase",
+      "Data Modeling",
+      "ETL Pipelines",
+      "Data Warehousing",
+      "Dashboarding",
+      "KPI Design",
+    ],
+  },
+  {
+    title: "Cloud & DevOps",
+    description: "Deployment, containerization, versioning, and cloud-adjacent tools used in my application work.",
+    skills: [
+      "Google Cloud Platform",
+      "Vercel",
+      "Docker",
+      "GitHub Actions",
+      "CI/CD Concepts",
+      "Environment Management",
+      "API Integration",
+      "OAuth",
+      "n8n",
+      "Workflow Automation",
+    ],
+  },
+  {
+    title: "Analytics & Decisioning",
+    description: "The analysis methods I use to turn data into decisions stakeholders can act on.",
+    skills: [
+      "Exploratory Data Analysis",
+      "Funnel Analysis",
+      "A/B Testing",
+      "Hypothesis Testing",
+      "Risk Analysis",
+      "Forecasting Concepts",
+      "Business Intelligence",
       "Stakeholder Communication",
-      "Requirements Clarification",
-      "Technical Presentations",
+      "Experiment Design",
+      "Insight Storytelling",
     ],
   },
 ];
@@ -45,42 +115,43 @@ export default function SkillsSection() {
           transition={{ duration: 0.6 }}
           className="relative flex flex-col md:flex-row items-center md:items-end justify-between mb-16 md:mb-24 mt-8"
         >
-          {/* Text Content */}
           <div className="flex-1 w-full text-center md:text-left z-20">
-            <h2 className="text-xs md:text-sm tracking-[0.3em] uppercase text-primary mb-3 font-bold">Skills</h2>
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-4 leading-tight tracking-tight">
-              My Core Skills<span className="text-primary">.</span>
+            <h2 className="text-xs md:text-sm tracking-[0.3em] uppercase text-primary mb-3 font-bold">
+              Skills
             </h2>
-            <p className="text-muted-foreground text-base md:text-lg lg:text-xl max-w-xl mx-auto md:mx-0 leading-relaxed mt-4 md:mt-6">
-              A comprehensive overview of the analytics tools, languages, and strategic frameworks I leverage to drive impact.
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-4 leading-tight tracking-tight">
+              Data, AI, and Product Engineering<span className="text-primary">.</span>
+            </h2>
+            <p className="text-muted-foreground text-base md:text-lg lg:text-xl max-w-2xl mx-auto md:mx-0 leading-relaxed mt-4 md:mt-6">
+              My stack spans analytics, machine learning, LLM application development, data systems, and full-stack delivery. This section reflects the actual tooling and methods behind the projects on this portfolio.
             </p>
           </div>
 
-          {/* Laptop Character */}
           <div className="w-full md:w-auto flex justify-center md:justify-end shrink-0 mt-12 md:mt-0 z-10">
-            <motion.img 
+            <motion.img
               initial={{ opacity: 0, x: 30, scale: 0.95 }}
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
               viewport={{ once: true }}
-              src="/images/hero/hero_skills.png" 
+              src="/images/hero/hero_skills.png"
               alt="Vishal Skills Illustration"
               className="w-[280px] sm:w-[320px] md:w-[400px] lg:w-[480px] h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)] pointer-events-none"
             />
           </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
           {skillCategories.map((cat, i) => (
             <motion.div
               key={cat.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
+              transition={{ delay: i * 0.08, duration: 0.5 }}
               className="p-6 rounded-[2rem] border-none bg-card shadow-[inset_2px_2px_8px_rgba(255,255,255,0.1),_inset_-3px_-3px_10px_rgba(0,0,0,0.5),_6px_10px_20px_rgba(0,0,0,0.4)]"
             >
-              <h3 className="text-sm font-semibold text-foreground mb-4">{cat.title}</h3>
+              <h3 className="text-sm font-semibold text-foreground mb-3">{cat.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-5">{cat.description}</p>
               <div className="flex flex-wrap gap-2">
                 {cat.skills.map((skill) => (
                   <span
