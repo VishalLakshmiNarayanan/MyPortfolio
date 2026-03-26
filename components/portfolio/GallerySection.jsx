@@ -10,6 +10,20 @@ const moments = [
     img: "/images/Moments/devhacks3.png",
   },
   {
+    titlePart1: "Unit of Data Science",
+    titlePart2: "& Analytics Lab",
+    date: "2026",
+    description: "The closing presentation from my 8-week work with the Unit of Data Science and Analytics Lab, where I presented findings from an NLP analysis on topic shifts and public sentiment around the 2026 State of the Union.",
+    img: "/images/Moments/eve3n.jpeg",
+  },
+  {
+    titlePart1: "HackASU",
+    titlePart2: "x Claude Builders Club",
+    date: "2026",
+    description: "Participated in the HackASU hackathon with the Claude Builders Club and won the Go Viral, Win Big track sponsored by TamaGrow.",
+    img: "/images/Moments/claude.JPG",
+  },
+  {
     titlePart1: "DevHacks",
     titlePart2: "S2",
     date: "September 2025",
