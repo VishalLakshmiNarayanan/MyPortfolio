@@ -70,7 +70,7 @@ export default function HeroSection() {
               <Trophy size={20} />
             </div>
             <div>
-              <h4 className="text-2xl font-bold text-foreground leading-none mb-1">6</h4>
+              <h4 className="text-2xl font-bold text-foreground leading-none mb-1">7</h4>
               <p className="text-[10px] md:text-xs text-muted-foreground font-bold uppercase tracking-wider">Hackathon Wins</p>
             </div>
           </motion.div>

@@ -4,6 +4,13 @@ import { Github, ArrowUpRight, ExternalLink } from "lucide-react";
 import ProjectModal from "./ProjectModal";
 import { projects, projectCategories } from "../../lib/portfolioProjects";
 
+const aiApplicationPriority = [
+  "NPA Digital Twin",
+  "SlideSage",
+  "The Shadow Committee",
+  "AGNOS AI",
+];
+
 function ProjectCard({ project, index, onOpen }) {
   const cardRef = useRef(null);
   const [glow, setGlow] = useState({ x: 0, y: 0, opacity: 0 });
@@ -133,7 +140,18 @@ export default function ProjectsSection() {
   const [selected, setSelected] = useState(null);
   const [activeCategory, setActiveCategory] = useState(projectCategories[0].id);
 
-  const visibleProjects = projects.filter((project) => project.group === activeCategory);
+  const visibleProjects = projects
+    .filter((project) => project.group === activeCategory)
+    .sort((a, b) => {
+      if (activeCategory !== "ai-applications") return 0;
+
+      const aPriority = aiApplicationPriority.indexOf(a.title);
+      const bPriority = aiApplicationPriority.indexOf(b.title);
+      const aRank = aPriority === -1 ? Number.MAX_SAFE_INTEGER : aPriority;
+      const bRank = bPriority === -1 ? Number.MAX_SAFE_INTEGER : bPriority;
+
+      return aRank - bRank;
+    });
   const activeCategoryMeta = projectCategories.find((item) => item.id === activeCategory);
 
   return (

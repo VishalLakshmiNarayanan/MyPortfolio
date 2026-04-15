@@ -3,6 +3,13 @@ import { motion } from "framer-motion";
 
 const moments = [
   {
+    titlePart1: "HackAZona",
+    titlePart2: "Cognite Track Winner",
+    date: "2026",
+    description: "My 7th Hackathon Victory. Team Tokyo won the HackAZona Cognite Track by building the NPA Digital Twin platform, transforming industrial time-series sensor data into an interactive 3D monitoring environment for remote operations.",
+    img: "/images/Moments/cognite.png",
+  },
+  {
     titlePart1: "SpaceHack",
     titlePart2: "Global Winner",
     date: "2026",
