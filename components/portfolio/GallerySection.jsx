@@ -3,6 +3,13 @@ import { motion } from "framer-motion";
 
 const moments = [
   {
+    titlePart1: "Kiro Spark",
+    titlePart2: "Impact Track Winner",
+    date: "April 2026",
+    description: "My 8th Hackathon Victory. Won the Impact Track at the Kiro Spark Challenge by building Inference Network, a project focused on making AI more accessible and sustainable.",
+    img: "/images/Moments/spark.png",
+  },
+  {
     titlePart1: "HackAZona",
     titlePart2: "Cognite Track Winner",
     date: "2026",
@@ -24,13 +31,6 @@ const moments = [
     img: "/images/Moments/devhacks3.png",
   },
   {
-    titlePart1: "Unit of Data Science",
-    titlePart2: "& Analytics Lab",
-    date: "2026",
-    description: "The closing presentation from my 8-week work with the Unit of Data Science and Analytics Lab, where I presented findings from an NLP analysis on topic shifts and public sentiment around the 2026 State of the Union.",
-    img: "/images/Moments/eve3n.png",
-  },
-  {
     titlePart1: "HackASU",
     titlePart2: "x Claude Builders Club",
     date: "2026",
@@ -50,6 +50,27 @@ const moments = [
     date: "March 2025",
     description: "Built an agentic framework-based trip planner and won the People's Choice Award. The event was partnered with Microsoft Azure.",
     img: "/images/Moments/Hackazona.png",
+  },
+  {
+    titlePart1: "Arizona Space",
+    titlePart2: "Congress",
+    date: "April 2026",
+    description: "Attended the Space Rising conference at Arizona Space Congress to explore Arizona's growing role in the global space economy and ecosystem.",
+    img: "/images/Moments/ASC.png",
+  },
+  {
+    titlePart1: "Capstone",
+    titlePart2: "Presentation",
+    date: "April 2026",
+    description: "Presented my final capstone project on Predicting Equity-Based Disaster Response and Resource Optimization.",
+    img: "/images/Moments/capstone.png",
+  },
+  {
+    titlePart1: "Unit of Data Science",
+    titlePart2: "& Analytics Lab",
+    date: "2026",
+    description: "The closing presentation from my 8-week work with the Unit of Data Science and Analytics Lab, where I presented findings from an NLP analysis on topic shifts and public sentiment around the 2026 State of the Union.",
+    img: "/images/Moments/eve3n.png",
   },
   {
     titlePart1: "AI Summit",
