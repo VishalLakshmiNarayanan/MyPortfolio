@@ -3,6 +3,20 @@ import { motion } from "framer-motion";
 
 const moments = [
   {
+    titlePart1: "Masters",
+    titlePart2: "Graduation",
+    date: "May 2026",
+    description: "Walked across the stage at ASU to receive my Master's degree in Data Science, the culmination of two years of research, hackathons, and building.",
+    img: "/images/Moments/grad.png",
+  },
+  {
+    titlePart1: "Cognite",
+    titlePart2: "Presentation",
+    date: "May 2026",
+    description: "Presented our NPA Digital Twin solution at the Cognite office during the Arizona Nerd Network (AZNN) May meet ",
+    img: "/images/Moments/cognitepre.png",
+  },
+  {
     titlePart1: "Kiro Spark",
     titlePart2: "Impact Track Winner",
     date: "April 2026",
